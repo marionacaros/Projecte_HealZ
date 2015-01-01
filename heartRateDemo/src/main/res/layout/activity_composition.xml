@@ -11,53 +11,38 @@
     android:background="@drawable/coolbg"
     tools:context=".MainActivityHeartRate" >
 
+    <com.csr.view.DataView
+        android:id="@+id/impedanceDW"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        custom:valueText="--"
+        custom:unitText="Ohms"
+        custom:layout_dataview="@layout/data_big_no_title" />
 
     <com.csr.view.DataView
-        android:id="@+id/batteryData"
+        android:id="@+id/totalBodyWaterDW"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         custom:valueText="--"
-        custom:titleText="Battery Level"               
-        custom:layout_dataview="@layout/data_small" />
-    
-    <com.csr.view.DataView
-        android:id="@+id/manufacturerData"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        custom:valueText="--"
-        custom:titleText="Manufacturer"        
-        custom:layout_dataview="@layout/data_small" />
+        custom:titleText="RR value"
+        custom:unitText="Ticks"        
+        custom:layout_dataview="@layout/data_normal" />
         
     <com.csr.view.DataView
-        android:id="@+id/hardwareRevData"
+        android:id="@+id/fatFreeMassDW"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        custom:titleText="Hardware Revision"        
+        custom:titleText="Energy"
+        custom:unitText="KJ" 
         custom:valueText="--"        
-        custom:layout_dataview="@layout/data_small" />
+        custom:layout_dataview="@layout/data_normal" />
     
     <com.csr.view.DataView
-        android:id="@+id/fwRevData"
+        android:id="@+id/freeMassDW"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        custom:titleText="Firmware Revision"        
+        custom:titleText="Sensor location"        
         custom:valueText="--"        
-        custom:layout_dataview="@layout/data_small" />
+        custom:layout_dataview="@layout/data_normal" />
     
-    <com.csr.view.DataView
-        android:id="@+id/swRevData"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        custom:titleText="Software Revision"        
-        custom:valueText="--"        
-        custom:layout_dataview="@layout/data_small" />
-    
-    <com.csr.view.DataView
-        android:id="@+id/serialNoData"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        custom:titleText="Serial Number"        
-        custom:valueText="--"        
-        custom:layout_dataview="@layout/data_small" />
-    
- </LinearLayout>
+    </LinearLayout>

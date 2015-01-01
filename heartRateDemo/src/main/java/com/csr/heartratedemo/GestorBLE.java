@@ -1,0 +1,271 @@
+package com.csr.heartratedemo;
+
+import android.app.Activity;
+import android.bluetooth.BluetoothGattCharacteristic;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.ParcelUuid;
+import android.widget.Toast;
+
+import com.csr.btsmart.BtSmartService;
+
+import java.io.UnsupportedEncodingException;
+import java.lang.ref.WeakReference;
+import java.util.UUID;
+
+/**
+ * Created by marionacaros on 28/4/16.
+ */
+public class GestorBLE {
+
+    private static final int REQUEST_MANUFACTURER = 0;
+    private static final int REQUEST_BATTERY = 1;
+    private static final int REQUEST_HEART_RATE = 2;
+    private static final int REQUEST_LOCATION = 3;
+    private static final int REQUEST_HARDWARE_REV = 4;
+    private static final int REQUEST_FW_REV = 5;
+    private static final int REQUEST_SW_REV = 6;
+    private static final int REQUEST_SERIAL_NO = 7;
+    private static final int REQUEST_COMPOSITION = 8;//
+    public Handler mHandler;
+
+
+
+    /**
+     * This is the handler for characteristic value updates.
+     */
+
+    public GestorBLE(Activity a, IBLEDATA interfaz) {
+
+        mHandler = new HeartRateHandler(a, interfaz);
+    }
+
+
+
+
+    interface IBLEDATA {
+
+        //void batteryNotificationHandler(byte value); //@param value The battery percentage value.
+        void sensorLocationHandler(int locationIndex); //@param locationIndex Value received in location characteristic - indexes into locations array.
+
+        void newHeartRate(int hrm);
+        void newEnergyData(int energy);
+        void newRRvalue(int lastRR);
+
+        void newImpedance(int z);
+
+
+
+    }
+
+    private static class HeartRateHandler extends Handler {
+        private final WeakReference<Activity> mActivity;
+
+        public IBLEDATA mInterfaz;
+        private String mBatteryPercent;
+
+        public HeartRateHandler(Activity activity, IBLEDATA interfaz) {
+            mInterfaz = interfaz;
+            mActivity = new WeakReference<Activity>(activity);
+        }
+
+
+        public void handleMessage(Message msg) {
+            Activity parentActivity = mActivity.get();
+            if (parentActivity != null) {
+                switch (msg.what) {
+                    case BtSmartService.MESSAGE_REQUEST_FAILED: {
+                        // The request id tells us what failed.
+                        int requestId = msg.getData().getInt(BtSmartService.EXTRA_CLIENT_REQUEST_ID);
+                        switch (requestId) {
+                            case REQUEST_HEART_RATE:
+                                Toast.makeText(parentActivity, "Failed to register for heart rate notifications.",
+                                        Toast.LENGTH_SHORT).show();
+                                parentActivity.finish();
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                    case BtSmartService.MESSAGE_CHARACTERISTIC_VALUE: {
+                        Bundle msgExtra = msg.getData();
+                        UUID serviceUuid =
+                                ((ParcelUuid) msgExtra.getParcelable(BtSmartService.EXTRA_SERVICE_UUID)).getUuid();
+                        UUID characteristicUuid =
+                                ((ParcelUuid) msgExtra.getParcelable(BtSmartService.EXTRA_CHARACTERISTIC_UUID)).getUuid();
+
+                        // Heart rate notification.
+                        if (serviceUuid.compareTo(BtSmartService.BtSmartUuid.HRP_SERVICE.getUuid()) == 0
+                                && characteristicUuid.compareTo(BtSmartService.BtSmartUuid.HEART_RATE_MEASUREMENT.getUuid()) == 0) {
+                            heartRateHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE));
+                        }
+                        //AÑADIR SERVICES Y CARACTERÍSTICAS
+
+                        //Body Composition
+                        else if(serviceUuid.compareTo(BtSmartService.BtSmartUuid.BCS_SERVICE.getUuid()) == 0
+                                && characteristicUuid.compareTo(BtSmartService.BtSmartUuid.BODY_COMPOSITION_MEASUREMENT.getUuid()) == 0) {
+                            heartRateHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE));
+                        }
+
+                        // Device information
+                        else if (serviceUuid.compareTo(BtSmartService.BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid()) == 0) {
+                            String value;
+                            try {
+                                value = new String(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE), "UTF-8");
+                            } catch (UnsupportedEncodingException e) {
+                                value = "--";
+                            }
+                            if (characteristicUuid.compareTo(BtSmartService.BtSmartUuid.MANUFACTURER_NAME.getUuid()) == 0) {
+                                //parentActivity.mManufacturer = value;
+                            } else if (characteristicUuid.compareTo(BtSmartService.BtSmartUuid.HARDWARE_REVISION.getUuid()) == 0) {
+                                //parentActivity.mHardwareRev = value;
+                            } else if (characteristicUuid.compareTo(BtSmartService.BtSmartUuid.FIRMWARE_REVISION.getUuid()) == 0) {
+                                //parentActivity.mFwRev = value;
+                            } else if (characteristicUuid.compareTo(BtSmartService.BtSmartUuid.SOFTWARE_REVISION.getUuid()) == 0) {
+                                //parentActivity.mSwRev = value;
+                            } else if (characteristicUuid.compareTo(BtSmartService.BtSmartUuid.SERIAL_NUMBER.getUuid()) == 0) {
+                                // parentActivity.mSerialNo = value;
+                            }
+
+                        }
+                        // Battery level notification.
+                        else if (serviceUuid.compareTo(BtSmartService.BtSmartUuid.BATTERY_SERVICE.getUuid()) == 0
+                                && characteristicUuid.compareTo(BtSmartService.BtSmartUuid.BATTERY_LEVEL.getUuid()) == 0) {
+                            batteryNotificationHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE)[0]);
+                        }
+                        // Sensor location
+                        else if (serviceUuid.compareTo(BtSmartService.BtSmartUuid.HRP_SERVICE.getUuid()) == 0
+                                && characteristicUuid.compareTo(BtSmartService.BtSmartUuid.HEART_RATE_LOCATION.getUuid()) == 0) {
+                            mInterfaz.sensorLocationHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE)[0]);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void batteryNotificationHandler(byte value) {
+
+            mBatteryPercent = String.valueOf(value + "%");
+        }
+
+        /**
+         * Extract the various values from the heart rate characteristic and display in the UI.
+         * <p>
+         * <p>
+         * Value received in the characteristic notification.
+         */
+        public void heartRateHandler(byte[] value) {
+            final byte INDEX_FLAGS = 0;
+            final byte INDEX_HRM_VALUE = 1;
+            final byte INDEX_ENERGY_VALUE = 2;
+
+            byte energyIndexOffset = 0;
+
+            final byte FLAG_HRM_FORMAT = 0x01;
+            final byte FLAG_ENERGY_PRESENT = (0x01 << 3);
+            final byte FLAG_RR_PRESENT = (0x01 << 4);
+
+            final byte SIZEOF_UINT16 = 2;
+
+            // Re-create the characteristic with the received value.
+            BluetoothGattCharacteristic characteristic =
+                    new BluetoothGattCharacteristic(BtSmartService.BtSmartUuid.HEART_RATE_MEASUREMENT.getUuid(), 0, 0);
+            characteristic.setValue(value);
+
+            byte flags = characteristic.getValue()[INDEX_FLAGS]; //COJE BYTE 0 PARA LEER FLAGS ARRAY
+
+            // Check the flags of the characteristic to find if the heart rate number format is UINT16 or UINT8.
+            int hrm = 0;
+            if ((flags & FLAG_HRM_FORMAT) != 0) {
+                hrm = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, INDEX_HRM_VALUE); //BYTE 1
+                // Need to offset all the energy value index by 1 as the heart rate value is taking up two bytes.
+                energyIndexOffset++;
+            } else {
+                hrm = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, INDEX_HRM_VALUE);
+            }
+            mInterfaz.newHeartRate(hrm);
+//            heartRateData.setValueText(String.valueOf(hrm));
+
+            // Get the expended energy if present.
+            int energyExpended = 0;
+            if ((flags & FLAG_ENERGY_PRESENT) != 0) {
+                energyExpended =
+                        characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, INDEX_ENERGY_VALUE
+                                + energyIndexOffset);
+                mInterfaz.newEnergyData(energyExpended);
+//                energyData.setValueText(String.valueOf(energyExpended));
+            }
+
+            // Get RR interval values if present.
+            if ((flags & FLAG_RR_PRESENT) != 0) {
+                int lastRR = 0;
+                // There can be multiple RR values - just get the most recent which will be the last uint16 in the array.
+                lastRR = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, value.length - SIZEOF_UINT16);
+                mInterfaz.newRRvalue(lastRR);
+//                rrData.setValueText(String.valueOf(lastRR));
+            }
+        }
+    }
+    /*
+    public void CompositionHandler(byte[] value) {
+        final byte INDEX_FLAGS = 0;
+        final byte INDEX_HRM_VALUE = 1;
+        final byte INDEX_ENERGY_VALUE = 2;
+
+        byte energyIndexOffset = 0;
+
+        final byte FLAG_HRM_FORMAT = 0x01;
+        final byte FLAG_ENERGY_PRESENT = (0x01 << 3);
+        final byte FLAG_RR_PRESENT = (0x01 << 4);
+
+        final byte SIZEOF_UINT16 = 2;
+
+        // Re-create the characteristic with the received value.
+        BluetoothGattCharacteristic characteristic =
+                new BluetoothGattCharacteristic(BtSmartService.BtSmartUuid.HEART_RATE_MEASUREMENT.getUuid(), 0, 0);
+        characteristic.setValue(value);
+
+        byte flags = characteristic.getValue()[INDEX_FLAGS]; //COJE BYTE 0 PARA LEER FLAGS ARRAY
+
+        // Check the flags of the characteristic to find if the heart rate number format is UINT16 or UINT8.
+        int hrm = 0;
+        if ((flags & FLAG_HRM_FORMAT) != 0) {
+            hrm = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, INDEX_HRM_VALUE); //BYTE 1
+            // Need to offset all the energy value index by 1 as the heart rate value is taking up two bytes.
+            energyIndexOffset++;
+        } else {
+            hrm = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, INDEX_HRM_VALUE);
+        }
+        mInterfaz.newHeartRate(hrm);
+//            heartRateData.setValueText(String.valueOf(hrm));
+
+        // Get the expended energy if present.
+        int energyExpended = 0;
+        if ((flags & FLAG_ENERGY_PRESENT) != 0) {
+            energyExpended =
+                    characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, INDEX_ENERGY_VALUE
+                            + energyIndexOffset);
+            mInterfaz.newEnergyData(energyExpended);
+//                energyData.setValueText(String.valueOf(energyExpended));
+        }
+
+        // Get RR interval values if present.
+        if ((flags & FLAG_RR_PRESENT) != 0) {
+            int lastRR = 0;
+            // There can be multiple RR values - just get the most recent which will be the last uint16 in the array.
+            lastRR = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, value.length - SIZEOF_UINT16);
+            mInterfaz.newRRvalue(lastRR);
+//                rrData.setValueText(String.valueOf(lastRR));
+        }
+    }
+
+
+    }
+
+*/
+        ;
+
+}

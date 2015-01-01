@@ -20,20 +20,20 @@
 </string>
 
     <string name="conditions_text">
-    It’s recommended that at the time of measurement, the subject is under these conditions:\n\n
-
-    -Have not made strenuous exercise 24 hours before.\n\n
-    -Hae not eaten the 2 hours before.\n\n
-    -Urinating before the measurement.\n\n
-    -Measure weight and height in each evaluation.\n\n
-    -Stay lying on his back during 8 minuts before the measurement.\n\n
-    -Correct positioning of the electrodes.\n\n
-    -Arms and legs should be separated from the trunk.\n\n
-    -Remove metal elements\n\n</string>
+    It is recommended that at the time of measurement, the user is under these conditions:\n\n
+        <!--TODO-->
+        \t- Have not eaten 2 hours before.\n\n
+    \t- Have urinated before the measure.\n\n
+    \t- Update weight before each evaluation.\n\n
+    \t- Correct positioning of the electrodes.\n\n
+    \t- Hands should not be in contact during the measure.\n\n
+    \t- Remove metal elements
+    \t- Do not use Zteero when carrying metal elements (i.e. pacemaker, prosthesis)
+        \n\n</string>
 
 
     <string name="info_text">Zteero is a personal monitoring device that allows one to measure in real time: <b>\n\n-
-        Heart and breathing rate\n\n- Percentage of fat free mass \n\n- Free mass\n\n- Total body water</b>\n\nIt is largely used by performers
+        Heart and breathing rate\n\n- Percentage of Fat Free Mass \n\n- Fat Mass\n\n- Total Body Water</b>\n\nIt is largely used by performers
         of various types of physical exercise.\n\nThis app records all your measures that can be find at <b>history</b> menu option for later study and to follow the evolution of your body.\n\n</string>
 
     <!-- Copy Paste Android Developers Sample -->
