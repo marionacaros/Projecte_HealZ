@@ -13,8 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-//heeeey whatsup?
-//marioja que ja
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -44,7 +42,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-//hsckzhvlzsdhv pzsdibv
+//hsckzhvlzsdhv pz  sdibv
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -83,15 +81,15 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_history) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_settings) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_tutorial) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_About_Us) {
 
         } else if (id == R.id.nav_send) {
 
