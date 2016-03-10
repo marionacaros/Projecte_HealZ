@@ -23,7 +23,12 @@
         <activity
             android:name=".FC_FR"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_fr__fr"
+            android:label="@string/title_activity_fc__fr"
+            android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name=".Composition"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_composition"
             android:theme="@style/FullscreenTheme"></activity>
     </application>
 

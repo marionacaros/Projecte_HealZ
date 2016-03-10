@@ -105,8 +105,9 @@ public class MainActivity extends AppCompatActivity
 
 
     private void ButtonCalculs() {
-        button = (Button) findViewById(R.id.button_mesure);
+        button = (Button) findViewById(R.id.button_measure);
         button.setOnClickListener(new View.OnClickListener(){
+            @Override
             public void onClick(View v){
                 Intent intent = new Intent(MainActivity.this, Calculs.class);
                 startActivity(intent);
