@@ -8,19 +8,19 @@
             android:title="Home" />
         <item
             android:id="@+id/nav_history"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/history"
             android:title="History" />
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/settings"
             android:title="Settings" />
         <item
             android:id="@+id/nav_tutorial"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/tutorial"
             android:title="Tutorial" />
         <item
             android:id="@+id/nav_About_Us"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/about_us"
             android:title="About Us" />
     </group>
 
