@@ -19,7 +19,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".Perfil" />
-        <activity android:name=".Calculs"></activity>
+        <activity android:name=".Calculs" />
+        <activity
+            android:name=".FC_FR"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_fr__fr"
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>
