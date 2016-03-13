@@ -20,10 +20,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 
-public class MainActivity extends ActionBarActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
     // Create new fragment and transaction
+
     private Fragment frag = new Fragment();
     private FragmentTransaction transaction = getFragmentManager().beginTransaction();
     private ImageButton button;
@@ -34,11 +35,13 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
+        ButtonCalculs();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ButtonCalculs();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -98,6 +101,8 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
             startActivity(intent);
             // Handle the camera action
         } else if (id == R.id.nav_history) {
+
+/*
             setContentView(R.layout.fragment_history);
             // Replace whatever is in the fragment_container view with this fragment,
             // and add the transaction to the back stack
@@ -105,6 +110,14 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
             transaction.addToBackStack(null);
             transaction.setTransition(TRANSIT_FRAGMENT_OPEN);
             // Commit the transaction
+            transaction.commit();
+
+*/
+            String ident= "IdFragment";
+            Bundle arguments = new Bundle();
+            arguments.putString("id", ident);
+            HistoryFragment fragment2= HistoryFragment.newInstance(arguments);
+            transaction.replace(android.R.id.content, fragment2, HistoryFragment.TAG);
             transaction.commit();
 
         } else if (id == R.id.nav_settings) {
@@ -119,6 +132,7 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        //drawer.closeDrawers();
         return true;
     }
 

@@ -22,13 +22,33 @@ import android.app.Activity;
  * create an instance of this fragment.
  */
 public class HistoryFragment extends Fragment {
+    public static final String TAG ="History_Frag";
+    private FragmentIterationListener mListener= null;
 
-    private OnFragmentInteractionListener mListener;
-
-
-    public interface OnFragmentInteractionListener{
-        public void OnFragmentInteractionListener();
+    public interface FragmentIterationListener{
+        public void onFragmentIteration(Bundle parameters);
     }
+
+
+    /////Metode
+    public static HistoryFragment newInstance(Bundle arguments){
+
+        HistoryFragment f =new HistoryFragment();
+        if(arguments!= null){
+            f.setArguments(arguments);
+
+        }
+        return f;
+    }
+
+
+
+    public HistoryFragment(){
+
+    }
+
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,14 +67,14 @@ public class HistoryFragment extends Fragment {
     }
 
 
-    @Override
+
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            mListener = (FragmentIterationListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnHeadlineSelectedListener");
