@@ -1,9 +1,12 @@
 package pae.healz;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,22 +19,24 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends ActionBarActivity
+        implements TopSectionFragment.TopSectionListener {
 
+    private static final  int TRANSIT_FRAGMENT_OPEN = 4097;
     private Button button;
+    // Create new fragment and transaction
+    private Fragment frag = new Fragment();
+    private FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ButtonCalculs();
-
-
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -43,7 +48,9 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    //hsckzhvlzsdhv pz  sdibv
+
+
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -54,6 +61,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    //MENU
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -87,6 +95,14 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
             // Handle the camera action
         } else if (id == R.id.nav_history) {
+
+            // Replace whatever is in the fragment_container view with this fragment,
+            // and add the transaction to the back stack
+            transaction.replace(R.id.history_frag, frag);
+            transaction.addToBackStack(null);
+            transaction.setTransition(TRANSIT_FRAGMENT_OPEN);
+            // Commit the transaction
+            transaction.commit();
 
         } else if (id == R.id.nav_settings) {
 
