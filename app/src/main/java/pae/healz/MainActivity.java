@@ -1,7 +1,10 @@
 package pae.healz;
 
 import android.app.Fragment;
+<<<<<<< HEAD
 import android.app.FragmentTransaction;
+=======
+>>>>>>> e10903868924b7324ed68516630c6429e366c4e3
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,17 +20,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 
 public class MainActivity extends ActionBarActivity
         implements TopSectionFragment.TopSectionListener {
 
+<<<<<<< HEAD
     private static final  int TRANSIT_FRAGMENT_OPEN = 4097;
     private Button button;
     // Create new fragment and transaction
     private Fragment frag = new Fragment();
     private FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
+=======
+    private ImageButton button;
+>>>>>>> e10903868924b7324ed68516630c6429e366c4e3
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +130,7 @@ public class MainActivity extends ActionBarActivity
 
     private void ButtonCalculs() {
         button = (Button) findViewById(R.id.button_measure);
+        button = (ImageButton) findViewById(R.id.button_measure);
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
