@@ -1,10 +1,7 @@
 package pae.healz;
 
 import android.app.Fragment;
-<<<<<<< HEAD
 import android.app.FragmentTransaction;
-=======
->>>>>>> e10903868924b7324ed68516630c6429e366c4e3
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -23,19 +20,16 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 
-public class MainActivity extends ActionBarActivity
-        implements TopSectionFragment.TopSectionListener {
+public class MainActivity extends ActionBarActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-<<<<<<< HEAD
-    private static final  int TRANSIT_FRAGMENT_OPEN = 4097;
-    private Button button;
+
     // Create new fragment and transaction
     private Fragment frag = new Fragment();
     private FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-=======
     private ImageButton button;
->>>>>>> e10903868924b7324ed68516630c6429e366c4e3
+    private static final  int TRANSIT_FRAGMENT_OPEN = 4097;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +47,7 @@ public class MainActivity extends ActionBarActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+       navigationView.setNavigationItemSelectedListener(this);
     }
 
 
@@ -93,7 +87,8 @@ public class MainActivity extends ActionBarActivity
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
-    @Override
+
+
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -103,7 +98,7 @@ public class MainActivity extends ActionBarActivity
             startActivity(intent);
             // Handle the camera action
         } else if (id == R.id.nav_history) {
-
+            setContentView(R.layout.fragment_history);
             // Replace whatever is in the fragment_container view with this fragment,
             // and add the transaction to the back stack
             transaction.replace(R.id.history_frag, frag);
@@ -129,7 +124,7 @@ public class MainActivity extends ActionBarActivity
 
 
     private void ButtonCalculs() {
-        button = (Button) findViewById(R.id.button_measure);
+
         button = (ImageButton) findViewById(R.id.button_measure);
         button.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -141,7 +136,6 @@ public class MainActivity extends ActionBarActivity
 
 
     }
-
 
 
 }

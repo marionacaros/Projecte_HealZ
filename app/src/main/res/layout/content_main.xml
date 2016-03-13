@@ -15,40 +15,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello Mariona and Marc!" />
-        android:text="--  CALCULATE NOW  --"
+        android:text="Hello Mariona and Marc!"
         android:textSize="30sp"
         android:layout_marginBottom="59dp"
         android:layout_above="@+id/button_measure"
         android:layout_alignEnd="@+id/button_measure"
         android:layout_gravity="center" />
 
-    <Button
-        android:id="@+id/button_measure"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:background = "@color/colorPrimary"
-        android:text="MEASURE"
 
-         />
-    <!--
-    <fragment android:name="pae.healz.HistoryFragment"
-        android:id="@+id/history_frag"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        tools:layout="@layout/fragment_history" />
-
--->
-=======
-        android:elegantTextHeight="false"
-        android:textColorHighlight="#fc0606"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
-        -->
 
     <ImageButton
         android:id="@+id/button_measure"
@@ -59,7 +33,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="59dp" />
->>>>>>> e10903868924b7324ed68516630c6429e366c4e3
 
 
 </RelativeLayout>
