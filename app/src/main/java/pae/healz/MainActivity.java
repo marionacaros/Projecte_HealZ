@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private Fragment frag = new Fragment();
   //  private FragmentTransaction transaction = getFragmentManager().beginTransaction();
+    //rama marc
     private ImageButton button;
     private static final  int TRANSIT_FRAGMENT_OPEN = 4097;
 
