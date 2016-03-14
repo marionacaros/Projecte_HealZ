@@ -22,36 +22,13 @@ import android.app.Activity;
  * create an instance of this fragment.
  */
 public class HistoryFragment extends Fragment {
-    public static final String TAG ="History_Frag";
-    private FragmentIterationListener mListener= null;
-
-    public interface FragmentIterationListener{
-        public void onFragmentIteration(Bundle parameters);
-    }
-
-
-    /////Metode
-    public static HistoryFragment newInstance(Bundle arguments){
-
-        HistoryFragment f =new HistoryFragment();
-        if(arguments!= null){
-            f.setArguments(arguments);
-
-        }
-        return f;
-    }
-
-
-
-
-
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        onAttach(getActivity());
+        onAttach( getActivity());
     }
 
 
@@ -65,7 +42,7 @@ public class HistoryFragment extends Fragment {
 
 
 
-    public void onAttach(Activity activity) {
+    public void onAttach(Context activity) {
         super.onAttach(activity);
 
         // This makes sure that the container activity has implemented
@@ -81,22 +58,10 @@ public class HistoryFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        //mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-
-
-
+ /*
     @Override
     public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) {
         // Do something that differs the Activity's menu here
@@ -119,6 +84,6 @@ public class HistoryFragment extends Fragment {
         return false;
     }
 
-
+*/
 
 }

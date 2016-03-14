@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Fragment frag = new Fragment();
   //  private FragmentTransaction transaction = getFragmentManager().beginTransaction();
     //rama marc
-    private ImageButton button;
+
     private static final  int TRANSIT_FRAGMENT_OPEN = 4097;
 
 
@@ -98,12 +98,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            Intent intent = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(intent);
-            // Handle the camera action
+            frag= new HomeFragment();
+
         } else if (id == R.id.nav_history) {
-
-
             frag= new HistoryFragment();
 
 
@@ -127,19 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    private void ButtonCalculs() {
 
-        button = (ImageButton) findViewById(R.id.button_measure);
-        button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(MainActivity.this, Calculs.class);
-                startActivity(intent);
-            }
-        });
-
-
-    }
 
 
 }
