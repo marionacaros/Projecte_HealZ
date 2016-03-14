@@ -1,7 +1,7 @@
 package pae.healz;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // Create new fragment and transaction
 
     private Fragment frag = new Fragment();
-    private FragmentTransaction transaction = getFragmentManager().beginTransaction();
+  //  private FragmentTransaction transaction = getFragmentManager().beginTransaction();
     private ImageButton button;
     private static final  int TRANSIT_FRAGMENT_OPEN = 4097;
 
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         setContentView(R.layout.activity_main);
-        ButtonCalculs();
+        //ButtonCalculs();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -102,23 +102,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // Handle the camera action
         } else if (id == R.id.nav_history) {
 
-/*
-            setContentView(R.layout.fragment_history);
-            // Replace whatever is in the fragment_container view with this fragment,
-            // and add the transaction to the back stack
-            transaction.replace(R.id.history_frag, frag);
-            transaction.addToBackStack(null);
-            transaction.setTransition(TRANSIT_FRAGMENT_OPEN);
-            // Commit the transaction
-            transaction.commit();
 
-*/
-            String ident= "IdFragment";
-            Bundle arguments = new Bundle();
-            arguments.putString("id", ident);
-            HistoryFragment fragment2= HistoryFragment.newInstance(arguments);
-            transaction.replace(android.R.id.content, fragment2, HistoryFragment.TAG);
-            transaction.commit();
+            frag= new HistoryFragment();
+
 
         } else if (id == R.id.nav_settings) {
 
@@ -129,7 +115,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_send) {
 
         }
-
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, frag)
+                .commit();
+        getSupportActionBar().setTitle(item.getTitle());
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         //drawer.closeDrawers();
