@@ -26,7 +26,6 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        //ButtonCalculs();
         onAttach( getActivity());
     }
 
@@ -35,7 +34,17 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home,container, false);
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        //Enllaç button_calculs:
+        button = (ImageButton) view.findViewById(R.id.button_measure);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), Calculs.class);
+                startActivity(intent);
+            }
+        });
+        return view;
     }
 
 
@@ -53,17 +62,5 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void ButtonCalculs() {
 
-        button = (ImageButton) button.findViewById(R.id.button_measure);
-        button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent();
-                startActivity(intent);
-            }
-        });
-
-
-    }
 }
