@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="pae.healz.HistoryFragment"
-    android:background="@color/black_overlay">
+    android:background="@color/colorBackground"
+
+    >
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

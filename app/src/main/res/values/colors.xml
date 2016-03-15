@@ -3,6 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-
     <color name="black_overlay">#66000000</color>
+
+
+    <!--  colors app -->
+    <color name="colorBackground">#1A1B48</color>
+    <color name="colorBar"> #0F102B</color>
+    <color name="colorButton"> #4184DC</color>
+
+
+
 </resources>
