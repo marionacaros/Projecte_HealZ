@@ -10,43 +10,69 @@
     tools:context="pae.healz.Calculs"
     android:background="@color/colorBackground"
     >
-
-
-    <Button
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="General Measure"
-        android:textSize="25dp"
+        android:id="@+id/imageView3"
+        android:src="@drawable/redSignal"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        style="@style/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GENERAL MEASURE"
+        android:textSize="20dp"
         android:shadowColor="@color/colorBar"
         android:id="@+id/button_GM"
         android:layout_gravity="center"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
         android:layout_above="@+id/button_C"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="47dp"
+        android:layout_alignParentEnd="true" />
 
     <Button
+        style="@style/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FC/FR Measure"
-        android:textSize="25dp"
+        android:text="FC/FR MEASURE"
+        android:textSize="20dp"
         android:id="@+id/button_FCFR"
         android:layout_gravity="center"
-        android:layout_marginBottom="104dp"
+        android:layout_marginBottom="66dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
+        style="@style/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Composition"
-        android:textSize="25dp"
+        android:text="COMPOSITION"
+        android:textSize="20dp"
         android:id="@+id/button_C"
         android:layout_gravity="center"
-        android:layout_alignParentStart="true"
         android:layout_above="@+id/button_FCFR"
-        android:layout_alignParentLeft="true"
-        android:layout_alignEnd="@+id/button_GM" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="46dp"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="TAKE A MEASURMENT"
+        android:id="@+id/titleCalculs"
+        android:layout_above="@+id/button_GM"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp" />
+
+
+
+
 
 </RelativeLayout>
