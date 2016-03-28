@@ -27,6 +27,7 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         onAttach( getActivity());
+
     }
 
 
@@ -35,6 +36,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home,container, false);
         //Enllaç button_calculs:
+
         button = (ImageButton) view.findViewById(R.id.button_measure);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
