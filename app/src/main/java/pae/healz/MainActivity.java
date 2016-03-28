@@ -1,5 +1,8 @@
 package pae.healz;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothManager;
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
@@ -24,14 +27,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     // Create new fragment and transaction
-
     private Fragment frag = new Fragment();
-  //  private FragmentTransaction transaction = getFragmentManager().beginTransaction();
-    //rama marc
 
-    private static final  int TRANSIT_FRAGMENT_OPEN = 4097;
-
-
+    //private static final  int TRANSIT_FRAGMENT_OPEN = 4097;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +49,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-       navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener(this);
+
+
     }
 
 

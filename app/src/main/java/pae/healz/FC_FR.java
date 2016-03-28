@@ -87,7 +87,7 @@ public class FC_FR extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_fr__fr);
+        setContentView(R.layout.activity_fc__fr);
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
