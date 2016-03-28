@@ -289,6 +289,7 @@ public class BluetoothLeService extends Service {
         }
     }
 
+
     /**
      * Retrieves a list of supported GATT services on the connected device. This should be
      * invoked only after {@code BluetoothGatt#discoverServices()} completes successfully.
