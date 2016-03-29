@@ -10,6 +10,7 @@ package pae.healz;
         import android.content.pm.PackageManager;
         import android.os.Bundle;
         import android.os.Handler;
+        import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.Menu;
         import android.view.MenuItem;
@@ -39,7 +40,11 @@ public class Comunication extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().setTitle(R.string.title_devices);
+
+        setContentView(R.layout.comunication);
+
+        
+        //getActionBar().setTitle(R.string.title_devices);
         mHandler = new Handler();
 
         // Use this check to determine whether BLE is supported on the device.  Then you can
@@ -176,6 +181,7 @@ public class Comunication extends ListActivity {
         }
 
         public void addDevice(BluetoothDevice device) {
+            Log.d("WWWW", "DISP CONECT.");
             if(!mLeDevices.contains(device)) {
                 mLeDevices.add(device);
             }
