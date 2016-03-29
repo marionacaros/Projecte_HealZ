@@ -22,6 +22,12 @@
             android:id="@+id/nav_About_Us"
             android:icon="@drawable/about_us"
             android:title="About Us" />
+        <item
+            android:id="@+id/nav_Profile_test"
+            android:icon="@drawable/about_us"
+            android:title="Profile">
+
+        </item>
     </group>
 
     <item android:title="Communicate">
