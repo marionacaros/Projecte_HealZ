@@ -17,18 +17,20 @@ public class Calculs extends AppCompatActivity {
 
     // Initializes Bluetooth adapter.
     private Button button;
-    private BluetoothAdapter mBluetoothAdapter;
-    private final static int REQUEST_ENABLE_BT = 1;
+   // private BluetoothAdapter mBluetoothAdapter;
+   // private final static int REQUEST_ENABLE_BT = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculs);
+        Button_Connect();
         Button_GM();
         Button_FCFR();
         Button_Composition();
 
         //BLE
+        /*
         final BluetoothManager bluetoothManager =
                 (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = bluetoothManager.getAdapter();
@@ -45,10 +47,23 @@ public class Calculs extends AppCompatActivity {
         if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-        }
+        }*/
 
 
     }
+    private void Button_Connect() {
+        button = (Button) findViewById(R.id.button_connect);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Calculs.this, Comunication.class);
+                startActivity(intent);
+            }
+        });
+
+
+    }
+
 
     private void Button_GM() {
         button = (Button) findViewById(R.id.button_GM);

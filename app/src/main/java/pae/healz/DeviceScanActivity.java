@@ -1,33 +1,35 @@
 package pae.healz;
 
-        import android.app.Activity;
-        import android.app.ListActivity;
-        import android.bluetooth.BluetoothAdapter;
-        import android.bluetooth.BluetoothDevice;
-        import android.bluetooth.BluetoothManager;
-        import android.content.Context;
-        import android.content.Intent;
-        import android.content.pm.PackageManager;
-        import android.os.Bundle;
-        import android.os.Handler;
-        import android.util.Log;
-        import android.view.LayoutInflater;
-        import android.view.Menu;
-        import android.view.MenuItem;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.BaseAdapter;
-        import android.widget.ListView;
-        import android.widget.TextView;
-        import android.widget.Toast;
+/**
+ * Created by marionacaros on 28/3/16.
+ */
 
-        import java.util.ArrayList;
+import android.app.Activity;
+import android.app.ListActivity;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
- * Activity for scanning and displaying available Bluetooth LE devices. ---DeviceScanActivity
+ * Activity for scanning and displaying available Bluetooth LE devices.
  */
-public class Comunication extends ListActivity {
-
+public class DeviceScanActivity extends ListActivity {
     private LeDeviceListAdapter mLeDeviceListAdapter;
     private BluetoothAdapter mBluetoothAdapter;
     private boolean mScanning;
@@ -39,12 +41,9 @@ public class Comunication extends ListActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.comunication);
-
-        
-        //getActionBar().setTitle(R.string.title_devices);
+        getActionBar().setTitle(R.string.title_devices);
         mHandler = new Handler();
 
         // Use this check to determine whether BLE is supported on the device.  Then you can
@@ -177,11 +176,10 @@ public class Comunication extends ListActivity {
         public LeDeviceListAdapter() {
             super();
             mLeDevices = new ArrayList<BluetoothDevice>();
-            mInflator = Comunication.this.getLayoutInflater();
+            mInflator = DeviceScanActivity.this.getLayoutInflater();
         }
 
         public void addDevice(BluetoothDevice device) {
-            Log.d("WWWW", "DISP CONECT.");
             if(!mLeDevices.contains(device)) {
                 mLeDevices.add(device);
             }
