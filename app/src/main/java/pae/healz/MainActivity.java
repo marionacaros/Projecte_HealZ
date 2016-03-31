@@ -1,5 +1,6 @@
 package pae.healz;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // Create new fragment and transaction
     private Fragment frag = new Fragment();
     private ImageButton button_profile;
+    private MenuItem item;
 
     //private static final  int TRANSIT_FRAGMENT_OPEN = 4097;
 
@@ -97,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             frag = new HistoryFragment();
 
         } else if (id == R.id.nav_settings) {
+            frag = new SettingsFragment();
 
         } else if (id == R.id.nav_tutorial) {
 
