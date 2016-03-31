@@ -23,10 +23,8 @@ package pae.healz;
 
         import java.util.ArrayList;
 
-/**
- * Activity for scanning and displaying available Bluetooth LE devices. ---DeviceScanActivity
- */
-public class Comunication extends ListActivity {
+
+public class ScanDevices extends ListActivity {
 
     private LeDeviceListAdapter mLeDeviceListAdapter;
     private BluetoothAdapter mBluetoothAdapter;
@@ -177,7 +175,7 @@ public class Comunication extends ListActivity {
         public LeDeviceListAdapter() {
             super();
             mLeDevices = new ArrayList<BluetoothDevice>();
-            mInflator = Comunication.this.getLayoutInflater();
+            mInflator = ScanDevices.this.getLayoutInflater();
         }
 
         public void addDevice(BluetoothDevice device) {
@@ -206,6 +204,7 @@ public class Comunication extends ListActivity {
         }
 
         @Override
+        //aquesta classe sha de dir scan 
         public long getItemId(int i) {
             return i;
         }
