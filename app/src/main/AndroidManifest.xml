@@ -5,7 +5,7 @@
 
     <!-- Min/target SDK versions (<uses-sdk>) managed by build.gradle -->
 
-    <!-- hola 3
+    <!-- hola 3 csm
     Declare this required feature if you want to make the app available to BLE-capable
     devices only.  If you want to make your app available to devices that don't support BLE,
     you should set to "false".  Instead, determine BLE capability by using
