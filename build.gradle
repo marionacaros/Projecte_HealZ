@@ -3,9 +3,13 @@
 buildscript {
     repositories {
         jcenter()
+        //gif
+       // mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.5.0'
+        // execucio animacio del gift
+       // compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -15,6 +19,8 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        //gif
+       // mavenCentral()
     }
 }
 

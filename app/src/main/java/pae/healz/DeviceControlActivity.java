@@ -142,6 +142,7 @@ public class DeviceControlActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //LAYAOUT
         setContentView(R.layout.gatt_services_characteristics);
 
         final Intent intent = getIntent();
@@ -183,7 +184,7 @@ public class DeviceControlActivity extends Activity {
         unbindService(mServiceConnection);
         mBluetoothLeService = null;
     }
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.gatt_services, menu);
@@ -196,7 +197,7 @@ public class DeviceControlActivity extends Activity {
         }
         return true;
     }
-
+*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {

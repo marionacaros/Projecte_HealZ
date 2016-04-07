@@ -15,7 +15,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ble_not_supported">Bluetooth Low Energy not supported in this mobile</string>
 
-<!-- Copy Paste Android Developers Sample -->
+    <string name="fc_fr_text">1. Put your hands around the <b>Zteero device</b>.\n\n2. Make sure your fingers are in contact with the electrodes as you can see on the image.\n\n3. Press <b>LET\'S MEASURE!</b> and wait until the animation finishes. </string>
+
+    <!-- Copy Paste Android Developers Sample -->
 
     <string name="label_data">Data:</string>
     <string name="label_device_address">Device address:</string>
@@ -35,6 +37,7 @@
     <string name="menu_disconnect">Disconnect</string>
     <string name="menu_scan">Scan</string>
     <string name="menu_stop">Stop</string>
+    <string name="title_activity_animation">AnimationActivity</string>
 
 
 </resources>

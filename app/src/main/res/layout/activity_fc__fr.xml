@@ -19,12 +19,10 @@
             android:layout_height="match_parent"
             android:background="@color/colorBackground">
 
-
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Breathing and Heart Rate"
+            android:text="Breathing/Heart Rate"
             android:layout_marginTop="10dp"
             android:textStyle="bold"
             android:textSize="30sp"
@@ -39,34 +37,46 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/text_title_fcfr"
                 android:layout_above="@+id/button_next_fcfr"
-                android:layout_margin="12dp">
+                android:layout_margin="12dp"
+                android:id="@+id/scrollView">
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <TextView
-
+                        android:id="@+id/fr_fc_text"
+                        android:layout_margin="20dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Hellooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo its meeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee hajjansxnajsnsanxasn jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr \n
-                         \n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaa\n aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-
-                        "
                         android:textColor="#FFFFFF"
+                        android:textSize="20dp"
+                        android:text="@string/fc_fr_text"
                         android:singleLine="false"/>
+
+                    <ImageView
+                        android:layout_below="@+id/fr_fc_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/imageView"
+                        android:src="@drawable/image2"
+                        android:layout_centerHorizontal="true" />
                 </RelativeLayout>
+
 
 
             </ScrollView>
 
 
-        <Button
+            <Button
             android:id="@+id/button_next_fcfr"
             style="@style/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:text="NEXT"
+            android:text="LET'S MEASURE!"
             />
+
+
+
         </RelativeLayout>
 
     </FrameLayout>

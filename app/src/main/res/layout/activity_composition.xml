@@ -63,14 +63,9 @@
 
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Aqui posarem les dades a escriure \n  Aqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \n
-                           Aqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \n
-                           Aqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \n
-                           Aqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \n
-                           Aqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \n
-                           Aqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \n
-                           Aqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \n
-                           Aqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \nAqui posarem les dades a escriure \n"
+                        android:layout_margin="20dp"
+                        android:id="@+id/text_composition"
+                        android:text="@string/fc_fr_text"
                         android:textSize="20dp"
                         android:textColor="#FFFFFF"
                         android:singleLine="false"/>

@@ -1,12 +1,14 @@
 package pae.healz;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -17,7 +19,9 @@ public class FC_FR extends AppCompatActivity {
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
      */
+    private Button button;
     private static final boolean AUTO_HIDE = true;
+
 
     /**
      * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
@@ -80,6 +84,7 @@ public class FC_FR extends AppCompatActivity {
         //mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content_composition);
 
+        Button_animation();
 
         // Set up the user interaction to manually show or hide the system UI.
 
@@ -100,6 +105,18 @@ public class FC_FR extends AppCompatActivity {
 
     }
 
+    private void Button_animation() {
+        button = (Button) findViewById(R.id.button_next_fcfr);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FC_FR.this, AnimationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+    }
 
 
 

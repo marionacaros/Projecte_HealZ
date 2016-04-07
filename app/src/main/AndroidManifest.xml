@@ -2,21 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pae.healz">
 
-
     <!-- Min/target SDK versions (<uses-sdk>) managed by build.gradle -->
 
-    <!-- Declare this required feature if you want to make the app available to BLE-capable
+
+    <!--
+    Declare this required feature if you want to make the app available to BLE-capable
     devices only.  If you want to make your app available to devices that don't support BLE,
     you should set to "false".  Instead, determine BLE capability by using
-    PackageManager.hasSystemFeature(FEATURE_BLUETOOTH_LE) -->
-    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+    PackageManager.hasSystemFeature(FEATURE_BLUETOOTH_LE)
+    -->
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
 
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <!-- Permisos per poder executar app a Android M -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -30,26 +33,38 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".Perfil" />
         <activity android:name=".Calculs" />
-        <activity android:name=".ScanDevices"
-            android:label="@string/app_name">
-
-        </activity>
+        <activity
+            android:name=".ScanDevices"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".DeviceControlActivity"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            ></activity>
         <activity
             android:name=".FC_FR"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_fc__fr"
-            android:theme="@style/FullscreenTheme" />
+             />
         <activity
             android:name=".Composition"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_composition"
-            android:theme="@style/FullscreenTheme"></activity>
-        <service android:name=".BluetoothLeService" android:enabled="true"/>
+             />
+
+        <service
+            android:name=".BluetoothLeService"
+            android:enabled="true" />
+
+        <activity
+            android:name=".AnimationActivity"
+            android:label="@string/title_activity_animation"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

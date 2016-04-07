@@ -12,8 +12,6 @@ package pae.healz;
         import android.os.Handler;
         import android.util.Log;
         import android.view.LayoutInflater;
-        import android.view.Menu;
-        import android.view.MenuItem;
         import android.view.View;
         import android.view.ViewGroup;
         import android.widget.BaseAdapter;
@@ -39,7 +37,7 @@ public class ScanDevices extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.comunication);
+        setContentView(R.layout.devices_list_ble);
 
         
         //getActionBar().setTitle(R.string.title_devices);
@@ -66,6 +64,7 @@ public class ScanDevices extends ListActivity {
         }
     }
 
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -95,7 +94,7 @@ public class ScanDevices extends ListActivity {
         }
         return true;
     }
-
+*/
     @Override
     protected void onResume() {
         super.onResume();
@@ -136,6 +135,7 @@ public class ScanDevices extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         final BluetoothDevice device = mLeDeviceListAdapter.getDevice(position);
         if (device == null) return;
+
         final Intent intent = new Intent(this, DeviceControlActivity.class);
         intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, device.getName());
         intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, device.getAddress());
