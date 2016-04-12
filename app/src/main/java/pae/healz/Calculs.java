@@ -19,8 +19,8 @@ public class Calculs extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculs);
-        Button_Connect();
-        Button_GM();
+        //Button_Connect();
+        //Button_GM();
         Button_FCFR();
         Button_Composition();
 
@@ -46,20 +46,7 @@ public class Calculs extends AppCompatActivity {
 
 
     }
-    private void Button_Connect() {
-        button = (Button) findViewById(R.id.button_connect);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Calculs.this, ScanDevices.class);
-                startActivity(intent);
-            }
-        });
-
-
-    }
-
-
+/*
     private void Button_GM() {
         button = (Button) findViewById(R.id.button_GM);
         button.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +58,7 @@ public class Calculs extends AppCompatActivity {
         });
 
 
-    }
+    }*/
 
     private void Button_FCFR() {
         button = (Button) findViewById(R.id.button_FCFR);

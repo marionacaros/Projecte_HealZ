@@ -83,8 +83,7 @@ public class FC_FR extends AppCompatActivity {
         mVisible = true;
         //mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content_composition);
-
-        Button_animation();
+        Button_Connect();
 
         // Set up the user interaction to manually show or hide the system UI.
 
@@ -104,7 +103,20 @@ public class FC_FR extends AppCompatActivity {
         // are available.
 
     }
+    private void Button_Connect() {
+        button = (Button) findViewById(R.id.button_connect);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FC_FR.this, ScanDevices.class);
+                startActivity(intent);
+            }
+        });
 
+
+    }
+
+/**
     private void Button_animation() {
         button = (Button) findViewById(R.id.button_next_fcfr);
         button.setOnClickListener(new View.OnClickListener() {

@@ -60,6 +60,11 @@
         <service
             android:name=".BluetoothLeService"
             android:enabled="true" />
+        <service
+        android:name="com.csr.btsmart.BtSmartService"
+        android:enabled="true"
+        android:exported="false" >
+    </service>
 
         <activity
             android:name=".AnimationActivity"

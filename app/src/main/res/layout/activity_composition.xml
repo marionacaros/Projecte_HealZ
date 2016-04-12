@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/text_title_composition"
-                android:layout_above="@+id/button_next_composition"
+                android:layout_above="@+id/button_connect_composition"
                 android:layout_margin="12dp"
                 >
                 <RelativeLayout
@@ -76,12 +76,12 @@
 
 
             <Button
-                android:id="@+id/button_next_composition"
+                android:id="@+id/button_connect_composition"
                 style="@style/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:text="NEXT"
+                android:text="CONNECT"
                 />
         </RelativeLayout>
 

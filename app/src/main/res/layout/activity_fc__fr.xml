@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/text_title_fcfr"
-                android:layout_above="@+id/button_next_fcfr"
+                android:layout_above="@+id/button_connect"
                 android:layout_margin="12dp"
                 android:id="@+id/scrollView">
                 <RelativeLayout
@@ -67,12 +67,13 @@
 
 
             <Button
-            android:id="@+id/button_next_fcfr"
-            style="@style/button"
+                style="@style/button"
+            android:id="@+id/button_connect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:text="LET'S MEASURE!"
+            android:text="CONNECT"
+                android:textSize="20dp"
             />
 
 

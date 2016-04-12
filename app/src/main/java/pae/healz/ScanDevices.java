@@ -37,9 +37,9 @@ public class ScanDevices extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //List of devices
         setContentView(R.layout.devices_list_ble);
 
-        
         //getActionBar().setTitle(R.string.title_devices);
         mHandler = new Handler();
 

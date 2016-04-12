@@ -197,7 +197,7 @@ public class DeviceControlActivity extends Activity {
         }
         return true;
     }
-*/
+*/ /*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
@@ -213,6 +213,7 @@ public class DeviceControlActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+    */
 
     private void updateConnectionState(final int resourceId) {
         runOnUiThread(new Runnable() {
