@@ -181,16 +181,16 @@ public class Perfil extends AppCompatActivity {
                         outSWMensaje.close();
                     } catch (Exception e) {
                         Log.e(TAG, e.getMessage());
-                       Toast.makeText(getApplicationContext(), "The file TXT is impossible to be created",
-                                Toast.LENGTH_LONG).show();
+                      // Toast.makeText(getApplicationContext(), "The file TXT is impossible to be created",
+                              //  Toast.LENGTH_LONG).show();
                     }
                  //   actualizarTXT();
 
                 }
                 else{
-                    Toast.makeText(Perfil.this,
-                            "Please, introduce all the information",
-                            Toast.LENGTH_LONG).show();
+                    //Toast.makeText(Perfil.this,
+                         //   "Please, introduce all the information",
+                          //  Toast.LENGTH_LONG).show();
                 }
             }
         });

@@ -10,6 +10,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import com.csr.heartratedemo.MainActivityHeartRate;
+
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
@@ -75,7 +77,7 @@ public class Composition extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_composition);
-
+        Button_Connect();
         mVisible = true;
         //mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
@@ -100,7 +102,7 @@ public class Composition extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Composition.this, ScanDevices.class);
+                Intent intent = new Intent(Composition.this, MainActivityHeartRate.class);
                 startActivity(intent);
             }
         });

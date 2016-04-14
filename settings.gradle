@@ -1,1 +1,4 @@
 include ':app'
+include ':btSmartLibrary'
+include ':dataView'
+include ':heartRateDemo'
