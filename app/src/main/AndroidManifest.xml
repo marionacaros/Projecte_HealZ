@@ -41,31 +41,34 @@
         <activity android:name=".Calculs" />
         <activity
             android:name=".ScanDevices"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
         <activity
             android:name=".DeviceControlActivity"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            ></activity>
+            android:theme="@style/AppTheme.AppBarOverlay" />
         <activity
             android:name=".FC_FR"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_fc__fr"
-             />
+            android:label="@string/title_activity_fc__fr" />
         <activity
             android:name=".Composition"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_composition"
-             />
+            android:label="@string/title_activity_composition" />
 
         <service
             android:name=".BluetoothLeService"
             android:enabled="true" />
-        <!--<service
+        <!--
+    <service
         android:name="com.csr.btsmart.BtSmartService"
         android:enabled="true"
         android:exported="false" >
-    </service>-->
+    </service>
+        -->
 
+        <activity
+            android:name=".ConditionsActivity"
+            android:label="@string/title_activity_conditions"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
