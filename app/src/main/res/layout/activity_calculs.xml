@@ -36,7 +36,7 @@
         style="@style/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="HEART AND BREATHING RATE"
+        android:text="HEART &amp; BREATHING RATE"
         android:textSize="20dp"
         android:layout_gravity="center"
         android:layout_below="@+id/button_C"
