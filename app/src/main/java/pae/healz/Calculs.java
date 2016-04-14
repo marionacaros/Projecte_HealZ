@@ -19,10 +19,9 @@ public class Calculs extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculs);
-        //Button_Connect();
-        //Button_GM();
-        Button_FCFR();
-        Button_Composition();
+        button_FCFR();
+        button_Composition();
+        button_Conditions();
 
         //BLE
         /*
@@ -46,21 +45,21 @@ public class Calculs extends AppCompatActivity {
 
 
     }
-/*
-    private void Button_GM() {
-        button = (Button) findViewById(R.id.button_GM);
+
+    private void button_Conditions() {
+        button = (Button) findViewById(R.id.button_conditions);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Calculs.this, FC_FR.class);
+                Intent intent = new Intent(Calculs.this, ConditionsActivity.class);
                 startActivity(intent);
             }
         });
 
 
-    }*/
+    }
 
-    private void Button_FCFR() {
+    private void button_FCFR() {
         button = (Button) findViewById(R.id.button_FCFR);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +72,7 @@ public class Calculs extends AppCompatActivity {
 
     }
 
-    private void Button_Composition() {
+    private void button_Composition() {
         button = (Button) findViewById(R.id.button_C);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +83,7 @@ public class Calculs extends AppCompatActivity {
         });
 
     }
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -91,5 +91,5 @@ public class Calculs extends AppCompatActivity {
         return true;
     }
 
-
+*/
     }

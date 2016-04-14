@@ -56,29 +56,6 @@ public class HistoryFragment extends Fragment {
         //mListener = null;
     }
 
- /*
-    @Override
-    public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) {
-        // Do something that differs the Activity's menu here
-        super.onCreateOptionsMenu(menu, inflater);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_tutorial:
-                // Not implemented here
-                return false;
-            case R.id.history_frag:
-                // Do Fragment menu item stuff here
-                return true;
-            default:
-                break;
-        }
-
-        return false;
-    }
-
-*/
 
 }

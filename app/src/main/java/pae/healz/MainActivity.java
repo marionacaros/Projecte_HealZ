@@ -155,10 +155,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             frag = new SettingsFragment();
 
         } else if (id == R.id.nav_tutorial) {
+            frag = new InformationFragment();
 
         } else if (id == R.id.nav_About_Us) {
-
-        } else if (id == R.id.nav_send) {
+            frag = new About_UsFragment();
 
         }
 

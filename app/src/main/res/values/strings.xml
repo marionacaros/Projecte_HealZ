@@ -17,6 +17,15 @@
 
     <string name="fc_fr_text">1. Put your hands around the <b>Zteero device</b>.\n\n2. Make sure your palms are in contact with the electrodes as you can see on the image.\n\n3. Press <b>CONNECT</b> to establish communication with the Zteero device.\n\n4. When the device is connected you can start the measurement!</string>
 
+
+    <string name="info_text">Zteero is a personal monitoring device that allows one to measure one\'s
+        heart and breathing rate in real time or record the heart rate for later study. It is largely used by performers
+        of various types of physical exercise.\n\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis faucibus maximus. Phasellus sed viverra dolor. Fusce accumsan nibh erat, et laoreet dui blandit vel. Etiam pharetra nulla id lorem congue sodales. Donec egestas lectus velit, sit amet molestie turpis efficitur sed. Phasellus non convallis velit. Etiam non justo a erat bibendum pretium at vitae nulla. Praesent sit amet elit eu dolor faucibus pellentesque. Donec dictum felis et diam venenatis, nec consequat enim efficitur. Sed sodales dui et leo pharetra ullamcorper. Nulla blandit est eu eros tincidunt semper. Vivamus scelerisque nec erat vel dapibus. Donec elementum cursus ex nec mollis. Cras nec scelerisque nulla. Suspendisse potenti.
+
+Pellentesque accumsan ultricies risus eu condimentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consectetur diam sed massa condimentum, nec rhoncus nibh sagittis. Fusce efficitur enim et elementum lacinia. In hac habitasse platea dictumst. Proin hendrerit ac leo id efficitur. In nec velit et ex placerat mattis sit amet id purus. Nam eros orci, feugiat sit amet enim vitae, scelerisque venenatis lorem. Fusce porta lorem magna. Etiam eu dui eget felis pharetra finibus nec id orci. Proin egestas leo non libero vehicula commodo. Aliquam est mi, sodales non nisl ac, venenatis iaculis libero. Nullam id blandit sapien, in sollicitudin turpis. Duis egestas tortor laoreet elementum vulputate. Suspendisse auctor et erat et sollicitudin.
+
+Nullam vehicula faucibus risus a placerat. Sed sed mattis odio, a facilisis est. Duis luctus lacus sit amet varius mollis. Proin ac sagittis nibh. Integer quis condimentum sapien. Mauris eget cursus eros. Nulla mollis metus sed turpis dapibus luctus. Donec felis enim, lacinia vitae lobortis ac, placerat eu urna.</string>
+
     <!-- Copy Paste Android Developers Sample -->
 
      <string name="action_info">Device Information</string> 
@@ -43,6 +52,7 @@
     <string name="menu_scan">Scan</string>
     <string name="menu_stop">Stop</string>
     <string name="title_activity_animation">AnimationActivity</string>
+    <string name="title_activity_conditions">ConditionsActivity</string>
 
 
 </resources>

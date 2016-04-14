@@ -13,36 +13,35 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView3"
+        android:id="@+id/signal_image"
         android:src="@drawable/red_signal"
         android:layout_alignParentStart="true" />
 
-<!--    <Button
-        android:id="@+id/button_GM"
-        style="@style/button"
+    <Button
+        android:id="@+id/button_conditions"
+        style="@style/buttonred"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GENERAL MEASURE"
+        android:text="MEASURE CONDITIONS"
         android:textSize="20dp"
         android:shadowColor="@color/colorBar"
         android:layout_gravity="center"
-        android:layout_above="@+id/button_C"
+        android:layout_below="@+id/signal_image"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="30dp"
-        android:layout_alignParentEnd="true" /> -->
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/button_FCFR"
         style="@style/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="HEART AND BREATHING RATE"
+        android:text="HEART &amp; BREATHING RATE"
         android:textSize="20dp"
         android:layout_gravity="center"
-        android:layout_below="@+id/button_C"
+        android:layout_below="@+id/button_conditions"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="45dp"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignEnd="@+id/button_conditions" />
 
     <Button
         android:id="@+id/button_C"
@@ -52,10 +51,10 @@
         android:text="COMPOSITION"
         android:textSize="20dp"
         android:layout_gravity="center"
-        android:layout_below="@+id/imageView3"
+        android:layout_below="@+id/button_FCFR"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginTop="32dp"
+        android:layout_alignEnd="@+id/button_FCFR" />
 
     <TextView
         android:layout_width="wrap_content"
