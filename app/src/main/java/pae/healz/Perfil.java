@@ -27,6 +27,7 @@ public class Perfil extends AppCompatActivity {
     private EditText Name, SecondName, Sex, Age, Weight, Height;
     private final static String FILE = "InfoUser.txt";
     private ArrayList<Integer> Information;
+    private String NameS, SecondNameS;
     private Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +121,6 @@ public class Perfil extends AppCompatActivity {
             String texto = bufferInfo.readLine();
             Name.setText(texto);
 
-
             texto = bufferInfo.readLine();
             SecondName.setText(texto);
 
@@ -161,15 +161,30 @@ public class Perfil extends AppCompatActivity {
                 if (Name.getText().length() != 0
                         && SecondName.getText().length() != 0
                         && Sex.getText().length() != 0
+                        && Age.getText().length() != 0
                         && Height.getText().length() != 0
                         && Weight.getText().length() != 0) {
+                    try {    OutputStreamWriter outSWMensaje = new OutputStreamWriter(
+                            openFileOutput(FILE, Context.MODE_PRIVATE));
 
-                    Information.add(Integer.parseInt(Sex.getText().toString()));
-                    Information.add(Integer.parseInt(Age.getText().toString()));
-                    Information.add(Integer.parseInt(Height.getText().toString()));
-                    Information.add(Integer.parseInt(Weight.getText().toString()));
+                        outSWMensaje.write(Name.getText().toString() + "\n");
+                        outSWMensaje.write(SecondName.getText().toString() + "\n");
 
-                    actualizarTXT();
+
+                        outSWMensaje.write(Sex.getText().toString() + "\n");
+                        outSWMensaje.write(Age.getText().toString() + "\n");
+                        outSWMensaje.write(Height.getText().toString() + "\n");
+                        outSWMensaje.write(Weight.getText().toString() + "\n");
+
+
+
+                        outSWMensaje.close();
+                    } catch (Exception e) {
+                        Log.e(TAG, e.getMessage());
+                       Toast.makeText(getApplicationContext(), "The file TXT is impossible to be created",
+                                Toast.LENGTH_LONG).show();
+                    }
+                 //   actualizarTXT();
 
                 }
                 else{
@@ -182,23 +197,6 @@ public class Perfil extends AppCompatActivity {
     }
 
 
-    private void actualizarTXT() {
-        try {
-            OutputStreamWriter outSWMensaje = new OutputStreamWriter(
-                    openFileOutput(FILE, Context.MODE_PRIVATE));
-            // Por cada tiempo escrito en los EditText escribimos una línea
-            // en el archivo de alarmas.
-            for (int i : Information) {
-                outSWMensaje.write(i + "\n");
-            }
-
-            outSWMensaje.close();
-        } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
-            Toast.makeText(this, "No se pudo crear el archivo de alarmas",
-            Toast.LENGTH_LONG).show();
-        }
-    }
 
 
 
