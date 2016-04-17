@@ -7,10 +7,10 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/nexus4_background"
+    android:background="@drawable/coolbg"
     tools:context=".HeartRateActivity" >
 
-    <ImageButton
+    <!--<ImageButton
         android:id="@+id/buttonScan"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"        
@@ -19,13 +19,12 @@
         android:layout_alignParentBottom="true"
         android:contentDescription="Scan"
         android:layout_marginBottom="15dp"
-        android:src="@drawable/scan_button_style" />
+        android:src="@drawable/scan_button_style" />-->
     
     <ListView
         android:id="@+id/scanListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/buttonScan"
         android:stackFromBottom="false"
         android:layout_marginBottom="15dp"        
         android:layout_alignParentLeft="true"/>

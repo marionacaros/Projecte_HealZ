@@ -1,33 +1,28 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:background="@drawable/coolbg"
     tools:context="pae.healz.HomeFragment">
 
 
-    <ImageButton
-        android:id="@+id/button_measure"
-        android:layout_width="173dp"
-        android:layout_height="173dp"
-        android:src="@drawable/calculate"
-        android:background="@android:color/transparent"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="59dp"
-        android:layout_gravity="center_horizontal|bottom" />
-
-    <TextView
+    <Button
+        android:id="@+id/button_C"
+        style="@style/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GET A MEASURE"
-        android:textColor="#33B8DC"
-        android:textSize="40sp"
-        android:layout_marginBottom="30dp"
-        android:layout_above="@+id/button_measure"
-        android:layout_alignEnd="@+id/button_measure"
+        android:text="TAKE A MEASUREMENT"
+        android:textSize="23dp"
         android:layout_gravity="center"
-        android:id="@+id/textView2" />
+        android:layout_alignParentStart="true"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,10 +30,9 @@
         android:text="LAST MEASURE"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
-        android:layout_marginTop="50dp"
-        android:layout_above="@+id/button_measure"
-        android:layout_alignEnd="@+id/button_measure"
-        android:layout_gravity="center_horizontal|top" />
+        android:layout_marginBottom="80dp"
+        android:layout_gravity="center" />
 
 
 </FrameLayout>
+</android.support.design.widget.CoordinatorLayout>

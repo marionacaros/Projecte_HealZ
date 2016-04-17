@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -16,7 +17,7 @@ import android.widget.TextView;
  */
 public class HomeFragment extends Fragment {
 
-    private ImageButton button;
+    private Button button;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -37,7 +38,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home,container, false);
         //Enllaç button_calculs:
 
-        button = (ImageButton) view.findViewById(R.id.button_measure);
+        button = (Button) view.findViewById(R.id.button_C);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
