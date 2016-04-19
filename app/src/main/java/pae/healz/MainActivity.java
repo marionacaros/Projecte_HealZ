@@ -16,18 +16,21 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ImageButton;
-
 import com.csr.btsmart.BtSmartService;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
 
+    private static final String TAG = "No Name";
     // Create new fragment and transaction
     private Fragment frag = new Fragment();
     private ImageButton button_profile;
     private MenuItem item;
+    private Perfil perfil;
+    EditText namelayout, name;
 
     //private static final  int TRANSIT_FRAGMENT_OPEN = 4097;
 
@@ -51,8 +54,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
         checkpermissions();
 
-
+        setNameToLayout();
     }
+
+    //Funció per posar el nom de la persona al layout Home
+    private void setNameToLayout(){
+        namelayout = (EditText) findViewById(R.id.Home_name);
+        try{
+            name = perfil.getName();
+            String nombre = name.toString();
+            namelayout.setText(nombre);
+
+        } catch (Exception e) {
+        Log.e(TAG, e.getMessage());
+    }
+
+        }
 
     private void checkpermissions(){
         if (ContextCompat.checkSelfPermission(this,

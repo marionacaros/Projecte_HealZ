@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -24,7 +25,7 @@ public class Perfil extends AppCompatActivity {
 
     private static final String TAG = "Error in writing info";
     //De momento, Name y SecondName no se guarda (para un futuro)
-    private EditText Name, SecondName, Sex, Age, Weight, Height;
+    private EditText Name, Name2, SecondName, Sex, Age, Weight, Height;
     private final static String FILE = "InfoUser.txt";
     private ArrayList<Integer> Information;
     private String NameS, SecondNameS;
@@ -105,7 +106,27 @@ public class Perfil extends AppCompatActivity {
         }
     }
 
-    private boolean SetText() {
+
+    //Funció declarada per llegir el Nom del ficher de text
+    public EditText getName(){
+        try {
+            InputStreamReader archi = new InputStreamReader(
+                    openFileInput(FILE));
+            BufferedReader bufferInfo = new BufferedReader(archi);
+            String nombre = bufferInfo.readLine();
+            Name2.setText(nombre);
+
+            bufferInfo.close();
+            return Name2;
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+
+    private  boolean SetText() {
+        //boolean aux es per dir que retorni el nom o no
         try {
             //Funcionamiento: Leemos el archivo de texto y ponemos, en cada edittext lo que toca
 

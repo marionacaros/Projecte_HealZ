@@ -7,12 +7,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorBackground"
     tools:context="pae.healz.Perfil">
 
     <ImageButton
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:src="@drawable/profile"
+        android:src="@drawable/heart_rate_red"
         android:id="@+id/photoButton"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -22,8 +23,9 @@
         android:layout_width="150dp"
         android:layout_height="75dp"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:textColor="#FFFFFF"
         android:ems="10"
+        android:hint="name"
         android:id="@+id/Name"
         android:layout_below="@+id/photoButton"
         android:layout_alignParentStart="true" />
@@ -32,55 +34,109 @@
     <EditText
         android:layout_width="150dp"
         android:layout_height="75dp"
+        android:textColor="#FFFFFF"
         android:inputType="textPersonName"
-        android:text="Second Name"
         android:ems="10"
         android:id="@+id/Second_Name"
-        android:layout_below="@+id/photoButton"
+        android:layout_alignBottom="@+id/Name"
         android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="100dp"
         android:layout_height="75dp"
+        android:textColor="#FFFFFF"
         android:id="@+id/Sex"
-        android:text="Sex"
-        android:layout_above="@+id/Weight"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/Name" />
+        android:layout_alignTop="@+id/Age"
+        android:layout_alignStart="@+id/textview_weigh" />
     <EditText
         android:layout_width="100dp"
         android:layout_height="75dp"
         android:id="@+id/Age"
-        android:text="Age"
-        android:layout_above="@+id/Sex"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/textview_age"
         android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="100dp"
         android:layout_height="75dp"
         android:id="@+id/Weight"
-        android:text="Weight"
-        android:layout_above="@+id/button_save"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/Sex" />
+        android:textColor="#FFFFFF"
+        android:layout_alignTop="@+id/Height"
+        android:layout_alignStart="@+id/textview_weigh" />
 
     <EditText
         android:layout_width="100dp"
         android:layout_height="75dp"
         android:id="@+id/Height"
-        android:text="Height"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/Sex" />
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/textview_heigh"
+        android:layout_alignParentStart="true" />
 
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
+        style="@style/button"
         android:id="@+id/button_save"
         android:onClick="onClick"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Second Name"
+        android:textSize="20dp"
+        android:textColor="#FFFFFF"
+        android:id="@+id/textview_name"
+        android:layout_below="@+id/photoButton"
+        android:layout_alignStart="@+id/Second_Name" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="20dp"
+        android:textColor="#FFFFFF"
+        android:id="@+id/textview_secondname"
+        android:layout_below="@+id/photoButton"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Age"
+        android:textSize="20dp"
+        android:textColor="#FFFFFF"
+        android:id="@+id/textview_age"
+        android:layout_below="@+id/Name"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sex"
+        android:textSize="20dp"
+        android:textColor="#FFFFFF"
+        android:id="@+id/textview_sex"
+        android:layout_above="@+id/Sex"
+        android:layout_alignEnd="@+id/textview_weigh" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Heigh"
+        android:textSize="20dp"
+        android:textColor="#FFFFFF"
+        android:id="@+id/textview_heigh"
+        android:layout_below="@+id/Age"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weigh"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:id="@+id/textview_weigh"
+        android:layout_below="@+id/Sex"
+        android:layout_toEndOf="@+id/photoButton" />
 
 </RelativeLayout>

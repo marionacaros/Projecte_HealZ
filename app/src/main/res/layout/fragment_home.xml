@@ -20,25 +20,32 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GET A MEASURE"
-        android:textColor="#33B8DC"
-        android:textSize="40sp"
-        android:layout_marginBottom="30dp"
+        android:text="LAST MEASURE"
+        android:textColor="#FFFFFF"
+        android:textSize="30dp"
         android:layout_above="@+id/button_measure"
         android:layout_alignEnd="@+id/button_measure"
-        android:layout_gravity="center"
-        android:id="@+id/textView2" />
-
+        android:layout_gravity="center_horizontal|top" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LAST MEASURE"
         android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        android:layout_marginTop="50dp"
+        android:textSize="30dp"
         android:layout_above="@+id/button_measure"
         android:layout_alignEnd="@+id/button_measure"
         android:layout_gravity="center_horizontal|top" />
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
+        android:ems="10"
+        android:id="@+id/Home_name"
+        android:layout_below="@+id/photoButton"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="top" />
 
 
 </FrameLayout>
