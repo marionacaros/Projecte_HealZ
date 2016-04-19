@@ -2,22 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
     tools:context="pae.healz.Composition">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
-    <TextView
-        android:id="@+id/fullscreen_content_composition"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:keepScreenOn="true"
-        android:text="@string/dummy_content"
-        android:textColor="#33b5e5"
-        android:textSize="50sp"
-        android:textStyle="bold" />
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
@@ -32,17 +21,16 @@
             style="?metaButtonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorBackground">
-
-
+            android:background="@drawable/coolbg"
+            >
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Composition"
+                android:text="Follow the steps"
                 android:layout_marginTop="10dp"
                 android:textStyle="bold"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textColor="#FFFFFF"
 
                 android:id="@+id/text_title_composition"

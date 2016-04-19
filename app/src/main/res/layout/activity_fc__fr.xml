@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
-    tools:context="pae.healz.Composition"
+    android:background="@color/colorTransparent"
+    tools:context="pae.healz.FC_FR"
     android:id="@+id/fullscreen_content">
 
     <FrameLayout
@@ -17,15 +17,15 @@
             style="?metaButtonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorBackground">
+            android:background="@drawable/coolbg">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Breathing/Heart Rate"
+            android:text="Follow the steps"
             android:layout_marginTop="10dp"
             android:textStyle="bold"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textColor="#FFFFFF"
 
             android:id="@+id/text_title_fcfr"

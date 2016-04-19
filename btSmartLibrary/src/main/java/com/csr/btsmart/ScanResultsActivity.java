@@ -70,7 +70,7 @@ public abstract class ScanResultsActivity extends Activity {
 
     private static Handler mHandler = new Handler();
 
-    private ImageButton mScanButton = null;
+    //private ImageButton mScanButton = null;
 
     private boolean mCheckBt = false;
     
@@ -113,9 +113,10 @@ public abstract class ScanResultsActivity extends Activity {
 
         final BluetoothManager btManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBtAdapter = btManager.getAdapter();
+        scanLeDevice(true);
 
-        mScanButton = (ImageButton) findViewById(R.id.buttonScan);
-        mScanButton.setOnClickListener(mScanButtonListener);
+        //mScanButton = (ImageButton) findViewById(R.id.buttonScan);
+        //mScanButton.setOnClickListener(mScanButtonListener);
 
         // Register for broadcasts on BluetoothAdapter state change so that we can tell if it has been turned off.
         IntentFilter filter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
@@ -154,7 +155,7 @@ public abstract class ScanResultsActivity extends Activity {
     
     /**
      * Click handler for the scan button that starts scanning for BT Smart devices.
-     */
+     *
     OnClickListener mScanButtonListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -181,7 +182,7 @@ public abstract class ScanResultsActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         mCheckBt = false;
         if (requestCode == REQUEST_ENABLE_BT && resultCode != RESULT_OK) {
-            mScanButton.setEnabled(false);
+            //mScanButton.setEnabled(false);
             Toast.makeText(this, "Bluetooth not enabled.", Toast.LENGTH_LONG).show();
         }
     }
@@ -197,11 +198,11 @@ public abstract class ScanResultsActivity extends Activity {
                     Toast.makeText(context, "Bluetooth disabled.", Toast.LENGTH_LONG).show();
                     scanLeDevice(false);
                     clearScanResults();                    
-                    mScanButton.setEnabled(false);                    
+                    //mScanButton.setEnabled(false);
                 }
                 else if (state == BluetoothAdapter.STATE_ON) {
                     Toast.makeText(context, "Bluetooth enabled.", Toast.LENGTH_LONG).show();
-                    mScanButton.setEnabled(true);
+                    //mScanButton.setEnabled(true);
                     mBtAdapter = ((BluetoothManager)getSystemService(Context.BLUETOOTH_SERVICE)).getAdapter();
                 }
             }
@@ -213,7 +214,7 @@ public abstract class ScanResultsActivity extends Activity {
         public void run() {
             mBtAdapter.stopLeScan(mLeScanCallback);
             setProgressBarIndeterminateVisibility(false);
-            mScanButton.setEnabled(true);
+           // mScanButton.setEnabled(true);
         }
     };
 
@@ -240,14 +241,14 @@ public abstract class ScanResultsActivity extends Activity {
             clearScanResults();
             setProgressBarIndeterminateVisibility(true);            
             mBtAdapter.startLeScan(mLeScanCallback);
-            mScanButton.setEnabled(false);
+            //mScanButton.setEnabled(false);
         }
         else {
             // Cancel the scan timeout callback if still active or else it may fire later.
             mHandler.removeCallbacks(scanTimeout);
             setProgressBarIndeterminateVisibility(false);
             mBtAdapter.stopLeScan(mLeScanCallback);
-            mScanButton.setEnabled(true);
+            //mScanButton.setEnabled(true);
         }
     }
 
