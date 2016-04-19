@@ -96,7 +96,7 @@ public class Perfil extends AppCompatActivity {
                     openFileOutput(FILE, Context.MODE_PRIVATE));
 
             // Escribimos los 5 tiempos iniciales en el archivo.
-            outSWMensaje.write("Name\nSecond Name\nSex\nAge\nWeight\nHeight\n");
+            outSWMensaje.write("\n\n\n\n\n\n");
 
             // Cerramos el flujo de escritura del archivo, este paso es obligatorio,
             // de no hacerlo no se podrá acceder posteriormente al archivo.

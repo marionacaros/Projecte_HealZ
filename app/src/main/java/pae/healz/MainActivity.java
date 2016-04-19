@@ -18,11 +18,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageButton;
+
 import com.csr.btsmart.BtSmartService;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-
 
     private static final String TAG = "No Name";
     // Create new fragment and transaction
@@ -53,10 +53,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().getItem(0).setChecked(true);
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
         checkpermissions();
-
-        setNameToLayout();
+        button_profile = (ImageButton) navigationView.getHeaderView(0).findViewById(R.id.ImageHomeProfile);
+        button_profile.setOnClickListener(this);
+        //setNameToLayout();
     }
-
+    /*
     //Funció per posar el nom de la persona al layout Home
     private void setNameToLayout(){
         namelayout = (EditText) findViewById(R.id.Home_name);
@@ -70,8 +71,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
         }
+        */
 
-    private void checkpermissions(){
+    private void checkpermissions() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -112,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     // contacts-related task you need to do.
 
                 } else {
-                        //PONER DIALOGO QUE NO VA A FUNCIONAR
+                    //PONER DIALOGO QUE NO VA A FUNCIONAR
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }
@@ -123,8 +125,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // permissions this app might request
         }
     }
-
-
 
 
     @Override
@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         if (id == R.id.nav_home) {
-            frag= new HomeFragment();
+            frag = new HomeFragment();
 
         } else if (id == R.id.nav_history) {
             frag = new HistoryFragment();
@@ -187,20 +187,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         //drawer.closeDrawers();
 
-        button_profile = (ImageButton) findViewById(R.id.ImageHomeProfile);
-        if (button_profile!=null)
-        button_profile.setOnClickListener(this);
         return true;
     }
 
-
-
-
-
-
     @Override
     public void onClick(View v) {
-        if (v == button_profile){
+        if (v == button_profile) {
             Intent intent = new Intent(MainActivity.this, Perfil.class);
             startActivity(intent);
         }
