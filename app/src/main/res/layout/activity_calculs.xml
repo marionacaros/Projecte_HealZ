@@ -60,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Take a measurement"
+        android:text="Take a measure"
         android:id="@+id/textView"
         android:textColor="#FFFFFF"
         android:textSize="30dp"

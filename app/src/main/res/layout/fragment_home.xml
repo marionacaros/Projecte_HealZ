@@ -18,8 +18,8 @@
         style="@style/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TAKE A MEASUREMENT"
-        android:textSize="23dp"
+        android:text="TAKE A MEASURE"
+        android:textSize="26dp"
         android:layout_gravity="center"
         android:layout_alignParentStart="true"
         />
