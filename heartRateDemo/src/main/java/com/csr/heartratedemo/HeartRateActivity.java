@@ -92,7 +92,7 @@ public class HeartRateActivity extends Activity {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         // Display back button in action bar.
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        // getActionBar().setDisplayHomeAsUpEnabled(true);
 
         setContentView(R.layout.activity_heart_rate);
 
@@ -238,7 +238,7 @@ public class HeartRateActivity extends Activity {
                         smartService.requestCharacteristicValue(REQUEST_SERIAL_NO,
                                 BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(), BtSmartUuid.SERIAL_NUMBER.getUuid(),
                                 parentActivity.mHeartHandler);
-
+//  REGISTER CHARACTERISTIC Y SERVICE
                         // Register to be told about battery level.
                         smartService.requestCharacteristicNotification(REQUEST_BATTERY,
                                 BtSmartUuid.BATTERY_SERVICE.getUuid(), BtSmartUuid.BATTERY_LEVEL.getUuid(),
