@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="WHAT CAN DO ZTEERO?"
+            android:text="WHAT CAN ZTEERO DO?"
             android:layout_marginTop="10dp"
             android:textStyle="bold"
             android:textSize="25sp"
