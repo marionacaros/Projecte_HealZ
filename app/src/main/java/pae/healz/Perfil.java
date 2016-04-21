@@ -66,7 +66,7 @@ public class Perfil extends AppCompatActivity {
             if (!SetText()) {
                 // Avisamos al usuario de que el archivo era corrupto.
                 Toast.makeText(Perfil.this,
-                        "Please fill in the parameters",
+                        "Please fill in all the parameters",
                         Toast.LENGTH_LONG).show();
                 // Creamos de nuevo el archivo.
                 crearTXT();
