@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"    
     android:orientation="horizontal"
-    android:background="@color/background"
+    android:background="@drawable/coolbg"
     android:padding="10dip"
     android:layout_marginBottom="2dp" >
       
