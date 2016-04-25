@@ -54,7 +54,7 @@
                         android:layout_height="match_parent"
                         android:textColor="#FFFFFF"
                         android:textSize="18dp"
-                        android:text="@string/info_text"
+                        android:text="@string/about_us_text"
                         android:singleLine="false"/>
                 </RelativeLayout>
 

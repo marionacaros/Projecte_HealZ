@@ -1,30 +1,40 @@
 <resources>
     <string name="app_name">Zteero</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
-
     <string name="title_activity_fc__fr">Breathing Rate - Heart Rate</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-
     <string name="title_activity_composition">Composition</string>
-
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ble_not_supported">Bluetooth Low Energy not supported in this mobile</string>
 
-    <string name="fc_fr_text">1. Put your hands around the <b>Zteero device</b>.\n\n2. Make sure your palms are in contact with the electrodes as you can see on the image.\n\n3. Press <b>CONNECT</b> to establish communication with the Zteero device.\n\n4. When the device is connected you can start the measurement!</string>
+    <string name="navigation_drawer_open">Navigation drawer open</string>
+    <string name="navigation_drawer_close">Navigation drawer close</string>
+
+    <string name="fc_fr_text">1. Put your hands around <b>Zteero</b>.\n\n2. Be sure your palms are in contact with the electrodes as you can see on the image, but not in contact between them.\n\n3. Press <b>CONNECT</b> to establish communication with Zteero.\n\n4. When Zteero is connected with the app you can start the measurement!</string>
+    <string name="about_us_text">We are a company that has developed a product able of analyzing the nutritional state of a person which is called Zteero.\n\nZteero is only though for fitness purpouse. You can find more information about the product at\: <u>www.Zteero.com</u> or you can contact by sending an email at <u>ZteeroCompany@gmail.com</u>\n\nThis idea came to observe the bad eating habits of the population, and how these habits affect their nutritional status.\n\n
+</string>
+
+    <string name="composition_steps">1. Put <b>Zteero</b> between your hand and your leg as you can
+        see on the image.\n\n2. Be sure that your hand are not in contact with your leg. In case of
+        contact results will be wrong.\n\n3. Press the button CONNECT to establish connection with
+        Zteero Device.\n\n4. When Zteero is connected with the app you can start the measurement.\n\n
+</string>
+
+    <string name="conditions_text">
+    It’s recommended that at the time of measurement, the subject is under these conditions:\n\n
+
+    -Have not made strenuous exercise 24 hours before.\n\n
+    -Hae not eaten the 2 hours before.\n\n
+    -Urinating before the measurement.\n\n
+    -Measure weight and height in each evaluation.\n\n
+    -Stay lying on his back during 8 minuts before the measurement.\n\n
+    -Correct positioning of the electrodes.\n\n
+    -Arms and legs should be separated from the trunk.\n\n
+    -Remove metal elements\n\n</string>
 
 
-    <string name="info_text">Zteero is a personal monitoring device that allows one to measure one\'s
-        heart and breathing rate in real time or record the heart rate for later study. It is largely used by performers
-        of various types of physical exercise.\n\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis faucibus maximus. Phasellus sed viverra dolor. Fusce accumsan nibh erat, et laoreet dui blandit vel. Etiam pharetra nulla id lorem congue sodales. Donec egestas lectus velit, sit amet molestie turpis efficitur sed. Phasellus non convallis velit. Etiam non justo a erat bibendum pretium at vitae nulla. Praesent sit amet elit eu dolor faucibus pellentesque. Donec dictum felis et diam venenatis, nec consequat enim efficitur. Sed sodales dui et leo pharetra ullamcorper. Nulla blandit est eu eros tincidunt semper. Vivamus scelerisque nec erat vel dapibus. Donec elementum cursus ex nec mollis. Cras nec scelerisque nulla. Suspendisse potenti.
-
-Pellentesque accumsan ultricies risus eu condimentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consectetur diam sed massa condimentum, nec rhoncus nibh sagittis. Fusce efficitur enim et elementum lacinia. In hac habitasse platea dictumst. Proin hendrerit ac leo id efficitur. In nec velit et ex placerat mattis sit amet id purus. Nam eros orci, feugiat sit amet enim vitae, scelerisque venenatis lorem. Fusce porta lorem magna. Etiam eu dui eget felis pharetra finibus nec id orci. Proin egestas leo non libero vehicula commodo. Aliquam est mi, sodales non nisl ac, venenatis iaculis libero. Nullam id blandit sapien, in sollicitudin turpis. Duis egestas tortor laoreet elementum vulputate. Suspendisse auctor et erat et sollicitudin.
-
-Nullam vehicula faucibus risus a placerat. Sed sed mattis odio, a facilisis est. Duis luctus lacus sit amet varius mollis. Proin ac sagittis nibh. Integer quis condimentum sapien. Mauris eget cursus eros. Nulla mollis metus sed turpis dapibus luctus. Donec felis enim, lacinia vitae lobortis ac, placerat eu urna.</string>
+    <string name="info_text">Zteero is a personal monitoring device that allows one to measure in real time: <b>\n\n-
+        Heart and breathing rate\n\n- Percentage of fat free mass \n\n- Free mass\n\n- Total body water</b>\n\nIt is largely used by performers
+        of various types of physical exercise.\n\nThis app records all your measures that can be find at <b>history</b> menu option for later study and to follow the evolution of your body.\n\n</string>
 
     <!-- Copy Paste Android Developers Sample -->
 

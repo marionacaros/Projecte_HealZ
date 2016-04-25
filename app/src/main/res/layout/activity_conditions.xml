@@ -48,8 +48,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:textColor="#FFFFFF"
-                            android:textSize="18dp"
-                            android:text="@string/info_text"
+                            android:textSize="16dp"
+                            android:text="@string/conditions_text"
                             android:singleLine="false"/>
                     </RelativeLayout>
 
