@@ -29,7 +29,7 @@ import android.widget.TextView;
  * Custom View that allows the displayed value to be edited by the user.
  * 
  */
-public class DataEditView extends DataView {
+public class  DataEditView extends DataView {
 
     EditText editView = null;
 
