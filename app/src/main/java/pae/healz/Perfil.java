@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
+import pae.healz.SQLite.UserSQLiteHelper;
+
 public class Perfil extends AppCompatActivity {
 
     private static final String TAG = "Error in writing info";
@@ -35,44 +38,17 @@ public class Perfil extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
-
-        dataBase = new DataBase(getApplicationContext());
-        dataBase.crearTXT(true);
-        inicializacion();
-        setText();
-        button_save();
+        //Declaramos base de datos y accedemos en modo escritura
+        UserSQLiteHelper dbHelp = new UserSQLiteHelper(getBaseContext());
+        SQLiteDatabase db = dbHelp.getWritableDatabase();
+        Toast.makeText(getBaseContext(), "Base de datos preparada", Toast.LENGTH_LONG).show();
     }
 
-    private void inicializacion(){
-        Name = (EditText) findViewById(R.id.Name);
-        SecondName = (EditText) findViewById(R.id.Second_Name);
-        Sex = (EditText) findViewById(R.id.Sex);
-        Age = (EditText) findViewById(R.id.Age);
-        Weight = (EditText) findViewById(R.id.Weight);
-        Height =(EditText) findViewById(R.id.Height);
-    }
 
-    public boolean setText(){
-        String text;
-        text = dataBase.leerlinea(NumeroLinea, Name);
-        Name.setText(text);
-        NumeroLinea++;
-        text = dataBase.leerlinea(NumeroLinea, SecondName);
-        SecondName.setText(text);
-        NumeroLinea++;
-        text = dataBase.leerlinea(NumeroLinea, Sex);
-        Sex.setText(text);
-        NumeroLinea++;
-        text = dataBase.leerlinea(NumeroLinea, Age);
-        Age.setText(text);
-        NumeroLinea++;
-        text = dataBase.leerlinea(NumeroLinea, Weight);
-        Weight.setText(text);
-        NumeroLinea++;
-        text = dataBase.leerlinea(NumeroLinea, Height);
-        Height.setText(text);
-        return true;
-    }
+
+
+
+
 
     private void button_save(){
         button = (Button) findViewById(R.id.button_save);
