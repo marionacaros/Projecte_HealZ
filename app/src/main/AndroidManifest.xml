@@ -21,6 +21,8 @@
     <!-- Permisos per poder executar app a Android M -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
         <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- Permisos per poder escriure a la memoria -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"

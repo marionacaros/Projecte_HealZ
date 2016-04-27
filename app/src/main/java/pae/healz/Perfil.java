@@ -24,12 +24,11 @@ import java.util.ArrayList;
 public class Perfil extends AppCompatActivity {
 
     private static final String TAG = "Error in writing info";
-    //De momento, Name y SecondName no se guarda (para un futuro)
-    private EditText Name, Name2, SecondName, Sex, Age, Weight, Height;
-    private final static String FILE_USER = "InfoUser.txt";
-    private ArrayList<Integer> Information;
+
+    private DataBase dataBase;
+    private int NumeroLinea=0;
+    private EditText Name, SecondName, Sex, Age, Weight, Height;
     private Button button;
-    private DataManager data;
 
 
     @Override
@@ -37,24 +36,42 @@ public class Perfil extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
 
-        data = new DataManager(getApplicationContext());
-        data.crearTXT();
-        data.Inicializacion_Information();
-        data.establecerTiempoInicial();
+        dataBase = new DataBase(getApplicationContext());
+        dataBase.crearTXT(true);
         inicializacion();
+        setText();
         button_save();
     }
 
     private void inicializacion(){
-
         Name = (EditText) findViewById(R.id.Name);
         SecondName = (EditText) findViewById(R.id.Second_Name);
         Sex = (EditText) findViewById(R.id.Sex);
         Age = (EditText) findViewById(R.id.Age);
         Weight = (EditText) findViewById(R.id.Weight);
         Height =(EditText) findViewById(R.id.Height);
+    }
 
-
+    public boolean setText(){
+        String text;
+        text = dataBase.leerlinea(NumeroLinea, Name);
+        Name.setText(text);
+        NumeroLinea++;
+        text = dataBase.leerlinea(NumeroLinea, SecondName);
+        SecondName.setText(text);
+        NumeroLinea++;
+        text = dataBase.leerlinea(NumeroLinea, Sex);
+        Sex.setText(text);
+        NumeroLinea++;
+        text = dataBase.leerlinea(NumeroLinea, Age);
+        Age.setText(text);
+        NumeroLinea++;
+        text = dataBase.leerlinea(NumeroLinea, Weight);
+        Weight.setText(text);
+        NumeroLinea++;
+        text = dataBase.leerlinea(NumeroLinea, Height);
+        Height.setText(text);
+        return true;
     }
 
     private void button_save(){
@@ -70,31 +87,31 @@ public class Perfil extends AppCompatActivity {
                         && Weight.getText().length() != 0) {
                     try {
 
+                        dataBase.escribirlinea(Name.getText().toString());
+                        dataBase.escribirlinea(SecondName.getText().toString());
+                        dataBase.escribirlinea(Sex.getText().toString());
+                        dataBase.escribirlinea(Age.getText().toString());
+                        dataBase.escribirlinea(Height.getText().toString());
+                        dataBase.escribirlinea(Weight.getText().toString());
 
 
+                        //OutputStreamWriter outSWMensaje = new OutputStreamWriter(
+                        //        openFileOutput(FILE_USER, Context.MODE_PRIVATE));
 
-
-                        OutputStreamWriter outSWMensaje = new OutputStreamWriter(
-                                openFileOutput(FILE_USER, Context.MODE_PRIVATE));
-
-                        outSWMensaje.write(Name.getText().toString() + "\n");
-                        outSWMensaje.write(SecondName.getText().toString() + "\n");
-                        outSWMensaje.write(Sex.getText().toString() + "\n");
-                        outSWMensaje.write(Age.getText().toString() + "\n");
-                        outSWMensaje.write(Height.getText().toString() + "\n");
-                        outSWMensaje.write(Weight.getText().toString() + "\n");
-                        outSWMensaje.close();
+                        //outSWMensaje.write(Name.getText().toString() + "\n");
+                        //outSWMensaje.write(SecondName.getText().toString() + "\n");
+                        //outSWMensaje.write(Sex.getText().toString() + "\n");
+                        //outSWMensaje.write(Age.getText().toString() + "\n");
+                       // outSWMensaje.write(Height.getText().toString() + "\n");
+                        //outSWMensaje.write(Weight.getText().toString() + "\n");
+                        //outSWMensaje.close();
                     } catch (Exception e) {
                         Log.e(TAG, e.getMessage());
-                        // Toast.makeText(getApplicationContext(), "The file TXT is impossible to be created",
-                        //  Toast.LENGTH_LONG).show();
+
                     }
-                    //   actualizarTXT();
 
                 } else {
-                    //Toast.makeText(Perfil.this,
-                    //   "Please, introduce all the information",
-                    //  Toast.LENGTH_LONG).show();
+                    Toast.makeText(Perfil.this, "Please, introduce all the information", Toast.LENGTH_LONG).show();
                 }
             }
         });
