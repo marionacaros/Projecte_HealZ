@@ -1,4 +1,4 @@
-package pae.healz;
+package pae.healz.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import pae.healz.R;
 
 
 public class InformationFragment extends Fragment {

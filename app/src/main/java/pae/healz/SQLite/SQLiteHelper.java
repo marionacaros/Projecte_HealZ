@@ -22,9 +22,21 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
 
 
-    //Tabla heartrate creada, hay que hacerlo para las demas
+    //Declaracion de las tablas en DB
     private static final String DATABASE_CREATE_HEARTRATE = "create table "
             + TABLE_HEARTRATE + "(" + COLUMN_ID
+            + " integer primary key autoincrement, " + COLUMN_TYPE
+            + " float not null, "+ COLUMN_DATE +" long not null);";
+    private static final String DATABASE_CREATE_WEIGHT = "create table "
+            + TABLE_WEIGHT + "(" + COLUMN_ID
+            + " integer primary key autoincrement, " + COLUMN_TYPE
+            + " float not null, "+ COLUMN_DATE +" long not null);";
+    private static final String DATABASE_CREATE_BODYWATER = "create table "
+            + TABLE_BODYWATER + "(" + COLUMN_ID
+            + " integer primary key autoincrement, " + COLUMN_TYPE
+            + " float not null, "+ COLUMN_DATE +" long not null);";
+    private static final String DATABASE_CREATE_FATFREEMASS = "create table "
+            + TABLE_FATFREEMASS + "(" + COLUMN_ID
             + " integer primary key autoincrement, " + COLUMN_TYPE
             + " float not null, "+ COLUMN_DATE +" long not null);";
 
@@ -33,8 +45,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
     public void onCreate(SQLiteDatabase db){
-        //faltan todas las demas
+        //Inicializacion de las tablas
         db.execSQL(DATABASE_CREATE_HEARTRATE);
+        db.execSQL(DATABASE_CREATE_WEIGHT);
+        db.execSQL(DATABASE_CREATE_BODYWATER);
+        db.execSQL(DATABASE_CREATE_FATFREEMASS);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

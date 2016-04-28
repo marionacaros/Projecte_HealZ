@@ -1,4 +1,4 @@
-package pae.healz;
+package pae.healz.Fragments;
 
 
 import android.content.Context;
@@ -9,8 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
+
+import pae.healz.Activities.Calculs;
+import pae.healz.R;
 
 /**
  * A simple {@link Fragment} subclass.
