@@ -1,31 +1,14 @@
 package pae.healz.Activities;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-
-import pae.healz.Json.User;
+import pae.healz.UserData.User;
 import pae.healz.R;
-import pae.healz.SQLite.SQLiteHelper;
-import pae.healz.SQLite.SQLiteHelper;
 
 public class Perfil extends AppCompatActivity {
 
@@ -39,7 +22,7 @@ public class Perfil extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil);
+            setContentView(R.layout.activity_perfil);
 
         name = (EditText) findViewById(R.id.Name);
         secondName = (EditText) findViewById(R.id.Second_Name);
@@ -47,37 +30,69 @@ public class Perfil extends AppCompatActivity {
         sex = (EditText) findViewById(R.id.Sex);
         height = (EditText) findViewById(R.id.Height);
         weight = (EditText) findViewById(R.id.Weight);
+        button = new Button(getApplicationContext());
 
+        user = new User(getApplicationContext());
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                nombre = name.getText().toString();
-                apellido = secondName.getText().toString();
-                edad = age.getText().toString();
-                sexo = sex.getText().toString();
-                altura = height.getText().toString();
-                peso = weight.getText().toString();
-            }
-        });
+        if(user.getname() == null){
+            name.setHint("Introduce Name");
+        }
+        else name.setText(user.getname());
 
-        user = new User(nombre, apellido, edad, sexo, altura, peso);
+        if(user.getsecondname() == null){
+            secondName.setHint("Introduce Last Name");
+        }
+        else secondName.setText(user.getsecondname());
 
+        if(user.getage() == null){
+            age.setHint("16-85 years");
+        }
+        else age.setText(user.getage());
 
+        if(user.getsex() == null){
+            sex.setHint("Man or Woman");
+        }
+        else sex.setText(user.getsex());
+
+        if(user.getweight() == null){
+            weight.setHint("20 - 250 Kg");
+        }
+        else weight.setText(user.getweight());
+
+        if(user.getheight() == null){
+            height.setHint("50 - 250 cm");
+        }
+        else height.setText(user.getheight());
+
+        button_save();
     }
-
-
-
-
-
-
-
 
     private void button_save(){
         button = (Button) findViewById(R.id.button_save);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+                name = (EditText) findViewById(R.id.Name);
+                secondName = (EditText) findViewById(R.id.Second_Name);
+                age = (EditText) findViewById(R.id.Age);
+                sex = (EditText) findViewById(R.id.Sex);
+                height = (EditText) findViewById(R.id.Height);
+                weight = (EditText) findViewById(R.id.Weight);
+                button = new Button(getApplicationContext());
+
+                nombre = name.getText().toString();
+                apellido = secondName.getText().toString();
+                edad = age.getText().toString();
+                sexo = sex.getText().toString();
+                altura = height.getText().toString();
+                peso = weight.getText().toString();
+
+                user.saveUserData(nombre, apellido, edad, sexo, peso, altura);
+
+                CharSequence text = "Information saved perfectly";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+                toast.show();
             }
         });
     }
