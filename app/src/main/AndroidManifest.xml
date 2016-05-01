@@ -42,6 +42,7 @@
         </activity>
         <activity android:name=".Activities.Perfil" />
         <activity android:name=".Activities.Calculs" />
+        <activity android:name=".Activities.Proba_Database"></activity>
         <activity
             android:name=".Activities.FC_FR"
             android:configChanges="orientation|keyboardHidden|screenSize"

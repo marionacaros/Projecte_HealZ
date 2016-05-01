@@ -9,9 +9,10 @@ import android.content.SharedPreferences;
 public class User {
     Context ctx;
     SharedPreferences prefsuser;
+
     public User (Context ctx){
         this.ctx=ctx;
-         prefsuser =  ctx.getSharedPreferences("Datos Usuario", Context.MODE_PRIVATE);
+        prefsuser =  ctx.getSharedPreferences("Datos Usuario", Context.MODE_PRIVATE);
 
     }
 
@@ -50,4 +51,6 @@ public class User {
         String height = prefsuser.getString("Altura", null);
         return height;
     }
+
+
 }

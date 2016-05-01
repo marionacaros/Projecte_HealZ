@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import pae.healz.Activities.Calculs;
+import pae.healz.Activities.Proba_Database;
 import pae.healz.R;
 
 /**
@@ -18,7 +19,7 @@ import pae.healz.R;
  */
 public class HomeFragment extends Fragment {
 
-    private Button button;
+    private Button button, buttonToDB;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -46,6 +47,17 @@ public class HomeFragment extends Fragment {
 
                 Intent intent = new Intent(getActivity(), Calculs.class);
                 startActivity(intent);
+            }
+        });
+
+        //Per fer la proba base de dades
+        buttonToDB = (Button) view.findViewById(R.id.button_database);
+        buttonToDB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent2 = new Intent(getActivity(), Proba_Database.class);
+                startActivity(intent2);
             }
         });
         return view;

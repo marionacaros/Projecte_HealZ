@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import pae.healz.R;
 
@@ -21,11 +22,12 @@ import pae.healz.R;
 public class HistoryFragment extends Fragment {
 
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        onAttach( getActivity());
+        onAttach(getActivity());
     }
 
 
@@ -34,6 +36,7 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history,container, false);
         return inflater.inflate(R.layout.fragment_history, container, false);
+
 
     }
 
