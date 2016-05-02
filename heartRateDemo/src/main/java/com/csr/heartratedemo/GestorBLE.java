@@ -31,7 +31,6 @@ public class GestorBLE {
     public Handler mHandler;
 
 
-
     /**
      * This is the handler for characteristic value updates.
      */
@@ -42,19 +41,18 @@ public class GestorBLE {
     }
 
 
-
-
     interface IBLEDATA {
 
         //void batteryNotificationHandler(byte value); //@param value The battery percentage value.
         void sensorLocationHandler(int locationIndex); //@param locationIndex Value received in location characteristic - indexes into locations array.
 
         void newHeartRate(int hrm);
+
         void newEnergyData(int energy);
+
         void newRRvalue(int lastRR);
 
         void newImpedance(int z);
-
 
 
     }
@@ -104,7 +102,7 @@ public class GestorBLE {
                         //AÑADIR SERVICES Y CARACTERÍSTICAS
 
                         //Body Composition
-                        else if(serviceUuid.compareTo(BtSmartService.BtSmartUuid.BCS_SERVICE.getUuid()) == 0
+                        else if (serviceUuid.compareTo(BtSmartService.BtSmartUuid.BCS_SERVICE.getUuid()) == 0
                                 && characteristicUuid.compareTo(BtSmartService.BtSmartUuid.BODY_COMPOSITION_MEASUREMENT.getUuid()) == 0) {
                             heartRateHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE));
                         }
@@ -208,64 +206,37 @@ public class GestorBLE {
 //                rrData.setValueText(String.valueOf(lastRR));
             }
         }
-    }
-    /*
-    public void CompositionHandler(byte[] value) {
-        final byte INDEX_FLAGS = 0;
-        final byte INDEX_HRM_VALUE = 1;
-        final byte INDEX_ENERGY_VALUE = 2;
 
-        byte energyIndexOffset = 0;
 
-        final byte FLAG_HRM_FORMAT = 0x01;
-        final byte FLAG_ENERGY_PRESENT = (0x01 << 3);
-        final byte FLAG_RR_PRESENT = (0x01 << 4);
+        public void CompositionHandler(byte[] value) {
+            final byte INDEX_FLAGS = 0;
 
-        final byte SIZEOF_UINT16 = 2;
+            final byte INDEX_IMPEDANCE_VALUE = 1;
 
-        // Re-create the characteristic with the received value.
-        BluetoothGattCharacteristic characteristic =
-                new BluetoothGattCharacteristic(BtSmartService.BtSmartUuid.HEART_RATE_MEASUREMENT.getUuid(), 0, 0);
-        characteristic.setValue(value);
+            byte indexOffset = 1; //16 bits
 
-        byte flags = characteristic.getValue()[INDEX_FLAGS]; //COJE BYTE 0 PARA LEER FLAGS ARRAY
+            final short FLAG_IMPEDANCE_PRESENT = (0x01 << 9);
+            final byte SIZEOF_UINT16 = 2;
+            int z = 0;
 
-        // Check the flags of the characteristic to find if the heart rate number format is UINT16 or UINT8.
-        int hrm = 0;
-        if ((flags & FLAG_HRM_FORMAT) != 0) {
-            hrm = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, INDEX_HRM_VALUE); //BYTE 1
-            // Need to offset all the energy value index by 1 as the heart rate value is taking up two bytes.
-            energyIndexOffset++;
-        } else {
-            hrm = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, INDEX_HRM_VALUE);
-        }
-        mInterfaz.newHeartRate(hrm);
-//            heartRateData.setValueText(String.valueOf(hrm));
+            // Re-create the characteristic with the received value.
+            BluetoothGattCharacteristic characteristic =
+                    new BluetoothGattCharacteristic(BtSmartService.BtSmartUuid.BODY_COMPOSITION_MEASUREMENT.getUuid(), 0, 0);
+            characteristic.setValue(value);
 
-        // Get the expended energy if present.
-        int energyExpended = 0;
-        if ((flags & FLAG_ENERGY_PRESENT) != 0) {
-            energyExpended =
-                    characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, INDEX_ENERGY_VALUE
-                            + energyIndexOffset);
-            mInterfaz.newEnergyData(energyExpended);
-//                energyData.setValueText(String.valueOf(energyExpended));
-        }
+            byte flags = characteristic.getValue()[INDEX_FLAGS]; //COJE BYTE 0 PARA LEER FLAGS ARRAY
 
-        // Get RR interval values if present.
-        if ((flags & FLAG_RR_PRESENT) != 0) {
-            int lastRR = 0;
-            // There can be multiple RR values - just get the most recent which will be the last uint16 in the array.
-            lastRR = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, value.length - SIZEOF_UINT16);
-            mInterfaz.newRRvalue(lastRR);
-//                rrData.setValueText(String.valueOf(lastRR));
+            //AGAFAR INFO BITS
+
+            if ((flags & FLAG_IMPEDANCE_PRESENT) != 0) {
+                z = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, INDEX_IMPEDANCE_VALUE + indexOffset);
+                mInterfaz.newImpedance(z);
+            }
+
         }
     }
 
 
-    }
-
-*/
-        ;
+    ;
 
 }
