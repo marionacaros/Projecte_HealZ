@@ -21,6 +21,8 @@
     <!-- Permisos per poder executar app a Android M -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
         <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- Permisos per poder escriure a la memoria -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -29,7 +31,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -38,14 +40,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Perfil" />
-        <activity android:name=".Calculs" />
+        <activity android:name=".Activities.Perfil" />
+        <activity android:name=".Activities.Calculs" />
+        <activity android:name=".Activities.Proba_Database"></activity>
         <activity
-            android:name=".FC_FR"
+            android:name=".Activities.FC_FR"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_fc__fr" />
         <activity
-            android:name=".Composition"
+            android:name=".Activities.Composition"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_composition" />
 
@@ -58,7 +61,7 @@
         -->
 
         <activity
-            android:name=".ConditionsActivity"
+            android:name=".Activities.ConditionsActivity"
             android:label="@string/title_activity_conditions"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     <activity

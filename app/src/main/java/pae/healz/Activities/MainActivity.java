@@ -1,4 +1,4 @@
-package pae.healz;
+package pae.healz.Activities;
 
 import android.Manifest;
 import android.content.Intent;
@@ -19,7 +19,12 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import com.csr.btsmart.BtSmartService;
+import pae.healz.Fragments.About_UsFragment;
+import pae.healz.Fragments.HistoryFragment;
+import pae.healz.Fragments.HomeFragment;
+import pae.healz.Fragments.InformationFragment;
+import pae.healz.Fragments.SettingsFragment;
+import pae.healz.R;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {

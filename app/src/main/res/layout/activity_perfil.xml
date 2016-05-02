@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/coolbg"
-    tools:context="pae.healz.Perfil">
+    tools:context=".Activities.Perfil">
 
     <ImageButton
         android:layout_width="130dp"
@@ -25,7 +25,6 @@
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:ems="10"
-        android:hint="Name"
         android:id="@+id/Name"
         android:layout_below="@+id/photoButton"
         android:layout_alignParentStart="true" />
@@ -38,23 +37,21 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/Second_Name"
-        android:hint="Second Name"
-        android:layout_alignBottom="@+id/Name"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/photoButton"
+        android:layout_alignEnd="@+id/Sex"
+        android:layout_toEndOf="@+id/Name" />
 
     <EditText
         android:layout_width="100dp"
         android:layout_height="75dp"
         android:textColor="#FFFFFF"
         android:id="@+id/Sex"
-        android:hint="Sex"
         android:layout_alignTop="@+id/Age"
         android:layout_alignStart="@+id/textview_weigh" />
     <EditText
         android:layout_width="100dp"
         android:layout_height="75dp"
         android:id="@+id/Age"
-        android:hint="Age"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/textview_age"
         android:layout_alignParentStart="true" />
@@ -63,16 +60,14 @@
         android:layout_width="100dp"
         android:layout_height="75dp"
         android:id="@+id/Weight"
-        android:hint="Weight"
         android:textColor="#FFFFFF"
-        android:layout_alignTop="@+id/Height"
+        android:layout_below="@+id/textview_weigh"
         android:layout_alignStart="@+id/textview_weigh" />
 
     <EditText
         android:layout_width="100dp"
         android:layout_height="75dp"
         android:id="@+id/Height"
-        android:hint="Height"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/textview_heigh"
         android:layout_alignParentStart="true" />
@@ -92,7 +87,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Second Name"
+        android:text="Second Name:"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:id="@+id/textview_name"
@@ -101,7 +96,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name"
+        android:text="Name:"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:id="@+id/textview_secondname"
@@ -110,7 +105,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Age"
+        android:text="Age:"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:id="@+id/textview_age"
@@ -119,16 +114,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sex"
+        android:text="Sex:"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:id="@+id/textview_sex"
         android:layout_above="@+id/Sex"
-        android:layout_alignEnd="@+id/textview_weigh" />
+        android:layout_alignEnd="@+id/textview_name" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Heigh"
+        android:text="Heigh:"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:id="@+id/textview_heigh"
@@ -137,7 +132,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Weigh"
+        android:text="Weigh:"
         android:textSize="20sp"
         android:textColor="#FFFFFF"
         android:id="@+id/textview_weigh"

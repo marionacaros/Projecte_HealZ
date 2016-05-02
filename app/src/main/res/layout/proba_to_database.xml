@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/coolbg"
+    >
+
+    <EditText
+        android:layout_width="123dp"
+        android:layout_height="75dp"
+        android:inputType="textPersonName"
+        android:hint="PutData"
+        android:textSize="25dp"
+        android:textColor="#FFFFFF"
+        android:ems="10"
+        android:id="@+id/data_probacalculs_introduce"
+        android:layout_gravity="right"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="113dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:textSize="25dp"
+        android:hint="SP"
+        android:textColor="#FFFFFF"
+        android:ems="10"
+        android:id="@+id/show_data_fromSP"
+        android:layout_gravity="right"
+        android:layout_below="@+id/data_probacalculs_introduce"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="113dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:textSize="25dp"
+        android:textColor="#FFFFFF"
+        android:hint="DB"
+        android:ems="10"
+        android:id="@+id/show_data_fromDB"
+        android:layout_gravity="right"
+        android:layout_below="@+id/show_data_fromSP"
+        android:layout_alignStart="@+id/show_data_fromSP" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guarda sharedpreference"
+        android:id="@+id/guarda_sharedpreference"
+
+
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="219dp"
+        android:layout_height="wrap_content"
+        android:text="Guarda database"
+        android:id="@+id/guarda_database"
+
+        android:layout_above="@+id/show_data_fromDB"
+        android:layout_alignEnd="@+id/view_data_fromDB" />
+
+    <Button
+        android:layout_width="216dp"
+        android:layout_height="wrap_content"
+        android:text="Show Data Database"
+        android:id="@+id/view_data_fromDB"
+
+
+        android:layout_marginTop="64dp"
+        android:layout_below="@+id/view_data_fromSP" />
+
+    <Button
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:text="Show Data Sharedpreference"
+        android:id="@+id/view_data_fromSP"
+        android:layout_below="@+id/show_data_fromDB"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

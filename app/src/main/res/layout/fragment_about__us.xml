@@ -8,7 +8,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pae.healz.About_UsFragment">
+    tools:context=".Fragments.About_UsFragment">
 
     <FrameLayout
         android:layout_width="match_parent"

@@ -9,7 +9,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pae.healz.HistoryFragment"
+    tools:context=".Fragments.HistoryFragment"
     android:background="@drawable/coolbg"
 
     >
@@ -21,6 +21,23 @@
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guarda a DB"
+        android:id="@+id/button_database"
+        android:layout_gravity="center" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:text="Put info"
+        android:textSize="25dp"
+        android:textColor="#FFFFFF"
+        android:id="@+id/editText"
+        android:layout_gravity="center_horizontal|top" />
 
 
 </FrameLayout>
