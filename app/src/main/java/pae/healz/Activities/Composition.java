@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 
-import com.csr.heartratedemo.MainActivityHeartRate;
 
 import pae.healz.R;
 
@@ -77,7 +76,7 @@ public class Composition extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_composition);
+        setContentView(R.layout.activity_dades_composition);
         Button_Connect();
         mVisible = true;
         //mControlsView = findViewById(R.id.fullscreen_content_controls);

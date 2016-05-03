@@ -1,4 +1,4 @@
-package com.csr.heartratedemo;
+package pae.healz.Activities;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothGattCharacteristic;

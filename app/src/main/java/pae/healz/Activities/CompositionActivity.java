@@ -16,7 +16,7 @@
  *
  ******************************************************************************/
 
-package com.csr.heartratedemo;
+package pae.healz.Activities;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
@@ -36,6 +36,8 @@ import com.csr.btsmart.BtSmartService.BtSmartUuid;
 import com.csr.view.DataView;
 
 import java.lang.ref.WeakReference;
+
+import pae.healz.R;
 
 public class CompositionActivity extends Activity implements GestorBLE.IBLEDATA {
 
