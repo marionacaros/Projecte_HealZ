@@ -16,7 +16,7 @@
  *
  ******************************************************************************/
 
-package pae.healz.Activities;
+package pae.healz.BluetoothData;
 
 import com.csr.heartratedemo.*;
 import com.csr.heartratedemo.HeartRateActivity;
@@ -51,7 +51,7 @@ public class DeviceInfoActivity extends Activity {
         final DataView serialNoData = (DataView) findViewById(R.id.serialNoData);
 
         Intent intent = getIntent();
-        batteryData.setValueText(intent.getExtras().getString(pae.healz.Activities.HeartRateActivity.EXTRA_BATTERY));
+        batteryData.setValueText(intent.getExtras().getString(pae.healz.BluetoothData.HeartRateActivity.EXTRA_BATTERY));
         manufacturerData.setValueText(intent.getExtras().getString(com.csr.heartratedemo.HeartRateActivity.EXTRA_MANUFACTURER));
         hwRevData.setValueText(intent.getExtras().getString(com.csr.heartratedemo.HeartRateActivity.EXTRA_HARDWARE_REV));
         swRevData.setValueText(intent.getExtras().getString(com.csr.heartratedemo.HeartRateActivity.EXTRA_SW_REV));

@@ -16,7 +16,7 @@
  *
  ******************************************************************************/
 
-package pae.healz.Activities;
+package pae.healz.BluetoothData;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;

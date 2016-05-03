@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 
+import pae.healz.BluetoothData.MainActivityHeartRate;
 import pae.healz.R;
 
 /**

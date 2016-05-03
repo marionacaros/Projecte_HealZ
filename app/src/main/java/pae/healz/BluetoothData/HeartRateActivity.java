@@ -16,7 +16,7 @@
  *
  ******************************************************************************/
 
-package pae.healz.Activities;
+package pae.healz.BluetoothData;
 
 import java.lang.ref.WeakReference;
 
