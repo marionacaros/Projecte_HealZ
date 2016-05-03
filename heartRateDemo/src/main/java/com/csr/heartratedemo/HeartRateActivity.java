@@ -18,9 +18,8 @@
 
 package com.csr.heartratedemo;
 
-import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
-import java.util.UUID;
+
 import com.csr.btsmart.BtSmartService;
 import com.csr.btsmart.BtSmartService.BtSmartUuid;
 import com.csr.view.DataView;
@@ -28,10 +27,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.os.ParcelUuid;
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothGattCharacteristic;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -42,9 +39,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-
-
-public class HeartRateActivity extends Activity {
+public class HeartRateActivity extends Activity implements GestorBLE.IBLEDATA {
 
     private BluetoothDevice mDeviceToConnect = null;
     private BtSmartService mService = null;
@@ -59,12 +54,12 @@ public class HeartRateActivity extends Activity {
     DataView energyData = null;
     DataView locationData = null;
 
-    private String mManufacturer;
-    private String mHardwareRev;
-    private String mFwRev;
-    private String mSwRev;
-    private String mSerialNo;
-    private String mBatteryPercent;
+    public String mManufacturer;
+    public String mHardwareRev;
+    public String mFwRev;
+    public String mSwRev;
+    public String mSerialNo;
+
 
     private static final int REQUEST_MANUFACTURER = 0;
     private static final int REQUEST_BATTERY = 1;
@@ -85,6 +80,9 @@ public class HeartRateActivity extends Activity {
     public static final String EXTRA_BATTERY = "BATTERY";
 
     private static final int INFO_ACTIVITY_REQUEST = 1;
+
+    public GestorBLE mGestorBLE = new GestorBLE(this,this);
+    private final Handler mHeartHandler = mGestorBLE.mHandler;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,18 +125,18 @@ public class HeartRateActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         /*switch (item.getItemId()) {
-        case R.id.action_info:
-            Intent intent = new Intent(this, DeviceInfoActivity.class);
-            intent.putExtra(EXTRA_MANUFACTURER, mManufacturer);
-            intent.putExtra(EXTRA_HARDWARE_REV, mHardwareRev);
-            intent.putExtra(EXTRA_FW_REV, mFwRev);
-            intent.putExtra(EXTRA_SW_REV, mSwRev);
-            intent.putExtra(EXTRA_SERIAL, mSerialNo);
-            intent.putExtra(EXTRA_BATTERY, mBatteryPercent);
-            // Start with startActivityForResult so that we can kill it using the request id if Bluetooth disconnects.
-            this.startActivityForResult(intent, INFO_ACTIVITY_REQUEST);
-        default:
-            return super.onOptionsItemSelected(item);
+            case R.id.action_info:
+                Intent intent = new Intent(this, DeviceInfoActivity.class);
+                intent.putExtra(EXTRA_MANUFACTURER, mManufacturer);
+                intent.putExtra(EXTRA_HARDWARE_REV, mHardwareRev);
+                intent.putExtra(EXTRA_FW_REV, mFwRev);
+                intent.putExtra(EXTRA_SW_REV, mSwRev);
+                intent.putExtra(EXTRA_SERIAL, mSerialNo);
+                intent.putExtra(EXTRA_BATTERY, mBatteryPercent);
+                // Start with startActivityForResult so that we can kill it using the request id if Bluetooth disconnects.
+                this.startActivityForResult(intent, INFO_ACTIVITY_REQUEST);
+            default:
+                return super.onOptionsItemSelected(item);
         }*/
         return super.onOptionsItemSelected(item);
 
@@ -151,7 +149,7 @@ public class HeartRateActivity extends Activity {
             mService.disconnect();
         }
         unbindService(mServiceConnection);
-        Toast.makeText(this, "Disconnected from heart rate sensor.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Disconnected from the sensor.", Toast.LENGTH_SHORT).show();
         finishActivity(INFO_ACTIVITY_REQUEST);
         super.onDestroy();
     }
@@ -193,6 +191,7 @@ public class HeartRateActivity extends Activity {
      * This is the handler for general messages about the connection.
      */
     private final DeviceHandler mDeviceHandler = new DeviceHandler(this);
+
 
     private static class DeviceHandler extends Handler {
         private final WeakReference<HeartRateActivity> mActivity;
@@ -240,7 +239,8 @@ public class HeartRateActivity extends Activity {
                         smartService.requestCharacteristicValue(REQUEST_SERIAL_NO,
                                 BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(), BtSmartUuid.SERIAL_NUMBER.getUuid(),
                                 parentActivity.mHeartHandler);
-//  REGISTER CHARACTERISTIC Y SERVICE
+
+
                         // Register to be told about battery level.
                         smartService.requestCharacteristicNotification(REQUEST_BATTERY,
                                 BtSmartUuid.BATTERY_SERVICE.getUuid(), BtSmartUuid.BATTERY_LEVEL.getUuid(),
@@ -262,12 +262,12 @@ public class HeartRateActivity extends Activity {
                 }
             }
         }
-    };
 
+    };
     /**
      * This is the handler for characteristic value updates.
      */
-    private final Handler mHeartHandler = new HeartRateHandler(this);
+  /*  private final Handler mHandler = new HeartRateHandler(this);
 
     private static class HeartRateHandler extends Handler {
         private final WeakReference<HeartRateActivity> mActivity;
@@ -348,22 +348,20 @@ public class HeartRateActivity extends Activity {
             }
         }
     };
-
+*/
     /**
      * Do something with the battery level received in a notification.
      * 
      * @param value
      *            The battery percentage value.
      */
-    private void batteryNotificationHandler(byte value) {
-        mBatteryPercent = String.valueOf(value + "%");
-    }
+
 
     /**
      * Use the value received in the sensor location characteristic to display the location.
      * @param locationIndex Value received in location characteristic - indexes into locations array.
      */
-    private void sensorLocationHandler(int locationIndex) {
+    public void sensorLocationHandler(int locationIndex) {
         final String[] locations = { "Other", "Chest", "Wrist", "Finger", "Hand", "Ear lobe", "Foot" };
 
         String location = "Not recognised";
@@ -373,13 +371,33 @@ public class HeartRateActivity extends Activity {
         locationData.setValueText(location);
     }
 
+    @Override
+    public void newHeartRate(int hrm) {
+        heartRateData.setValueText(String.valueOf(hrm));
+    }
+
+    @Override
+    public void newEnergyData(int energy) {
+        energyData.setValueText(String.valueOf(energy));
+    }
+
+    @Override
+    public void newRRvalue(int lastRR) {
+        rrData.setValueText(String.valueOf(lastRR));
+    }
+
+    @Override
+    public void newImpedance(int z) {
+
+    }
+
     /**
      * Extract the various values from the heart rate characteristic and display in the UI.
      * 
      * @param value
      *            Value received in the characteristic notification.
-     */
-    private void heartRateHandler(byte[] value) {
+     *//*
+    public void heartRateHandler(byte[] value) {
         final byte INDEX_FLAGS = 0;
         final byte INDEX_HRM_VALUE = 1;
         final byte INDEX_ENERGY_VALUE = 2;
@@ -409,8 +427,6 @@ public class HeartRateActivity extends Activity {
         else {
             hrm = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, INDEX_HRM_VALUE);
         }
-
-
         heartRateData.setValueText(String.valueOf(hrm));
 
         // Get the expended energy if present.
@@ -430,7 +446,5 @@ public class HeartRateActivity extends Activity {
                     characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, value.length - SIZEOF_UINT16);
             rrData.setValueText(String.valueOf(lastRR));
         }
-    }
-
-
+    }*/
 }

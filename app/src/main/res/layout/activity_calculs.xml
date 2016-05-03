@@ -56,17 +56,7 @@
         android:layout_marginTop="32dp"
         android:layout_alignEnd="@+id/button_FCFR" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Take a measure"
-        android:id="@+id/textView"
-        android:textColor="#FFFFFF"
-        android:textSize="30dp"
-        android:layout_marginTop="80dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+
 
 
     <!--
