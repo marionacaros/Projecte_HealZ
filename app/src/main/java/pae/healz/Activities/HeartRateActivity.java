@@ -16,19 +16,8 @@
  *
  ******************************************************************************/
 
-package com.csr.heartratedemo;
+package pae.healz.Activities;
 
-import java.io.UnsupportedEncodingException;
-import java.lang.ref.WeakReference;
-import java.util.UUID;
-import com.csr.btsmart.BtSmartService;
-import com.csr.btsmart.BtSmartService.BtSmartUuid;
-import com.csr.view.DataView;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Message;
-import android.os.ParcelUuid;
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGattCharacteristic;
@@ -37,11 +26,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.ParcelUuid;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.csr.btsmart.BtSmartService;
+import com.csr.btsmart.BtSmartService.BtSmartUuid;
+import com.csr.view.DataView;
+
+import java.io.UnsupportedEncodingException;
+import java.lang.ref.WeakReference;
+import java.util.UUID;
 
 
 public class HeartRateActivity extends Activity {
@@ -96,30 +97,30 @@ public class HeartRateActivity extends Activity {
         // Display back button in action bar.
         // getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        setContentView(R.layout.activity_heart_rate);
+        setContentView(com.csr.heartratedemo.R.layout.activity_heart_rate);
 
-        heartRateData = (DataView) findViewById(R.id.heartRateData);
-        rrData = (DataView) findViewById(R.id.RRData);
-        energyData = (DataView) findViewById(R.id.energyData);
-        locationData = (DataView) findViewById(R.id.locationData);
+        heartRateData = (DataView) findViewById(com.csr.heartratedemo.R.id.heartRateData);
+        rrData = (DataView) findViewById(com.csr.heartratedemo.R.id.RRData);
+        energyData = (DataView) findViewById(com.csr.heartratedemo.R.id.energyData);
+        locationData = (DataView) findViewById(com.csr.heartratedemo.R.id.locationData);
 
         // Get the device to connect to that was passed to us by the scan results Activity.
         Intent intent = getIntent();
         if (intent != null) {
             mDeviceToConnect = intent.getExtras().getParcelable(BluetoothDevice.EXTRA_DEVICE);
-                
+
             // Make a connection to BtSmartService to enable us to use its services.
             Intent bindIntent = new Intent(this, BtSmartService.class);
             bindService(bindIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
         }
     }
 
-    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.heart_rate, menu);
+        inflater.inflate(com.csr.heartratedemo.R.menu.heart_rate, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
