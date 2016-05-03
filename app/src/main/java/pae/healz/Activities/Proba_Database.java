@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.csr.heartratedemo.HeartRateActivity;
+
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
@@ -37,8 +39,6 @@ public class Proba_Database extends AppCompatActivity {
 
 
 
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.proba_to_database);
@@ -60,8 +60,6 @@ public class Proba_Database extends AppCompatActivity {
         buttonGetSP();
 
         //Escriptura en memoria a Base de Dades
-
-
         buttonSaveBD();
         getInfoBD();
 
@@ -157,7 +155,10 @@ public class Proba_Database extends AppCompatActivity {
                 }
 
                 Iterator it=atr.iterator();
-                viewFromDB.setText(""+((Atribute)it.next()).getVar());
+                while(it.hasNext()){
+                    atribute=(Atribute)it.next();
+                }
+                viewFromDB.setText(""+atribute.getVar());
 
                 CharSequence text = "Data has been loaded from DB";
                 int duration = Toast.LENGTH_SHORT;

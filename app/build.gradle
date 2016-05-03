@@ -28,4 +28,5 @@ dependencies {
     compile project(':btSmartLibrary')
     compile project(':dataView')
     compile project(':heartRateDemo')
+    compile 'com.jjoe64:graphview:4.0.1'
 }
