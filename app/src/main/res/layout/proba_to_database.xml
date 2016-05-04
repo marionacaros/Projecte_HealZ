@@ -90,6 +90,17 @@
         android:layout_height="2dip"
         android:background="#FFFFFF"
         android:layout_below="@+id/view_data_fromDB"
-        android:layout_alignEnd="@+id/show_data_fromDB" />
+        android:layout_alignEnd="@+id/show_data_fromDB"
+        android:id="@+id/view" />
+
+    <!-- View per les grafiques -->
+
+    <com.jjoe64.graphview.GraphView
+        android:layout_width="match_parent"
+        android:layout_height="200dip"
+        android:id="@+id/graph_1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/show_data_fromDB"
+        android:layout_below="@+id/view" />
 
 </RelativeLayout>

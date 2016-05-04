@@ -46,7 +46,7 @@ public class DataSourceDAO {
         else if(model.type==1)atr.id = database.insert(SQLiteHelper.TABLE_FATFREEMASS, null, values);
         else if(model.type==2)atr.id = database.insert(SQLiteHelper.TABLE_BODYWATER, null, values);
         else if(model.type==3)atr.id = database.insert(SQLiteHelper.TABLE_WEIGHT, null, values);
-        else atr.id = database.insert(SQLiteHelper.TABLE_AUX, null, values);
+        else atr.id = database.insert(SQLiteHelper.TABLE_FATMASS, null, values);
         close();
     }
 
@@ -59,7 +59,7 @@ public class DataSourceDAO {
         else if(type==1)cursor=database.query(SQLiteHelper.TABLE_FATFREEMASS,allColumns, null, null, null, null, null);
         else if(type==2)cursor=database.query(SQLiteHelper.TABLE_BODYWATER,allColumns, null, null, null, null, null);
         else if(type==3)cursor=database.query(SQLiteHelper.TABLE_WEIGHT, allColumns, null, null, null, null, null);
-        else cursor=database.query(SQLiteHelper.TABLE_AUX, allColumns, null, null, null, null, null);
+        else cursor=database.query(SQLiteHelper.TABLE_FATMASS, allColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {

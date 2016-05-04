@@ -4,13 +4,23 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.view.LayoutInflater;
 
 import com.csr.heartratedemo.HeartRateActivity;
+import com.jjoe64.graphview.LegendRenderer;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.Viewport;
 
+
+import java.sql.Array;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,8 +44,14 @@ public class Proba_Database extends AppCompatActivity {
     private DataSourceDAO BD;
     private List<Atribute> atr = null;
     private float data = 0;
+    private int i=0;
     private long date = System.currentTimeMillis();
     private Atribute atribute=null;
+
+    GraphView graph, graphview;
+    private GraphCreator gr;
+    Float valor;
+    Double[] array = {1d,3d,8d,5d,2d,0d,3d};
 
 
 
@@ -53,7 +69,13 @@ public class Proba_Database extends AppCompatActivity {
         viewFromDB = (EditText) findViewById(R.id.show_data_fromDB);
         viewFromSP = (EditText) findViewById(R.id.show_data_fromSP);
 
+        buttonSPSave = (Button) findViewById(R.id.guarda_sharedpreference);
+        buttonSPview = (Button) findViewById(R.id.view_data_fromSP);
+        buttonDBSave = (Button) findViewById(R.id.guarda_database);
+        buttonDBview = (Button) findViewById(R.id.view_data_fromDB);
 
+
+        graph = (GraphView) findViewById(R.id.graph_1);
 
         //Escriptura en memoria per Shared Preference
         buttonSaveSP();
@@ -63,12 +85,16 @@ public class Proba_Database extends AppCompatActivity {
         buttonSaveBD();
         getInfoBD();
 
+        //Inicialitzem grafic bon funcionament:
+        gr = new GraphCreator();
+        //graph = gr.crearGraficoSimpleLineal(graph, array,7);
+
     }
 
 
 
     private void buttonSaveSP() {
-        buttonSPSave = (Button) findViewById(R.id.guarda_sharedpreference);
+
         buttonSPSave.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -88,7 +114,7 @@ public class Proba_Database extends AppCompatActivity {
 
 
     private void buttonGetSP(){
-        buttonSPview = (Button) findViewById(R.id.view_data_fromSP);
+
         buttonSPview.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -116,7 +142,7 @@ public class Proba_Database extends AppCompatActivity {
     }
 
     public void buttonSaveBD(){
-        buttonDBSave = (Button) findViewById(R.id.guarda_database);
+
         buttonDBSave.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -142,7 +168,7 @@ public class Proba_Database extends AppCompatActivity {
 
 }
     public void getInfoBD(){
-        buttonDBview = (Button) findViewById(R.id.view_data_fromDB);
+
         buttonDBview.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -169,6 +195,33 @@ public class Proba_Database extends AppCompatActivity {
 
 
     }
+    private void crearGrafico(){
+
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(0, 1),
+                new DataPoint(1, 5),
+                new DataPoint(2, 3),
+                new DataPoint(3, 2),
+                new DataPoint(4, 6)
+        });
+        graph.addSeries(series);
+
+        LineGraphSeries<DataPoint> series2 = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(0, 3),
+                new DataPoint(1, 3),
+                new DataPoint(2, 6),
+                new DataPoint(3, 2),
+                new DataPoint(4, 5)
+        });
+        graph.addSeries(series2);
+
+        series.setTitle("Marc Guapo");
+        series2.setTitle("Mariona Pibon");
+        graph.getLegendRenderer().setVisible(true);
+        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.BOTTOM);
+
+    }
+
 
 }
 

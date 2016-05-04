@@ -19,9 +19,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public static final String TABLE_WEIGHT = "weight";
     public static final String TABLE_BODYWATER = "bodywater";
     public static final String TABLE_FATFREEMASS = "fatfreemass";
-
-    //Taula per fer proves
-    public static final String TABLE_AUX = "tablaproba";
+    public static final String TABLE_FATMASS = "tablaproba";
 
 
 
@@ -42,10 +40,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             + TABLE_FATFREEMASS + "(" + COLUMN_ID
             + " integer primary key autoincrement, " + COLUMN_TYPE
             + " float not null, "+ COLUMN_FECHA +" long not null);";
-
-    //Taula per treballar
-    private static final String DATABASE_CREATE_AUX = "create table if not exists "
-            + TABLE_AUX + "(" + COLUMN_ID
+    private static final String DATABASE_CREATE_FATMASS = "create table if not exists "
+            + TABLE_FATMASS + "(" + COLUMN_ID
             + " integer primary key autoincrement, " + COLUMN_TYPE
             + " float not null, "+ COLUMN_FECHA +" long not null);";
 
@@ -60,7 +56,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(DATABASE_CREATE_WEIGHT);
         db.execSQL(DATABASE_CREATE_BODYWATER);
         db.execSQL(DATABASE_CREATE_FATFREEMASS);
-        db.execSQL(DATABASE_CREATE_AUX);
+        db.execSQL(DATABASE_CREATE_FATMASS);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

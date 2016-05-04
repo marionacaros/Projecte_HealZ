@@ -12,7 +12,7 @@ public class ModelClassSQL {
     private float fatFreeMass;//type=1
     private float bodyWater;//type=2
     private float weight;//type=3
-    private float aux; //type=4
+    private float fatmass; //type=4
     private long date;
     public int type;
 
@@ -24,7 +24,7 @@ public class ModelClassSQL {
         else if(type==1)fatFreeMass=var;
         else if(type==2)bodyWater=var;
         else if(type==3)weight=var;
-        else aux = var;
+        else fatmass = var;
     }
     public Atribute getAtribute(){
         Atribute atribut=null;
@@ -33,7 +33,7 @@ public class ModelClassSQL {
         else if(type==1)atribut=new Atribute(id,fatFreeMass,date);
         else if(type==2)atribut=new Atribute(id,bodyWater,date);
         else if(type == 3)atribut=new Atribute(id,weight,date);
-        else atribut = new Atribute(id, aux, date);
+        else atribut = new Atribute(id, fatmass, date);
         return atribut;
     }
     public long getId() {
@@ -77,9 +77,9 @@ public class ModelClassSQL {
 
 
     public float getAux() {
-        return aux;
+        return fatmass;
     }
     public void setAux(float Weight){
-        this.aux = aux;
+        this.fatmass = fatmass;
     }
 }
