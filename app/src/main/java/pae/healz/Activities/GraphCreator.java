@@ -39,17 +39,18 @@ public class GraphCreator extends AppCompatActivity{
 
 
         //Caracteristiques gràfic:
-        graph.getGridLabelRenderer().setGridColor(Color.BLACK);
         graph.addSeries(series);
 
         if(type == 1){
-            series.setTitle("Weight evolution");
+            //series.setTitle("Weight evolution");
             int valor = (int)valorRandom+20;
             graph.getViewport().setMinY(0);
             graph.getViewport().setMaxY(valor);
             graph.getViewport().setMaxX(data.length);
             graph.getViewport().setMinX(0);
             graph.getGridLabelRenderer().setVerticalAxisTitle("Weight");
+            graph.getGridLabelRenderer().setGridColor(Color.WHITE);
+            graph.getGridLabelRenderer().setVerticalAxisTitleColor(Color.WHITE);
         }
         else if (type == 2){
             series.setTitle("Total Body Water (%)");
@@ -58,6 +59,8 @@ public class GraphCreator extends AppCompatActivity{
             graph.getViewport().setMaxX(data.length);
             graph.getViewport().setMinX(0);
             graph.getGridLabelRenderer().setVerticalAxisTitle("percentage");
+            graph.getGridLabelRenderer().setGridColor(Color.WHITE);
+            graph.getGridLabelRenderer().setVerticalAxisTitleColor(Color.WHITE);
         }
         else if (type==3){
             series.setTitle("Fat Free Mass (%)");
@@ -66,7 +69,8 @@ public class GraphCreator extends AppCompatActivity{
             graph.getViewport().setMaxX(data.length);
             graph.getViewport().setMinX(0);
             graph.getGridLabelRenderer().setVerticalAxisTitle("percentage");
-
+            graph.getGridLabelRenderer().setGridColor(Color.WHITE);
+            graph.getGridLabelRenderer().setVerticalAxisTitleColor(Color.WHITE);
         }
         else{
             series.setTitle("Fat Mass (%)");
@@ -75,6 +79,8 @@ public class GraphCreator extends AppCompatActivity{
             graph.getViewport().setMaxX(data.length);
             graph.getViewport().setMinX(0);
             graph.getGridLabelRenderer().setVerticalAxisTitle("percentage");
+            graph.getGridLabelRenderer().setGridColor(Color.WHITE);
+            graph.getGridLabelRenderer().setVerticalAxisTitleColor(Color.WHITE);
         }
 
 
@@ -83,8 +89,7 @@ public class GraphCreator extends AppCompatActivity{
         series.setThickness(10);
 
         graph.getGridLabelRenderer().setHorizontalAxisTitle("Samples");
-        graph.getGridLabelRenderer().setVerticalAxisTitleColor(Color.BLACK);
-        graph.getGridLabelRenderer().setHorizontalAxisTitleColor(Color.BLACK);
+        graph.getGridLabelRenderer().setHorizontalAxisTitleColor(Color.WHITE);
 
         //Caracteristiques llegenda
         graph.getLegendRenderer().setVisible(true);

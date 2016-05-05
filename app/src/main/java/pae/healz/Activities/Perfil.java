@@ -89,7 +89,7 @@ public class Perfil extends AppCompatActivity {
 
                 user.saveUserData(nombre, apellido, edad, sexo, peso, altura);
 
-                CharSequence text = user.getname();
+                CharSequence text = "Information saved";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(getApplicationContext(), text, duration);
                 toast.show();

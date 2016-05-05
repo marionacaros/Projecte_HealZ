@@ -100,7 +100,6 @@
         android:layout_height="200dip"
         android:id="@+id/graph_1"
         android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/show_data_fromDB"
-        android:layout_below="@+id/view" />
+        android:layout_alignEnd="@+id/show_data_fromDB" />
 
 </RelativeLayout>
