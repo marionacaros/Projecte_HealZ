@@ -42,45 +42,50 @@ public class GraphCreator extends AppCompatActivity{
         graph.addSeries(series);
 
         if(type == 1){
-            //series.setTitle("Weight evolution");
+            series.setTitle("Weight evolution");
             int valor = (int)valorRandom+20;
             graph.getViewport().setMinY(0);
             graph.getViewport().setMaxY(valor);
             graph.getViewport().setMaxX(data.length);
             graph.getViewport().setMinX(0);
-            graph.getGridLabelRenderer().setVerticalAxisTitle("Weight");
-            graph.getGridLabelRenderer().setGridColor(Color.WHITE);
+            graph.getViewport().setXAxisBoundsManual(true);
+            graph.getGridLabelRenderer().setVerticalAxisTitle("Weight (Kilograms)");
+            graph.getGridLabelRenderer().setVerticalAxisTitleTextSize(20);
             graph.getGridLabelRenderer().setVerticalAxisTitleColor(Color.WHITE);
+            graph.getGridLabelRenderer().setGridColor(Color.WHITE);
         }
         else if (type == 2){
             series.setTitle("Total Body Water (%)");
             graph.getViewport().setMinY(0);
-            graph.getViewport().setMaxY(100);
+            graph.getViewport().setMaxY(50);
             graph.getViewport().setMaxX(data.length);
             graph.getViewport().setMinX(0);
-            graph.getGridLabelRenderer().setVerticalAxisTitle("percentage");
-            graph.getGridLabelRenderer().setGridColor(Color.WHITE);
+            graph.getGridLabelRenderer().setVerticalAxisTitle("Percentage");
+            graph.getGridLabelRenderer().setVerticalAxisTitleTextSize(20);
             graph.getGridLabelRenderer().setVerticalAxisTitleColor(Color.WHITE);
+            graph.getGridLabelRenderer().setGridColor(Color.WHITE);
         }
         else if (type==3){
             series.setTitle("Fat Free Mass (%)");
             graph.getViewport().setMinY(0);
-            graph.getViewport().setMaxY(100);
+            graph.getViewport().setMaxY(80);
             graph.getViewport().setMaxX(data.length);
             graph.getViewport().setMinX(0);
-            graph.getGridLabelRenderer().setVerticalAxisTitle("percentage");
-            graph.getGridLabelRenderer().setGridColor(Color.WHITE);
+            graph.getGridLabelRenderer().setVerticalAxisTitle("Percentage");
+            graph.getGridLabelRenderer().setVerticalAxisTitleTextSize(20);
             graph.getGridLabelRenderer().setVerticalAxisTitleColor(Color.WHITE);
+            graph.getGridLabelRenderer().setGridColor(Color.WHITE);
         }
         else{
             series.setTitle("Fat Mass (%)");
             graph.getViewport().setMinY(0);
-            graph.getViewport().setMaxY(100);
+            graph.getViewport().setMaxY(80);
             graph.getViewport().setMaxX(data.length);
             graph.getViewport().setMinX(0);
-            graph.getGridLabelRenderer().setVerticalAxisTitle("percentage");
-            graph.getGridLabelRenderer().setGridColor(Color.WHITE);
+            graph.getGridLabelRenderer().setVerticalAxisTitle("Percentage");
+            graph.getGridLabelRenderer().setVerticalAxisTitleTextSize(20);
             graph.getGridLabelRenderer().setVerticalAxisTitleColor(Color.WHITE);
+            graph.getGridLabelRenderer().setGridColor(Color.WHITE);
         }
 
 
@@ -88,7 +93,12 @@ public class GraphCreator extends AppCompatActivity{
         series.setColor(Color.RED);
         series.setThickness(10);
 
-        graph.getGridLabelRenderer().setHorizontalAxisTitle("Samples");
+        graph.getGridLabelRenderer().setHorizontalLabelsColor(Color.TRANSPARENT);
+        graph.getGridLabelRenderer().setVerticalLabelsColor(Color.WHITE);
+        //graph.getViewport().setXAxisBoundsManual(true);
+        graph.getGridLabelRenderer().setHorizontalAxisTitle("Temporal   evolution");
+        graph.getGridLabelRenderer().setVerticalAxisTitleTextSize(30);
+        graph.getGridLabelRenderer().setVerticalAxisTitleColor(Color.BLACK);
         graph.getGridLabelRenderer().setHorizontalAxisTitleColor(Color.WHITE);
 
         //Caracteristiques llegenda

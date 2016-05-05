@@ -3,6 +3,10 @@ package pae.healz.Activities;
 import android.content.Context;
 import android.provider.ContactsContract;
 
+import java.lang.reflect.Array;
+import java.sql.SQLException;
+
+import pae.healz.BluetoothData.GestorBLE;
 import pae.healz.SQLite.DataSourceDAO;
 import pae.healz.SQLite.ModelClassSQL;
 import pae.healz.UserData.User;
@@ -10,7 +14,7 @@ import pae.healz.UserData.User;
 /**
  * Created by Marc on 05/05/2016.
  */
-public class Processing {
+public abstract class Processing implements GestorBLE.IBLEDATA{ //Correcte declaracio?
     //Aquesta classe conté totes les formules i calculs
     //Recull de bluetooth, calcula i escriu sobre la base de dades
     private int type =0; //TBW=1, FFM=2, FM=3
@@ -20,13 +24,20 @@ public class Processing {
 
     private User user;
     Context ctx;
-    private ModelClassSQL modelTBW;
+    private ModelClassSQL modelTBW, modelFM, modelFFM, modelW;
     private DataSourceDAO DB;
+    private GestorBLE dataFromBLE;
+
+
+    private Array[] infoNew = new Array[150];
+    private Array[] infoBluetooth = new Array[150]; //Viene de bluetooth, no hay que inicializar aqui
+
 
 
     public Processing(Context cont){
         ctx=cont;
         user = new User(ctx);
+        //dataFromBLE = new GestorBLE(ctx.getApplicationContext(), GestorBLE.IBLEDATA);
         inicializacionDatosUser();
         DB= new DataSourceDAO(ctx);
 
@@ -65,18 +76,46 @@ public class Processing {
     }
 
     public void guardarInfoEnBD(){
+        //De moment no impementem Heart Rate
+        //Guardem tota la informacio a la vegada
         long date = System.currentTimeMillis();
-        modelTBW = new ModelClassSQL(2, 0, (float)(tBW), date); //revisar el parseo
+        modelTBW = new ModelClassSQL(2, 0, (float)(tBW), date);
+        modelFM = new ModelClassSQL(4, 0, (float)(fM), date); //revisar el parseo
+        modelW = new ModelClassSQL(3, 0, (float)peso, date);
+        modelFFM = new ModelClassSQL(1, 0, (float)(fFM), date);
 
+        try {
+            DB.addparameters(modelFFM);
+            DB.addparameters(modelTBW);
+            DB.addparameters(modelFM);
+            DB.addparameters(modelW);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
+    //Funcion para el calculo de la Frecuencia Respiratoria
+    public int calcularFR(){
+        //Coeficientes filtro frecuencia respiratoria
+        double b1= 0.0015,b2=0,b3=-0.0029,b4=0,b5= 0.0015,a2=-3.8862,a3=5.6673,a4=-3.6761,a5=0.8949;
+        //El vector que tiene que llegar de bluetooth tiene que ser de modulos
+        for(int i=0; i<((infoBluetooth.length)/5); i++){ //OJO QUE NO SE SI ESTA BE
+            //infoNew[i]=b1*Float.parseFloat(infoBluetooth[i]);
+
+
+        }
+
+
+        return 0;
+    }
 
     /*
     Calculo de la frecuencia respiratoria
 
     Me pasan: Vector de modulos (desde bluetooth) - A bluetooth hem de guardar un vector amb els moduls
 
-    (n) = b(1)*x(n) + b(2)*x(n-1) + b(3)*x(n-2)+b(4)*x(n-3)+b(5)*x(-4)- a(2)*y(n-1) -a(3)*y(n-2)-a(4)*y(n-3)-a(5)*y(n-4)0.0015  b(1)= 0.0015 b(2)=0b(3)=-0.0029 b(4)=0b(5)= 0.0015 a(2)=-3.8862 a(3)=5.6673 a(4)=-3.6761 a(5)=0.8949
+    (n) = b(1)*x(n) + b(2)*x(n-1) + b(3)*x(n-2)+b(4)*x(n-3)+b(5)*x(-4)- a(2)*y(n-1) -a(3)*y(n-2)-a(4)*y(n-3)-a(5)*y(n-4)0.0015
+    //b(1)= 0.0015 b(2)=0b(3)=-0.0029 b(4)=0b(5)= 0.0015 a(2)=-3.8862 a(3)=5.6673 a(4)=-3.6761 a(5)=0.8949
 
 
 

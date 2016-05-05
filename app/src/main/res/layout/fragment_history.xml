@@ -25,7 +25,9 @@
         android:background="#80000000"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="44dp" />
+        android:layout_marginTop="44dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" />
 
 
         <Button
@@ -41,7 +43,9 @@
             android:layout_x="25dp"
             android:layout_y="200dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="5dp" />
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" />
 
         <Button
             style="@style/button"
@@ -55,7 +59,9 @@
             android:layout_alignStart="@+id/buttonTotalBodyWater"
             android:layout_x="223dp"
             android:layout_y="267dp"
-            android:layout_marginBottom="5dp" />
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" />
 
         <Button
             style="@style/button"
@@ -67,7 +73,9 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@+id/buttonTotalBodyWater"
-            android:layout_marginBottom="5dp" />
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp" />
 
         <Button
             style="@style/button"
@@ -78,7 +86,8 @@
             android:id="@+id/button_Total_Body_Water"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-             />
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" />
 
 
     </TableLayout>

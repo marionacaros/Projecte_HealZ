@@ -41,7 +41,7 @@ public class GestorBLE {
     }
 
 
-    interface IBLEDATA {
+    public interface IBLEDATA {
 
         //void batteryNotificationHandler(byte value); //@param value The battery percentage value.
         void sensorLocationHandler(int locationIndex); //@param locationIndex Value received in location characteristic - indexes into locations array.
