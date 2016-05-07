@@ -1,4 +1,4 @@
-package pae.healz.BluetoothData;
+package pae.healz.NotUsed;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothGattCharacteristic;
@@ -12,6 +12,9 @@ import com.csr.btsmart.BtSmartService;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.sql.Array;
 import java.util.UUID;
 
 /**
@@ -31,6 +34,7 @@ public class GestorBLE {
     public Handler mHandler;
 
 
+
     /**
      * This is the handler for characteristic value updates.
      */
@@ -41,7 +45,7 @@ public class GestorBLE {
     }
 
 
-    interface IBLEDATA {
+    public interface IBLEDATA {
 
         //void batteryNotificationHandler(byte value); //@param value The battery percentage value.
         void sensorLocationHandler(int locationIndex); //@param locationIndex Value received in location characteristic - indexes into locations array.
@@ -62,6 +66,11 @@ public class GestorBLE {
 
         public IBLEDATA mInterfaz;
         private String mBatteryPercent;
+        public byte[] newModule;
+        public byte[] newPhase;
+        public int cont=0;
+        public float[] moduls = new float[1000];
+        public float[] fases = new float[1000];
 
         public HeartRateHandler(Activity activity, IBLEDATA interfaz) {
             mInterfaz = interfaz;
@@ -150,13 +159,41 @@ public class GestorBLE {
             }
         }
 
-        private void UARTHandler(byte[] b) {
-            //FALTA IMPLEMENTAR!
 
-            final byte[] output;
-            //output = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, INDEX_HRM_VALUE);
+        private void UARTHandler(byte[] value) {
+
+            BluetoothGattCharacteristic characteristic =
+                    new BluetoothGattCharacteristic(BtSmartService.BtSmartUuid.RX_CHARACTERISTIC.getUuid(), 0, 0);
+            characteristic.setValue(value);
+
+            byte numT = characteristic.getValue()[0]; //número Trama
+            byte r0 = characteristic.getValue()[1];
+            byte r1 = characteristic.getValue()[2];
+            byte r2 = characteristic.getValue()[3];
+            byte r3 = characteristic.getValue()[4];
+            newModule = new byte[]{r0, r1, r2, r3};
+
+            float module = ByteBuffer.wrap(newModule).order(ByteOrder.BIG_ENDIAN).getFloat();
+            //float R2 = characteristic.getFloatValue(BluetoothGattCharacteristic.FORMAT_SFLOAT,1);
+
+            byte i0 = characteristic.getValue()[5];
+            byte i1 = characteristic.getValue()[6];
+            byte i2 = characteristic.getValue()[7];
+            byte i3 = characteristic.getValue()[8];
+            newPhase = new byte[]{i0,i1,i2,i3};
+
+            float phase = ByteBuffer.wrap(newModule).order(ByteOrder.BIG_ENDIAN).getFloat();
+            //float R2 = characteristic.getFloatValue(BluetoothGattCharacteristic.FORMAT_SFLOAT,1);
+
+            moduls[cont]=module;
+            fases[cont]=phase;
+            cont++;
 
         }
+
+
+
+
 
         public void batteryNotificationHandler(byte value) {
 

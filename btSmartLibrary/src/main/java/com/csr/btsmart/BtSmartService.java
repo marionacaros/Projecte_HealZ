@@ -77,13 +77,9 @@ public class BtSmartService extends Service {
 		BCS_SERVICE("0000181b-0000-1000-8000-00805f9b34fb"),
 		BODY_COMPOSITION_FEATURE("00002a9b-0000-1000-8000-00805f9b34fb"),
 		BODY_COMPOSITION_MEASUREMENT("00002a9c-0000-1000-8000-00805f9b34fb"),
-		UART_SERVICE("00000000"),
-		/*
-		RX Characteristic (UUID: 6E400003-B5A3-F393-E0A9-E50E24DCCA9E)
-The peer can send data to the device by writing to the RX Characteristic
-of the service. ATT Write Request or ATT Write Command can be used. The received data is sent on the UART interface.
-		 */
-		RX_CHARACTERISTIC("6E400003-B5A3-F393-E0A9-E50E24DCCA9E");
+
+		UART_SERVICE("195AE58A-437A-489B-B0CD-B7C9C394BAE4"), //custom service for data transmission test
+		RX_CHARACTERISTIC("5FC569A0-74A9-4FA4-B8B7-8354C86E45A4");
 
 		//CSC_SERVICE("00001816-0000-1000-8000-00805f9b34fb"), Cycling Speed Cadence
 		//CSC_MEASUREMENT("0002a5b-0000-1000-8000-00805f9b34fb"),

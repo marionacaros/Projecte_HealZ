@@ -2,7 +2,7 @@
     <string name="app_name">Zteero</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_fc__fr">Breathing Rate - Heart Rate</string>
-    <string name="title_activity_composition">Composition</string>
+    <string name="title_activity_composition">Body Composition</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ble_not_supported">Bluetooth Low Energy not supported in this mobile</string>
 
@@ -63,6 +63,8 @@
     <string name="menu_stop">Stop</string>
     <string name="title_activity_animation">AnimationActivity</string>
     <string name="title_activity_conditions">ConditionsActivity</string>
+    <string name="title_activity_data_rx">DataRx</string>
+    <string name="title_activity_scanresults">ScanResultsActivity</string>
 
 
 </resources>

@@ -16,20 +16,22 @@
  *
  ******************************************************************************/
 
-package pae.healz.BluetoothData;
+package pae.healz.NotUsed;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
-
+import java.util.UUID;
 import com.csr.btsmart.BtSmartService;
 import com.csr.btsmart.BtSmartService.BtSmartUuid;
-
 import com.csr.view.DataView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.os.ParcelUuid;
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGattCharacteristic;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -42,7 +44,7 @@ import android.widget.Toast;
 
 import pae.healz.R;
 
-public class HeartRateActivity extends Activity implements GestorBLE.IBLEDATA {
+public class HeartRateActivity extends Activity {
 
     private BluetoothDevice mDeviceToConnect = null;
     private BtSmartService mService = null;
@@ -50,19 +52,19 @@ public class HeartRateActivity extends Activity implements GestorBLE.IBLEDATA {
 
     // For connect timeout.
     private static Handler mHandler = new Handler();
-    
+
     // Data Views to update on the display.
     DataView heartRateData = null;
     DataView rrData = null;
     DataView energyData = null;
     DataView locationData = null;
 
-    public String mManufacturer;
-    public String mHardwareRev;
-    public String mFwRev;
-    public String mSwRev;
-    public String mSerialNo;
-
+    private String mManufacturer;
+    private String mHardwareRev;
+    private String mFwRev;
+    private String mSwRev;
+    private String mSerialNo;
+    private String mBatteryPercent;
 
     private static final int REQUEST_MANUFACTURER = 0;
     private static final int REQUEST_BATTERY = 1;
@@ -84,9 +86,6 @@ public class HeartRateActivity extends Activity implements GestorBLE.IBLEDATA {
 
     private static final int INFO_ACTIVITY_REQUEST = 1;
 
-    public GestorBLE mGestorBLE = new GestorBLE(this,this);
-    private final Handler mHeartHandler = mGestorBLE.mHandler;
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +94,7 @@ public class HeartRateActivity extends Activity implements GestorBLE.IBLEDATA {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         // Display back button in action bar.
-        // getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         setContentView(R.layout.activity_heart_rate);
 
@@ -127,7 +126,7 @@ public class HeartRateActivity extends Activity implements GestorBLE.IBLEDATA {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
-        /*switch (item.getItemId()) {
+      /*  switch (item.getItemId()) {
             case R.id.action_info:
                 Intent intent = new Intent(this, DeviceInfoActivity.class);
                 intent.putExtra(EXTRA_MANUFACTURER, mManufacturer);
@@ -141,8 +140,7 @@ public class HeartRateActivity extends Activity implements GestorBLE.IBLEDATA {
             default:
                 return super.onOptionsItemSelected(item);
         }*/
-        return super.onOptionsItemSelected(item);
-
+        return true;
     }
 
     @Override
@@ -152,7 +150,7 @@ public class HeartRateActivity extends Activity implements GestorBLE.IBLEDATA {
             mService.disconnect();
         }
         unbindService(mServiceConnection);
-        Toast.makeText(this, "Disconnected from the sensor.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Disconnected from heart rate sensor.", Toast.LENGTH_SHORT).show();
         finishActivity(INFO_ACTIVITY_REQUEST);
         super.onDestroy();
     }
@@ -180,13 +178,13 @@ public class HeartRateActivity extends Activity implements GestorBLE.IBLEDATA {
      * happen forever.
      */
     private void startConnectTimer() {
-        mHandler.postDelayed(onConnectTimeout, CONNECT_TIMEOUT_MILLIS);        
+        mHandler.postDelayed(onConnectTimeout, CONNECT_TIMEOUT_MILLIS);
     }
 
     private Runnable onConnectTimeout = new Runnable() {
         @Override
         public void run() {
-            if (!mConnected) finish();            
+            if (!mConnected) finish();
         }
     };
 
@@ -194,7 +192,6 @@ public class HeartRateActivity extends Activity implements GestorBLE.IBLEDATA {
      * This is the handler for general messages about the connection.
      */
     private final DeviceHandler mDeviceHandler = new DeviceHandler(this);
-
 
     private static class DeviceHandler extends Handler {
         private final WeakReference<HeartRateActivity> mActivity;
@@ -209,68 +206,67 @@ public class HeartRateActivity extends Activity implements GestorBLE.IBLEDATA {
             if (parentActivity != null) {
                 BtSmartService smartService = parentActivity.mService;
                 switch (msg.what) {
-                case BtSmartService.MESSAGE_CONNECTED: {
+                    case BtSmartService.MESSAGE_CONNECTED: {
 
-                    if (parentActivity != null) {
-                        parentActivity.mConnected = true;
+                        if (parentActivity != null) {
+                            parentActivity.mConnected = true;
 
-                        // Cancel the connect timer.
-                        mHandler.removeCallbacks(parentActivity.onConnectTimeout);
-                        
-                        parentActivity.setProgressBarIndeterminateVisibility(false);
-                        // Get the device information - this will come back to
-                        // us in a MESSAGE_CHARACTERISTIC_VALUE event.
-                        smartService.requestCharacteristicValue(REQUEST_MANUFACTURER,
-                                BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(),
-                                BtSmartUuid.MANUFACTURER_NAME.getUuid(), parentActivity.mHeartHandler);
+                            // Cancel the connect timer.
+                            mHandler.removeCallbacks(parentActivity.onConnectTimeout);
 
-                        smartService.requestCharacteristicValue(REQUEST_LOCATION, BtSmartUuid.HRP_SERVICE.getUuid(),
-                                BtSmartUuid.HEART_RATE_LOCATION.getUuid(), parentActivity.mHeartHandler);
+                            parentActivity.setProgressBarIndeterminateVisibility(false);
+                            // Get the device information - this will come back to
+                            // us in a MESSAGE_CHARACTERISTIC_VALUE event.
+                            smartService.requestCharacteristicValue(REQUEST_MANUFACTURER,
+                                    BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(),
+                                    BtSmartUuid.MANUFACTURER_NAME.getUuid(), parentActivity.mHeartHandler);
 
-                        smartService.requestCharacteristicValue(REQUEST_HARDWARE_REV,
-                                BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(),
-                                BtSmartUuid.HARDWARE_REVISION.getUuid(), parentActivity.mHeartHandler);
+                            smartService.requestCharacteristicValue(REQUEST_LOCATION, BtSmartUuid.HRP_SERVICE.getUuid(),
+                                    BtSmartUuid.HEART_RATE_LOCATION.getUuid(), parentActivity.mHeartHandler);
 
-                        smartService.requestCharacteristicValue(REQUEST_FW_REV,
-                                BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(),
-                                BtSmartUuid.FIRMWARE_REVISION.getUuid(), parentActivity.mHeartHandler);
+                            smartService.requestCharacteristicValue(REQUEST_HARDWARE_REV,
+                                    BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(),
+                                    BtSmartUuid.HARDWARE_REVISION.getUuid(), parentActivity.mHeartHandler);
 
-                        smartService.requestCharacteristicValue(REQUEST_SW_REV,
-                                BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(),
-                                BtSmartUuid.SOFTWARE_REVISION.getUuid(), parentActivity.mHeartHandler);
+                            smartService.requestCharacteristicValue(REQUEST_FW_REV,
+                                    BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(),
+                                    BtSmartUuid.FIRMWARE_REVISION.getUuid(), parentActivity.mHeartHandler);
 
-                        smartService.requestCharacteristicValue(REQUEST_SERIAL_NO,
-                                BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(), BtSmartUuid.SERIAL_NUMBER.getUuid(),
-                                parentActivity.mHeartHandler);
+                            smartService.requestCharacteristicValue(REQUEST_SW_REV,
+                                    BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(),
+                                    BtSmartUuid.SOFTWARE_REVISION.getUuid(), parentActivity.mHeartHandler);
 
+                            smartService.requestCharacteristicValue(REQUEST_SERIAL_NO,
+                                    BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(), BtSmartUuid.SERIAL_NUMBER.getUuid(),
+                                    parentActivity.mHeartHandler);
 
-                        // Register to be told about battery level.
-                        smartService.requestCharacteristicNotification(REQUEST_BATTERY,
-                                BtSmartUuid.BATTERY_SERVICE.getUuid(), BtSmartUuid.BATTERY_LEVEL.getUuid(),
-                                parentActivity.mHeartHandler);
+                            // Register to be told about battery level.
+                            smartService.requestCharacteristicNotification(REQUEST_BATTERY,
+                                    BtSmartUuid.BATTERY_SERVICE.getUuid(), BtSmartUuid.BATTERY_LEVEL.getUuid(),
+                                    parentActivity.mHeartHandler);
 
-                        // Register to be told about heart rate values.
-                        smartService.requestCharacteristicNotification(REQUEST_HEART_RATE,
-                                BtSmartUuid.HRP_SERVICE.getUuid(), BtSmartUuid.HEART_RATE_MEASUREMENT.getUuid(),
-                                parentActivity.mHeartHandler);
+                            // Register to be told about heart rate values.
+                            smartService.requestCharacteristicNotification(REQUEST_HEART_RATE,
+                                    BtSmartUuid.HRP_SERVICE.getUuid(), BtSmartUuid.HEART_RATE_MEASUREMENT.getUuid(),
+                                    parentActivity.mHeartHandler);
 
+                        }
+                        break;
                     }
-                    break;
-                }
-                case BtSmartService.MESSAGE_DISCONNECTED: {
-                    // End this activity and go back to scan results view.
-                    mActivity.get().finish();
-                    break;
-                }
+                    case BtSmartService.MESSAGE_DISCONNECTED: {
+                        // End this activity and go back to scan results view.
+                        mActivity.get().finish();
+                        break;
+                    }
                 }
             }
         }
-
     };
+
     /**
      * This is the handler for characteristic value updates.
      */
-  /*  private final Handler mHandler = new HeartRateHandler(this);
+    private final Handler mHeartHandler = new HeartRateHandler(this);
 
     private static class HeartRateHandler extends Handler {
         private final WeakReference<HeartRateActivity> mActivity;
@@ -283,88 +279,90 @@ public class HeartRateActivity extends Activity implements GestorBLE.IBLEDATA {
             HeartRateActivity parentActivity = mActivity.get();
             if (parentActivity != null) {
                 switch (msg.what) {
-                case BtSmartService.MESSAGE_REQUEST_FAILED: {
-                    // The request id tells us what failed.
-                    int requestId = msg.getData().getInt(BtSmartService.EXTRA_CLIENT_REQUEST_ID);
-                    switch (requestId) {
-                    case REQUEST_HEART_RATE:
-                        Toast.makeText(parentActivity, "Failed to register for heart rate notifications.",
-                                Toast.LENGTH_SHORT).show();
-                        parentActivity.finish();
+                    case BtSmartService.MESSAGE_REQUEST_FAILED: {
+                        // The request id tells us what failed.
+                        int requestId = msg.getData().getInt(BtSmartService.EXTRA_CLIENT_REQUEST_ID);
+                        switch (requestId) {
+                            case REQUEST_HEART_RATE:
+                                Toast.makeText(parentActivity, "Failed to register for heart rate notifications.",
+                                        Toast.LENGTH_SHORT).show();
+                                parentActivity.finish();
+                                break;
+                            default:
+                                break;
+                        }
                         break;
-                    default:
+                    }
+                    case BtSmartService.MESSAGE_CHARACTERISTIC_VALUE: {
+                        Bundle msgExtra = msg.getData();
+                        UUID serviceUuid =
+                                ((ParcelUuid) msgExtra.getParcelable(BtSmartService.EXTRA_SERVICE_UUID)).getUuid();
+                        UUID characteristicUuid =
+                                ((ParcelUuid) msgExtra.getParcelable(BtSmartService.EXTRA_CHARACTERISTIC_UUID)).getUuid();
+
+                        // Heart rate notification.
+                        if (serviceUuid.compareTo(BtSmartUuid.HRP_SERVICE.getUuid()) == 0
+                                && characteristicUuid.compareTo(BtSmartUuid.HEART_RATE_MEASUREMENT.getUuid()) == 0) {
+                            parentActivity.heartRateHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE));
+                        }
+                        // Device information
+                        else if (serviceUuid.compareTo(BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid()) == 0) {
+                            String value;
+                            try {
+                                value = new String(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE), "UTF-8");
+                            }
+                            catch (UnsupportedEncodingException e) {
+                                value = "--";
+                            }
+                            if (characteristicUuid.compareTo(BtSmartUuid.MANUFACTURER_NAME.getUuid()) == 0) {
+                                parentActivity.mManufacturer = value;
+                            }
+                            else if (characteristicUuid.compareTo(BtSmartUuid.HARDWARE_REVISION.getUuid()) == 0) {
+                                parentActivity.mHardwareRev = value;
+                            }
+                            else if (characteristicUuid.compareTo(BtSmartUuid.FIRMWARE_REVISION.getUuid()) == 0) {
+                                parentActivity.mFwRev = value;
+                            }
+                            else if (characteristicUuid.compareTo(BtSmartUuid.SOFTWARE_REVISION.getUuid()) == 0) {
+                                parentActivity.mSwRev = value;
+                            }
+                            else if (characteristicUuid.compareTo(BtSmartUuid.SERIAL_NUMBER.getUuid()) == 0) {
+                                parentActivity.mSerialNo = value;
+                            }
+
+                        }
+                        // Battery level notification.
+                        else if (serviceUuid.compareTo(BtSmartUuid.BATTERY_SERVICE.getUuid()) == 0
+                                && characteristicUuid.compareTo(BtSmartUuid.BATTERY_LEVEL.getUuid()) == 0) {
+                            parentActivity.batteryNotificationHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE)[0]);
+                        }
+                        // Sensor location
+                        else if (serviceUuid.compareTo(BtSmartUuid.HRP_SERVICE.getUuid()) == 0
+                                && characteristicUuid.compareTo(BtSmartUuid.HEART_RATE_LOCATION.getUuid()) == 0) {
+                            parentActivity.sensorLocationHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE)[0]);
+                        }
                         break;
                     }
-                    break;
-                }
-                case BtSmartService.MESSAGE_CHARACTERISTIC_VALUE: {
-                    Bundle msgExtra = msg.getData();
-                    UUID serviceUuid =
-                            ((ParcelUuid) msgExtra.getParcelable(BtSmartService.EXTRA_SERVICE_UUID)).getUuid();
-                    UUID characteristicUuid =
-                            ((ParcelUuid) msgExtra.getParcelable(BtSmartService.EXTRA_CHARACTERISTIC_UUID)).getUuid();
-
-                    // Heart rate notification.
-                    if (serviceUuid.compareTo(BtSmartUuid.HRP_SERVICE.getUuid()) == 0
-                            && characteristicUuid.compareTo(BtSmartUuid.HEART_RATE_MEASUREMENT.getUuid()) == 0) {
-                        parentActivity.heartRateHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE));
-                    }
-                    // Device information
-                    else if (serviceUuid.compareTo(BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid()) == 0) {
-                        String value;
-                        try {
-                            value = new String(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE), "UTF-8");
-                        }
-                        catch (UnsupportedEncodingException e) {
-                            value = "--";
-                        }
-                        if (characteristicUuid.compareTo(BtSmartUuid.MANUFACTURER_NAME.getUuid()) == 0) {
-                            parentActivity.mManufacturer = value;
-                        }
-                        else if (characteristicUuid.compareTo(BtSmartUuid.HARDWARE_REVISION.getUuid()) == 0) {
-                            parentActivity.mHardwareRev = value;
-                        }
-                        else if (characteristicUuid.compareTo(BtSmartUuid.FIRMWARE_REVISION.getUuid()) == 0) {
-                            parentActivity.mFwRev = value;
-                        }
-                        else if (characteristicUuid.compareTo(BtSmartUuid.SOFTWARE_REVISION.getUuid()) == 0) {
-                            parentActivity.mSwRev = value;
-                        }
-                        else if (characteristicUuid.compareTo(BtSmartUuid.SERIAL_NUMBER.getUuid()) == 0) {
-                            parentActivity.mSerialNo = value;
-                        }
-
-                    }
-                    // Battery level notification.
-                    else if (serviceUuid.compareTo(BtSmartUuid.BATTERY_SERVICE.getUuid()) == 0
-                            && characteristicUuid.compareTo(BtSmartUuid.BATTERY_LEVEL.getUuid()) == 0) {
-                        parentActivity.batteryNotificationHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE)[0]);
-                    }
-                    // Sensor location
-                    else if (serviceUuid.compareTo(BtSmartUuid.HRP_SERVICE.getUuid()) == 0
-                            && characteristicUuid.compareTo(BtSmartUuid.HEART_RATE_LOCATION.getUuid()) == 0) {
-                        parentActivity.sensorLocationHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE)[0]);
-                    }
-                    break;
-                }
                 }
             }
         }
     };
-*/
+
     /**
      * Do something with the battery level received in a notification.
-     * 
+     *
      * @param value
      *            The battery percentage value.
      */
-
+    private void batteryNotificationHandler(byte value) {
+        mBatteryPercent = String.valueOf(value + "%");
+    }
 
     /**
      * Use the value received in the sensor location characteristic to display the location.
      * @param locationIndex Value received in location characteristic - indexes into locations array.
      */
-    public void sensorLocationHandler(int locationIndex) {
+    private void sensorLocationHandler(int locationIndex) {
         final String[] locations = { "Other", "Chest", "Wrist", "Finger", "Hand", "Ear lobe", "Foot" };
 
         String location = "Not recognised";
@@ -374,43 +372,23 @@ public class HeartRateActivity extends Activity implements GestorBLE.IBLEDATA {
         locationData.setValueText(location);
     }
 
-    @Override
-    public void newHeartRate(int hrm) {
-        heartRateData.setValueText(String.valueOf(hrm));
-    }
-
-    @Override
-    public void newEnergyData(int energy) {
-        energyData.setValueText(String.valueOf(energy));
-    }
-
-    @Override
-    public void newRRvalue(int lastRR) {
-        rrData.setValueText(String.valueOf(lastRR));
-    }
-
-    @Override
-    public void newImpedance(int z) {
-
-    }
-
     /**
      * Extract the various values from the heart rate characteristic and display in the UI.
-     * 
+     *
      * @param value
      *            Value received in the characteristic notification.
-     *//*
-    public void heartRateHandler(byte[] value) {
+     */
+    private void heartRateHandler(byte[] value) {
         final byte INDEX_FLAGS = 0;
         final byte INDEX_HRM_VALUE = 1;
         final byte INDEX_ENERGY_VALUE = 2;
-         
+
         byte energyIndexOffset = 0;
 
         final byte FLAG_HRM_FORMAT = 0x01;
         final byte FLAG_ENERGY_PRESENT = (0x01 << 3);
         final byte FLAG_RR_PRESENT = (0x01 << 4);
-        
+
         final byte SIZEOF_UINT16 = 2;
 
         // Re-create the characteristic with the received value.
@@ -449,5 +427,5 @@ public class HeartRateActivity extends Activity implements GestorBLE.IBLEDATA {
                     characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, value.length - SIZEOF_UINT16);
             rrData.setValueText(String.valueOf(lastRR));
         }
-    }*/
+    }
 }

@@ -1,133 +1,153 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    tools:context=".Fragments.HomeFragment"
+    >
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/coolbg"
-    tools:context=".Fragments.HomeFragment">
-
-
-    <Button
-        android:id="@+id/button_C"
-        style="@style/button"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
-        android:text="TAKE A MEASURE"
-        android:textSize="26dp"
-        android:layout_gravity="center"
-        android:layout_above="@+id/button_database"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="35dp"
-        android:layout_marginRight="20dp" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:gravity="center">
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go to Proba-Database"
-        android:id="@+id/button_database"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="?metaButtonBarStyle"
+            android:background="@drawable/coolbg">
+            <!--style="?metaButtonBarStyle"-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Weight"
-        android:id="@+id/text_weight"
-        android:textSize="20dp"
-        android:textColor="#FFFFFF"
-        android:layout_above="@+id/textBodyWater"
-        android:layout_alignEnd="@+id/text_FatMass" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="BodyWater"
-        android:textSize="20dp"
-        android:id="@+id/text_BodyWater"
-        android:textColor="#FFFFFF"
-        android:layout_alignBottom="@+id/textBodyWater"
-        android:layout_alignEnd="@+id/text_FatMass" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="F. F. Mass"
-        android:id="@+id/text_FatFreeMass"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        android:layout_alignBottom="@+id/textFatFreeMass"
-        android:layout_alignEnd="@+id/text_FatMass" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fat Mass"
-        android:id="@+id/text_FatMass"
-        android:textSize="20dp"
-        android:textColor="#FFFFFF"
-        android:layout_above="@+id/textFatFreeMass"
-        android:layout_alignEnd="@+id/text_HeartRate" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Heart Rate"
-        android:textSize="20dp"
-        android:id="@+id/text_HeartRate"
-        android:textColor="#FFFFFF"
-        android:layout_alignBottom="@+id/textHeartRate"
-        android:layout_alignEnd="@+id/button_C" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Heart Rate"
-        android:textSize="23dp"
-        android:textColor="#FFFFFF"
-        android:id="@+id/textHeartRate"
-        android:layout_above="@+id/textWeight"
-        android:layout_alignStart="@+id/textWeight" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Body Water"
-        android:textSize="23dp"
-        android:textColor="#FFFFFF"
-        android:id="@+id/textBodyWater"
-        android:layout_above="@+id/textFatMass"
-        android:layout_alignStart="@+id/textFatMass" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fat Free Mass"
-        android:textSize="23dp"
-        android:textColor="#FFFFFF"
-        android:id="@+id/textFatFreeMass"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/textFatMass" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Weight"
-        android:textSize="23dp"
-        android:textColor="#FFFFFF"
-        android:id="@+id/textWeight"
-        android:layout_alignBaseline="@+id/text_weight"
-        android:layout_alignBottom="@+id/text_weight"
-        android:layout_alignStart="@+id/textBodyWater" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fat Mass"
-        android:textSize="23dp"
-        android:textColor="#FFFFFF"
-        android:id="@+id/textFatMass"
-        android:layout_above="@+id/textFatFreeMass"
-        android:layout_alignStart="@+id/button_C" />
 
-</RelativeLayout>
+
+
+            <Button
+                android:id="@+id/button_C"
+                style="@style/button"
+                android:layout_width="280dp"
+                android:layout_height="60dp"
+                android:layout_above="@+id/button_database"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="35dp"
+                android:layout_marginRight="20dp"
+                android:text="TAKE A MEASURE"
+                android:textSize="26dp" />
+
+
+            <Button
+                android:id="@+id/button_database"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal|bottom"
+                android:text="Go to Proba-Database" />
+
+            <TextView
+                android:id="@+id/text_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/textBodyWater"
+                android:layout_alignEnd="@+id/text_FatMass"
+                android:text="Weight"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/text_BodyWater"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textBodyWater"
+                android:layout_alignEnd="@+id/text_FatMass"
+                android:text="BodyWater"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/text_FatFreeMass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textFatFreeMass"
+                android:layout_alignEnd="@+id/text_FatMass"
+                android:text="F. F. Mass"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/text_FatMass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/textFatFreeMass"
+                android:layout_alignEnd="@+id/text_HeartRate"
+                android:text="Fat Mass"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/text_HeartRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textHeartRate"
+                android:layout_alignEnd="@+id/button_C"
+                android:text="Heart Rate"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/textHeartRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/textWeight"
+                android:layout_alignStart="@+id/textWeight"
+                android:text="Heart Rate"
+                android:textColor="#FFFFFF"
+                android:textSize="23dp" />
+
+            <TextView
+                android:id="@+id/textBodyWater"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/textFatMass"
+                android:layout_alignStart="@+id/textFatMass"
+                android:text="Body Water"
+                android:textColor="#FFFFFF"
+                android:textSize="23dp" />
+
+            <TextView
+                android:id="@+id/textFatFreeMass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textFatMass"
+                android:layout_centerVertical="true"
+                android:text="Fat Free Mass"
+                android:textColor="#FFFFFF"
+                android:textSize="23dp" />
+
+            <TextView
+                android:id="@+id/textWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/text_weight"
+                android:layout_alignBottom="@+id/text_weight"
+                android:layout_alignStart="@+id/textBodyWater"
+                android:text="Weight"
+                android:textColor="#FFFFFF"
+                android:textSize="23dp" />
+
+            <TextView
+                android:id="@+id/textFatMass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/textFatFreeMass"
+                android:layout_alignStart="@+id/button_C"
+                android:text="Fat Mass"
+                android:textColor="#FFFFFF"
+                android:textSize="23dp" />
+
+        </RelativeLayout>
+    </FrameLayout>
 </android.support.design.widget.CoordinatorLayout>

@@ -44,5 +44,41 @@
         custom:titleText="Sensor location"        
         custom:valueText="--"        
         custom:layout_dataview="@layout/data_normal" />
+
+    <!-- HEART RATE INFO - HRP_SERVICE-->
+    <com.csr.view.DataView
+        android:id="@+id/heartRateData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:valueText="--"
+        custom:unitText="BPM"
+        custom:layout_dataview="@layout/data_big_no_title" />
+
+    <com.csr.view.DataView
+        android:id="@+id/RRData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:valueText="--"
+        custom:titleText="RR value"
+        custom:unitText="Ticks"
+        custom:layout_dataview="@layout/data_normal" />
+
+    <com.csr.view.DataView
+        android:id="@+id/energyData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:titleText="Energy"
+        custom:unitText="KJ"
+        custom:valueText="--"
+        custom:layout_dataview="@layout/data_normal" />
+
+    <com.csr.view.DataView
+        android:id="@+id/locationData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:titleText="Sensor location"
+        custom:valueText="--"
+        custom:layout_dataview="@layout/data_normal" />
+
     
     </LinearLayout>

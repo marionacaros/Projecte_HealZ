@@ -16,14 +16,8 @@
  *
  ******************************************************************************/
 
-package com.csr.btsmart;
+package pae.healz.BluetoothData;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.UUID;
-import android.os.Bundle;
-import android.os.Handler;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -33,24 +27,31 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.UUID;
+
+import pae.healz.R;
 
 /**
  * Activity used to scan for remote Bluetooth Smart devices, show the results in a list, and perform an action (defined
  * by derived class) when a device is selected.
  */
-public abstract class ScanResultsActivity extends Activity {
+public class ScanResultsActivity extends Activity{
 
     private static final int REQUEST_ENABLE_BT = 1;
 
@@ -80,7 +81,7 @@ public abstract class ScanResultsActivity extends Activity {
      * @param deviceToConnect
      *            The Bluetooth device selected by the user.
      */
-    abstract protected void connectBluetooth(BluetoothDevice deviceToConnect);
+    //abstract protected void connectBluetooth(BluetoothDevice deviceToConnect);
 
     /**
      * Can be implemented by derived class to filter scan results by UUID.
@@ -121,7 +122,7 @@ public abstract class ScanResultsActivity extends Activity {
         // Register for broadcasts on BluetoothAdapter state change so that we can tell if it has been turned off.
         IntentFilter filter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
         this.registerReceiver(mReceiver, filter);
-        
+
         checkEnableBt();
     }
 
@@ -146,13 +147,13 @@ public abstract class ScanResultsActivity extends Activity {
        // onCreate will perform the Bluetooth check anyway.
        mCheckBt = true;
     }
-    
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mReceiver);
     }
-    
+
     /**
      * Click handler for the scan button that starts scanning for BT Smart devices.
      *
@@ -174,7 +175,7 @@ public abstract class ScanResultsActivity extends Activity {
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }
     }
-    
+
     /**
      * Callback activated after the user responds to the enable Bluetooth dialogue.
      */
@@ -197,7 +198,7 @@ public abstract class ScanResultsActivity extends Activity {
                 if (state == BluetoothAdapter.STATE_OFF) {
                     Toast.makeText(context, "Bluetooth disabled.", Toast.LENGTH_LONG).show();
                     scanLeDevice(false);
-                    clearScanResults();                    
+                    clearScanResults();
                     //mScanButton.setEnabled(false);
                 }
                 else if (state == BluetoothAdapter.STATE_ON) {
@@ -208,7 +209,7 @@ public abstract class ScanResultsActivity extends Activity {
             }
         }
     };
-    
+
     private Runnable scanTimeout = new Runnable() {
         @Override
         public void run() {
@@ -224,13 +225,13 @@ public abstract class ScanResultsActivity extends Activity {
     private void clearScanResults() {
         mScanResults.clear();
         mScanAddreses.clear();
-        // Make sure the display is updated; any old devices are removed from the ListView. 
+        // Make sure the display is updated; any old devices are removed from the ListView.
         mScanResultsAdapter.notifyDataSetChanged();
     }
-    
+
     /**
      * Start or stop scanning. Only scan for a limited amount of time defined by SCAN_PERIOD.
-     * 
+     *
      * @param enable
      *            Set to true to enable scanning, false to stop.
      */
@@ -239,7 +240,7 @@ public abstract class ScanResultsActivity extends Activity {
             // Stops scanning after a predefined scan period.
             mHandler.postDelayed(scanTimeout, mScanPeriodMillis);
             clearScanResults();
-            setProgressBarIndeterminateVisibility(true);            
+            setProgressBarIndeterminateVisibility(true);
             mBtAdapter.startLeScan(mLeScanCallback);
             //mScanButton.setEnabled(false);
         }
@@ -303,6 +304,9 @@ public abstract class ScanResultsActivity extends Activity {
             ScanInfo info = (ScanInfo) mScanResultsAdapter.getItem(position);
             BluetoothDevice deviceToConnect = mBtAdapter.getRemoteDevice(info.address);
             //connectBluetooth(deviceToConnect);
+            Intent intent = new Intent(ScanResultsActivity.this, DataRx.class);
+            intent.putExtra(BluetoothDevice.EXTRA_DEVICE, deviceToConnect);
+            startActivity(intent);
         }
     };
 
@@ -310,7 +314,7 @@ public abstract class ScanResultsActivity extends Activity {
      * Parse the UUIDs from an advert for filtering purposes. This code is based on code from
      * https://code.google.com/p/android/issues/detail?id=59490 and is required to work around issues in the Android API
      * with UUID filtering on scan results.
-     * 
+     *
      * @param advData
      *            Advertising data from a scan result.
      * @return List of UUIDs found in the advertising data.
