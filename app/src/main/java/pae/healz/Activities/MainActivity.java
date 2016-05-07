@@ -173,10 +173,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_history) {
             frag = new HistoryFragment();
 
-        } else if (id == R.id.nav_settings) {
+        } /*else if (id == R.id.nav_settings) {
             frag = new SettingsFragment();
 
-        } else if (id == R.id.nav_tutorial) {
+        } */else if (id == R.id.nav_tutorial) {
             frag = new InformationFragment();
 
         } else if (id == R.id.nav_About_Us) {

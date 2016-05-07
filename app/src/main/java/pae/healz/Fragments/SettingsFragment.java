@@ -16,6 +16,8 @@ import pae.healz.R;
  */
 public class SettingsFragment extends Fragment {
 
+    //Algun dia aixo tindra vida
+
 
     public SettingsFragment() {
         // Required empty public constructor
