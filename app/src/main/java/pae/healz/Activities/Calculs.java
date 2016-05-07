@@ -5,24 +5,39 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.sql.SQLException;
 
 import pae.healz.R;
+import pae.healz.SQLite.DataSourceDAO;
+import pae.healz.SQLite.ModelClassSQL;
 
 public class Calculs extends AppCompatActivity {
 
 
     // Initializes Bluetooth adapter.
     private Button button;
-   // private BluetoothAdapter mBluetoothAdapter;
+    private ModelClassSQL model;
+    private DataSourceDAO BD;
+    private long date = System.currentTimeMillis();
+    private float data = 0;
+
+
+    // private BluetoothAdapter mBluetoothAdapter;
    // private final static int REQUEST_ENABLE_BT = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculs);
+        BD = new DataSourceDAO(this.getApplicationContext());
+        model = new ModelClassSQL(3, 0, data, date);
         button_FCFR();
         button_Composition();
         button_Conditions();
+        button_savedata();
 
         //BLE
         /*
@@ -80,6 +95,31 @@ public class Calculs extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Calculs.this, Composition.class);
                 startActivity(intent);
+            }
+        });
+
+    }
+
+    private void button_savedata() {
+        button = (Button) findViewById(R.id.button_saveweight);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText weight = (EditText) findViewById(R.id.weight_info);
+                Float data = Float.valueOf(weight.getText().toString());
+                long date = System.currentTimeMillis();
+                model = new ModelClassSQL(3, 0, data, date);
+
+                try {
+                    BD.addparameters(model);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+                CharSequence text = "The weight has been saved okay";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+                toast.show();
             }
         });
 

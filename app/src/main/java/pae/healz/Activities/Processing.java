@@ -6,7 +6,6 @@ import android.provider.ContactsContract;
 import java.lang.reflect.Array;
 import java.sql.SQLException;
 
-import pae.healz.BluetoothData.GestorBLE;
 import pae.healz.SQLite.DataSourceDAO;
 import pae.healz.SQLite.ModelClassSQL;
 import pae.healz.UserData.User;
@@ -14,7 +13,7 @@ import pae.healz.UserData.User;
 /**
  * Created by Marc on 05/05/2016.
  */
-public abstract class Processing implements GestorBLE.IBLEDATA{ //Correcte declaracio?
+public abstract class Processing { //Correcte declaracio?
     //Aquesta classe conté totes les formules i calculs
     //Recull de bluetooth, calcula i escriu sobre la base de dades
     private int type =0; //TBW=1, FFM=2, FM=3
@@ -26,7 +25,6 @@ public abstract class Processing implements GestorBLE.IBLEDATA{ //Correcte decla
     Context ctx;
     private ModelClassSQL modelTBW, modelFM, modelFFM, modelW;
     private DataSourceDAO DB;
-    private GestorBLE dataFromBLE;
 
 
     private Array[] infoNew = new Array[150];
