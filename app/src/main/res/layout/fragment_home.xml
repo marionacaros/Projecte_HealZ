@@ -129,5 +129,38 @@
         android:layout_above="@+id/textFatFreeMass"
         android:layout_alignStart="@+id/button_C" />
 
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="4dip"
+        android:background="#FFFFFF"
+        android:id="@+id/view"
+        android:layout_marginTop="310dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="4dip"
+        android:background="#FFFFFF"
+        android:id="@+id/view2"
+        android:layout_marginTop="120dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp" />
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="4dip"
+        android:background="#FFFFFF"
+        android:id="@+id/view3"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginLeft="80dp" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="4dip"
+        android:background="#FFFFFF"
+        android:id="@+id/view4"
+        android:layout_marginTop="330dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginLeft="80dp" />
+
 </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
