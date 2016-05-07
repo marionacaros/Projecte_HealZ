@@ -7,6 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.sql.SQLException;
+
+import pae.healz.SQLite.DataSourceDAO;
+import pae.healz.SQLite.ModelClassSQL;
 import pae.healz.UserData.User;
 import pae.healz.R;
 
@@ -17,12 +21,16 @@ public class Perfil extends AppCompatActivity {
     private String nombre, apellido, sexo, edad, peso, altura;
     private Button button;
     private User user;
+    private ModelClassSQL model;
+    private DataSourceDAO BD;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_perfil);
+
+        BD = new DataSourceDAO(this.getApplicationContext());
 
         name = (EditText) findViewById(R.id.Name);
         secondName = (EditText) findViewById(R.id.Second_Name);
@@ -88,6 +96,14 @@ public class Perfil extends AppCompatActivity {
                 peso = weight.getText().toString();
 
                 user.saveUserData(nombre, apellido, edad, sexo, peso, altura);
+
+                long date = System.currentTimeMillis();
+                model = new ModelClassSQL(3, 0, Float.parseFloat(peso), date);
+                try {
+                    BD.addparameters(model);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
 
                 CharSequence text = "Information saved";
                 int duration = Toast.LENGTH_SHORT;

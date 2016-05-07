@@ -66,6 +66,7 @@ public class HistoryFragment extends Fragment {
 
         graphview = (GraphView) view.findViewById(R.id.graphView);
 
+
         buttonW = (Button) view.findViewById(R.id.button_weight);//Type 1
         buttonTBW = (Button) view.findViewById(R.id.button_Total_Body_Water);//Type 2
         buttonFFM = (Button) view.findViewById(R.id.buttonFatfreemass);//Type 3
@@ -87,6 +88,7 @@ public class HistoryFragment extends Fragment {
                     information[i]= atr.get(i).getVar();
                 }
                 int type =1;
+                graphview.removeAllSeries();
                 graphview = graph.crearGraficoSimpleLineal(graphview, information, information.length, type);
             }
         });
@@ -105,6 +107,7 @@ public class HistoryFragment extends Fragment {
                     information[i]= atr.get(i).getVar();
                 }
                 int type =2;
+                graphview.removeAllSeries();
                 graphview = graph.crearGraficoSimpleLineal(graphview, information, information.length, type);
             }
         });
@@ -123,6 +126,7 @@ public class HistoryFragment extends Fragment {
                     information[i]= atr.get(i).getVar();
                 }
                 int type =3;
+                graphview.removeAllSeries();
                 graphview = graph.crearGraficoSimpleLineal(graphview, information, information.length, type);
             }
         });
@@ -141,6 +145,7 @@ public class HistoryFragment extends Fragment {
                     information[i]= atr.get(i).getVar();
                 }
                 int type =4;
+                graphview.removeAllSeries();
                 graphview = graph.crearGraficoSimpleLineal(graphview, information, information.length, type);
             }
         });

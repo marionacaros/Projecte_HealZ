@@ -150,7 +150,7 @@ public class Proba_Database extends AppCompatActivity {
                 EditText a = (EditText) findViewById(R.id.data_probacalculs_introduce);
                 Float data = Float.valueOf(a.getText().toString());
                 long date = System.currentTimeMillis();
-                model = new ModelClassSQL(4, 0, data, date);
+                model = new ModelClassSQL(2, 0, data, date);
 
                 try {
                     BD.addparameters(model);
