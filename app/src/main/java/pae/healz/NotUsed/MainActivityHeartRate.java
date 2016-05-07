@@ -16,7 +16,7 @@
  *
  ******************************************************************************/
 
-package pae.healz.BluetoothData;
+package pae.healz.NotUsed;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;

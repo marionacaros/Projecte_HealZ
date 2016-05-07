@@ -20,7 +20,7 @@
 
     <!-- Permisos per poder executar app a Android M -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- Permisos per poder escriure a la memoria -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -42,50 +42,46 @@
         </activity>
         <activity android:name=".Activities.Perfil" />
         <activity android:name=".Activities.Calculs" />
-        <activity android:name=".Activities.Proba_Database"></activity>
+        <activity android:name=".Activities.Proba_Database" />
         <activity
             android:name=".Activities.FC_FR"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_fc__fr" />
+
         <activity
             android:name=".Activities.Composition"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_composition" />
 
-        <!--
-    <service
-        android:name="com.csr.btsmart.BtSmartService"
-        android:enabled="true"
-        android:exported="false" >
-    </service>
-        -->
-
         <activity
             android:name=".Activities.ConditionsActivity"
             android:label="@string/title_activity_conditions"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.csr.heartratedemo.MainActivityHeartRate"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name="com.csr.heartratedemo.HeartRateActivity"
+            android:label="@string/title_activity_heart_rate"
+            android:parentActivityName="com.csr.heartratedemo.MainActivityHeartRate"></activity>
+
+        <service
+            android:name="com.csr.btsmart.BtSmartService"
+            android:enabled="true"
+            android:exported="false"></service>
+
+        <activity
+            android:name="com.csr.heartratedemo.DeviceInfoActivity"
+            android:label="@string/title_activity_device_info"
+            android:parentActivityName="com.csr.heartratedemo.HeartRateActivity"></activity>
+        <activity
+            android:name=".BluetoothData.DataRx"
+            android:label="@string/title_activity_data_rx"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-    <activity
-        android:name="com.csr.heartratedemo.MainActivityHeartRate"
-        android:label="@string/app_name" >
-
-    </activity>
-    <activity
-        android:name="com.csr.heartratedemo.HeartRateActivity"
-        android:label="@string/title_activity_heart_rate"
-        android:parentActivityName="com.csr.heartratedemo.MainActivityHeartRate" >
-    </activity>
-
-    <service
-        android:name="com.csr.btsmart.BtSmartService"
-        android:enabled="true"
-        android:exported="false" >
-    </service>
-
-    <activity
-        android:name="com.csr.heartratedemo.DeviceInfoActivity"
-        android:parentActivityName="com.csr.heartratedemo.HeartRateActivity"
-        android:label="@string/title_activity_device_info" >
-    </activity>
-</application>
+        <activity
+            android:name=".BluetoothData.ScanResultsActivity"
+            android:label="@string/title_activity_scanresults"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
 
 </manifest>

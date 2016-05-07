@@ -16,7 +16,7 @@
  *
  ******************************************************************************/
 
-package pae.healz.BluetoothData;
+package pae.healz.NotUsed;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
@@ -28,11 +28,9 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
 import android.widget.Toast;
 
 import com.csr.btsmart.BtSmartService;
-import com.csr.btsmart.BtSmartService.BtSmartUuid;
 import com.csr.view.DataView;
 
 import java.lang.ref.WeakReference;
@@ -87,7 +85,7 @@ public class CompositionActivity extends Activity implements GestorBLE.IBLEDATA 
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
-        setContentView(R.layout.activity_dades_composition);
+        setContentView(R.layout.activity_dades);
 
         impedanceDW = (DataView) findViewById(R.id.impedanceDW);
         //totalBodyWaterDW = (DataView) findViewById(R.id.totalBodyWaterDW);
@@ -164,7 +162,7 @@ public class CompositionActivity extends Activity implements GestorBLE.IBLEDATA 
             mActivity = new WeakReference<CompositionActivity>(activity);
         }
 
-        @Override
+        /*@Override
         public void handleMessage(Message msg) {
             CompositionActivity parentActivity = mActivity.get();
             if (parentActivity != null) {
@@ -205,7 +203,7 @@ public class CompositionActivity extends Activity implements GestorBLE.IBLEDATA 
                 }
                 }
             }
-        }
+        }*/
 
     };
 
