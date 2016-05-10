@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         custom:valueText="--"
-        custom:titleText="RR value"
+        custom:titleText="Total Body Water"
         custom:unitText="Ticks"        
         custom:layout_dataview="@layout/data_normal" />
         
@@ -32,7 +32,7 @@
         android:id="@+id/fatFreeMassDW"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        custom:titleText="Energy"
+        custom:titleText="Fat Free MAss"
         custom:unitText="KJ" 
         custom:valueText="--"        
         custom:layout_dataview="@layout/data_normal" />
@@ -41,7 +41,7 @@
         android:id="@+id/freeMassDW"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        custom:titleText="Sensor location"        
+        custom:titleText="Free Mass"
         custom:valueText="--"        
         custom:layout_dataview="@layout/data_normal" />
 
