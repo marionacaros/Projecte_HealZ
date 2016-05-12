@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -33,6 +34,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import pae.healz.R;
+import pae.healz.SQLite.DataSourceDAO;
+import pae.healz.SQLite.ModelClassSQL;
 
 public class DataRx extends Activity {
 
@@ -72,6 +75,15 @@ public class DataRx extends Activity {
     private String mSerialNo;
     private String mBatteryPercent;
 
+    //Database   taula heartrate-modul, taula ffreemass-phase
+    private ModelClassSQL modelmodule;
+    private ModelClassSQL modelphase;
+    private DataSourceDAO BD;
+    private float data = 0;
+    private long date = System.currentTimeMillis();
+
+
+
 
     private static final int REQUEST_MANUFACTURER = 0;
     private static final int REQUEST_BATTERY = 1;
@@ -100,6 +112,10 @@ public class DataRx extends Activity {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         // Display back button in action bar.
         // getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        BD = new DataSourceDAO(this.getApplicationContext());
+        modelmodule = new ModelClassSQL(0, 0, data, date);
+        modelphase = new ModelClassSQL(1, 0, data, date);
 
         setContentView(R.layout.activity_dades);
 
@@ -402,6 +418,16 @@ public class DataRx extends Activity {
 
             impedanceDW.setValueText(String.valueOf(fModule));
             heartRateData.setValueText(String.valueOf(fPhase));
+
+            modelmodule = new ModelClassSQL(0, 0, fModule, date);
+            modelphase = new ModelClassSQL(1, 0, fPhase, date);
+
+            try {
+                BD.addparameters(modelmodule);
+                BD.addparameters(modelphase);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
         }
 
