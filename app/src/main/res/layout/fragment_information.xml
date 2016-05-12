@@ -12,12 +12,7 @@
     tools:context=".Fragments.InformationFragment"
     >
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:gravity="center"
-        >
+
     <RelativeLayout
         android:id="@+id/fullscreen_content_controls"
         style="?metaButtonBarStyle"
@@ -66,6 +61,5 @@
 
     </FrameLayout>
 
-</FrameLayout>
 </android.support.design.widget.CoordinatorLayout>
 

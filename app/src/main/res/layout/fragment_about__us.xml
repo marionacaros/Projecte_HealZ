@@ -4,66 +4,67 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Fragments.About_UsFragment">
-
-    <FrameLayout
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:gravity="center"
-        >
-        <RelativeLayout
-            android:id="@+id/fullscreen_content_controls"
-            style="?metaButtonBarStyle"
+        tools:context=".Fragments.About_UsFragment">
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/coolbg">
+            android:fitsSystemWindows="true"
+            android:gravity="center"
+            android:background="#CCFF0000">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="ZTEERO TEAM"
-                android:layout_marginTop="10dp"
-                android:textStyle="bold"
-                android:textSize="25sp"
-                android:textColor="#FFFFFF"
-                android:id="@+id/info_title"
-                android:gravity="center_horizontal"
-                android:layout_gravity="center_horizontal|top"
-                android:layout_alignParentEnd="true" />
-
-            <ScrollView
+            <RelativeLayout
+                android:id="@+id/fullscreen_content_controls"
+                style="?metaButtonBarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/info_title"
-                android:layout_margin="12dp"
-                android:id="@+id/scrollView">
+                android:background="@drawable/coolbg">
 
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/info_title"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center_horizontal|top"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="ZTEERO TEAM"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/info_text"
-                        android:layout_margin="20dp"
+                <ScrollView
+                    android:id="@+id/scrollView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/info_title"
+                    android:layout_margin="12dp">
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18dp"
-                        android:text="@string/about_us_text"
-                        android:singleLine="false"/>
-                </RelativeLayout>
+                        android:layout_height="match_parent">
 
-            </ScrollView>
+                        <TextView
+                            android:id="@+id/info_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="20dp"
+                            android:singleLine="false"
+                            android:text="@string/about_us_text"
+                            android:textColor="#FFFFFF"
+                            android:textSize="18dp" />
+                    </RelativeLayout>
 
-        </RelativeLayout>
+                </ScrollView>
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
 
     </FrameLayout>
-
-
-</FrameLayout>
 </android.support.design.widget.CoordinatorLayout>

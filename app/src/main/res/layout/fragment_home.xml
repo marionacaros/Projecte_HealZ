@@ -2,26 +2,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.HomeFragment"
-    >
+    tools:context=".Fragments.HomeFragment">
 
-    <FrameLayout
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:gravity="center">
+        tools:context=".Fragments.HomeFragment">
 
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
+            style="?metaButtonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            style="?metaButtonBarStyle"
             android:background="@drawable/coolbg">
             <!--style="?metaButtonBarStyle"-->
-
-
-
 
 
             <Button
