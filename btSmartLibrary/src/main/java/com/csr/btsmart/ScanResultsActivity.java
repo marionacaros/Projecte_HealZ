@@ -104,7 +104,7 @@ public abstract class ScanResultsActivity extends Activity {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         // Add animated progress indicator in top right corner.
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-
+        System.out.println("se ha ejecutado");
         setContentView(R.layout.activity_scan_results);
         mScanListView = (ListView) this.findViewById(R.id.scanListView);
         mScanResultsAdapter = new ScanResultsAdapter(this, mScanResults);

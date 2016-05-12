@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import com.csr.btsmart.BtSmartService;
@@ -25,6 +26,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.ActivityInfo;
 import android.os.ParcelUuid;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -59,8 +61,8 @@ public class DataRx extends Activity {
     public byte[] newModule;
     public byte[] newPhase;
     public int cont = 0;
-    public float[] moduls = new float[1000];
-    public float[] fases = new float[1000];
+    public ArrayList<Float> moduls;
+    public ArrayList<Float> fases;
 
     //strings info device
     private String mManufacturer;
@@ -69,6 +71,7 @@ public class DataRx extends Activity {
     private String mSwRev;
     private String mSerialNo;
     private String mBatteryPercent;
+
 
     private static final int REQUEST_MANUFACTURER = 0;
     private static final int REQUEST_BATTERY = 1;
@@ -197,7 +200,7 @@ public class DataRx extends Activity {
                             parentActivity.setProgressBarIndeterminateVisibility(false);
                             // Get the device information - this will come back to
                             // us in a MESSAGE_CHARACTERISTIC_VALUE event.
-                            smartService.requestCharacteristicValue(REQUEST_MANUFACTURER,
+ /*                           smartService.requestCharacteristicValue(REQUEST_MANUFACTURER,
                                     BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(),
                                     BtSmartUuid.MANUFACTURER_NAME.getUuid(), parentActivity.mHeartHandler);
 
@@ -229,10 +232,10 @@ public class DataRx extends Activity {
                             smartService.requestCharacteristicNotification(REQUEST_HEART_RATE,
                                     BtSmartUuid.HRP_SERVICE.getUuid(), BtSmartUuid.HEART_RATE_MEASUREMENT.getUuid(),
                                     parentActivity.mHeartHandler);
-
-                            //???? UART ???? para que sirve esto?
+*/
+                            //???? UART ???? para que sirve esto?*
                             smartService.requestCharacteristicNotification(REQUEST_NEW_VALUES,
-                                    BtSmartUuid.UART_SERVICE.getUuid(), BtSmartUuid.RX_CHARACTERISTIC.getUuid(),
+                                    BtSmartUuid.UART_SERVICE.getUuid(), BtSmartUuid.TX_CHARACTERISTIC.getUuid(),
                                     parentActivity.mHeartHandler);
 
                         }
@@ -260,7 +263,7 @@ public class DataRx extends Activity {
             mActivity = new WeakReference<DataRx>(activity);
         }
 
-        public void handleMessage(Message msg) {
+        public void handleMessage(Message msg) { //Está corriendo en el threat de la ui
             DataRx parentActivity = mActivity.get();
             if (parentActivity != null) {
                 switch (msg.what) {
@@ -279,12 +282,22 @@ public class DataRx extends Activity {
                         break;
                     }
                     case BtSmartService.MESSAGE_CHARACTERISTIC_VALUE: {
+
+                        Log.d("DataRx", "MESSAGE_CHARACTERISTIC_VALUE");
                         Bundle msgExtra = msg.getData();
                         UUID serviceUuid =
                                 ((ParcelUuid) msgExtra.getParcelable(BtSmartService.EXTRA_SERVICE_UUID)).getUuid();
                         UUID characteristicUuid =
                                 ((ParcelUuid) msgExtra.getParcelable(BtSmartService.EXTRA_CHARACTERISTIC_UUID)).getUuid();
 
+                        //UART
+                    //    if (serviceUuid.compareTo(BtSmartUuid.UART_SERVICE.getUuid()) == 0
+                             //   && characteristicUuid.compareTo(BtSmartUuid.TX_CHARACTERISTIC.getUuid()) == 0) {
+                          parentActivity.UARTHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE));
+
+//                            Toast.makeText(parentActivity, "Failed to register for heart rate notifications.",
+  //                                  Toast.LENGTH_SHORT).show();
+                        //}
                         // Heart rate notification.
                         if (serviceUuid.compareTo(BtSmartUuid.HRP_SERVICE.getUuid()) == 0
                                 && characteristicUuid.compareTo(BtSmartUuid.HEART_RATE_MEASUREMENT.getUuid()) == 0) {
@@ -321,12 +334,8 @@ public class DataRx extends Activity {
                                 && characteristicUuid.compareTo(BtSmartUuid.HEART_RATE_LOCATION.getUuid()) == 0) {
                             parentActivity.sensorLocationHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE)[0]);
                         }
-                        //UART
-                        else if (serviceUuid.compareTo(BtSmartUuid.UART_SERVICE.getUuid()) == 0
-                                && characteristicUuid.compareTo(BtSmartUuid.RX_CHARACTERISTIC.getUuid()) == 0) {
-                            parentActivity.UARTHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE));
-                            break;
-                        }
+                        break;
+
                     }
                 }
             }
@@ -335,8 +344,14 @@ public class DataRx extends Activity {
         private void UARTHandler(byte[] value) {
 
             BluetoothGattCharacteristic characteristic =
-                    new BluetoothGattCharacteristic(BtSmartService.BtSmartUuid.RX_CHARACTERISTIC.getUuid(), 0, 0);
+                    new BluetoothGattCharacteristic(BtSmartService.BtSmartUuid.TX_CHARACTERISTIC.getUuid(), 0, 0);
             characteristic.setValue(value);
+            Byte b=new Byte(value[0]);
+            Log.d("DataRx",b.toString());
+
+
+
+
 
             byte numT = characteristic.getValue()[0]; //número Trama
             byte r0 = characteristic.getValue()[1];
@@ -344,23 +359,49 @@ public class DataRx extends Activity {
             byte r2 = characteristic.getValue()[3];
             byte r3 = characteristic.getValue()[4];
             newModule = new byte[]{r0, r1, r2, r3};
+            byte[] newModule3 = new byte[]{r3,r2,r1,r0};
 
-            float module = ByteBuffer.wrap(newModule).order(ByteOrder.BIG_ENDIAN).getFloat();
-            //float R2 = characteristic.getFloatValue(BluetoothGattCharacteristic.FORMAT_SFLOAT,1);
+            Log.d("DataRxUART","numtrama:" + String.valueOf(numT));
+            Log.d("DataRxUART","R0:" + String.valueOf(r0));
+            Log.d("DataRxUART","R1:" + String.valueOf(r1));
+            Log.d("DataRxUART","R2:" + String.valueOf(r2));
+            Log.d("DataRxUART","R3:" + String.valueOf(r3));
+            //Log.d("DataRxUART","R4:" + String.valueOf(r4));
+
+            //7int module2 = ByteBuffer.wrap(newModule).order(ByteOrder.LITTLE_ENDIAN).getInt();
+            ///int module = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_SINT32, 1);
+            int module = ByteBuffer.wrap(newModule3).order(ByteOrder.LITTLE_ENDIAN).getInt();
+            Float fModule= new Float(module);
+            fModule=fModule/100.f;
+
+            Log.d("DataRxUART","MODULE:" + String.valueOf(module));
+ //           Log.d("DataRxUART","MODULE 2:" + String.valueOf(module));
+   ///         Log.d("DataRxUART","MODULE 3:" + String.valueOf(module3));
+
+
+
 
             byte i0 = characteristic.getValue()[5];
             byte i1 = characteristic.getValue()[6];
             byte i2 = characteristic.getValue()[7];
             byte i3 = characteristic.getValue()[8];
-            newPhase = new byte[]{i0, i1, i2, i3};
+            newPhase = new byte[]{i3, i2, i1, i0};
 
-            float phase = ByteBuffer.wrap(newModule).order(ByteOrder.BIG_ENDIAN).getFloat();
-            //float R2 = characteristic.getFloatValue(BluetoothGattCharacteristic.FORMAT_SFLOAT,1);
+            int phase = ByteBuffer.wrap(newPhase).order(ByteOrder.LITTLE_ENDIAN).getInt();
+            Float fPhase = new Float(phase);
+            fPhase = fPhase/100.f;
+            //float R2 = characteristic.getFloatValue(BluetoothGattCharacteristic.FORMAT_SFLOAT,5);
 
-            moduls[cont] = module; //PREGUNTAR
-            fases[cont] = phase;
-            cont++;
-            impedanceDW.setValueText(String.valueOf(module));
+            //IF
+            //moduls.add(module); //PREGUNTAR
+            //moduls.add(module);
+            //fases[cont] = phase;
+
+            //Float.MIN_VALUE
+                    //añadir boton home y repetir medida
+
+            impedanceDW.setValueText(String.valueOf(fModule));
+            heartRateData.setValueText(String.valueOf(fPhase));
 
         }
 

@@ -23,7 +23,6 @@ import pae.healz.Fragments.About_UsFragment;
 import pae.healz.Fragments.HistoryFragment;
 import pae.healz.Fragments.HomeFragment;
 import pae.healz.Fragments.InformationFragment;
-import pae.healz.Fragments.SettingsFragment;
 import pae.healz.R;
 
 
@@ -173,10 +172,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_history) {
             frag = new HistoryFragment();
 
-        } /*else if (id == R.id.nav_settings) {
-            frag = new SettingsFragment();
-
-        } */else if (id == R.id.nav_tutorial) {
+        } else if (id == R.id.nav_tutorial) {
             frag = new InformationFragment();
 
         } else if (id == R.id.nav_About_Us) {

@@ -3,92 +3,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@drawable/coolbg"
-    >
+    android:fitsSystemWindows="true">
 
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Fragments.HistoryFragment"
-
-
-    >
-
-    <!-- TODO: Update blank fragment layout -->
-    <com.jjoe64.graphview.GraphView
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="250dip"
-        android:id="@+id/graphView"
-        android:layout_gravity="center_horizontal|bottom"
-        android:background="#80000000"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="44dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp" />
+        android:layout_height="match_parent"
+        tools:context=".Fragments.HistoryFragment">
+
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".Fragments.HistoryFragment">
+
+            <!-- TODO: Update blank fragment layout -->
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/graphView"
+                android:layout_width="match_parent"
+                android:layout_height="250dip"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="44dp"
+                android:background="#80000000" />
 
 
-        <Button
-            style="@style/button"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="Weight"
-            android:textSize="20dp"
-            android:id="@+id/button_weight"
-            android:layout_below="@+id/graphView"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@+id/buttonFatfreemass"
-            android:layout_x="25dp"
-            android:layout_y="200dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp" />
+            <Button
+                android:id="@+id/button_weight"
+                style="@style/button"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/graphView"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="8dp"
+                android:layout_toStartOf="@+id/buttonFatfreemass"
+                android:layout_x="25dp"
+                android:layout_y="200dp"
+                android:text="Weight"
+                android:textSize="20dp" />
 
-        <Button
-            style="@style/button"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:text="Fat Free Mass"
-            android:textSize="20dp"
-            android:id="@+id/buttonFatfreemass"
-            android:layout_alignTop="@+id/buttonWeight"
-            android:layout_alignParentEnd="true"
-            android:layout_alignStart="@+id/buttonTotalBodyWater"
-            android:layout_x="223dp"
-            android:layout_y="267dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp" />
+            <Button
+                android:id="@+id/buttonFatfreemass"
+                style="@style/button"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignStart="@+id/buttonTotalBodyWater"
+                android:layout_alignTop="@+id/buttonWeight"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_x="223dp"
+                android:layout_y="267dp"
+                android:text="Fat Free Mass"
+                android:textSize="20dp" />
 
-        <Button
-            style="@style/button"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:text="Fat Mass"
-            android:textSize="20dp"
-            android:id="@+id/buttonFatmass"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@+id/buttonTotalBodyWater"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp" />
+            <Button
+                android:id="@+id/buttonFatmass"
+                style="@style/button"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_toStartOf="@+id/buttonTotalBodyWater"
+                android:text="Fat Mass"
+                android:textSize="20dp" />
 
-        <Button
-            style="@style/button"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:textSize="20dp"
-            android:text="Total Body Water"
-            android:id="@+id/button_Total_Body_Water"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp" />
+            <Button
+                android:id="@+id/button_Total_Body_Water"
+                style="@style/button"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Total Body Water"
+                android:textSize="20dp" />
 
 
-    </TableLayout>
+        </TableLayout>
+    </FrameLayout>
+
 </android.support.design.widget.CoordinatorLayout>
