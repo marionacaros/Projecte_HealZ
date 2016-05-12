@@ -51,6 +51,7 @@
     <EditText
         android:layout_width="100dp"
         android:layout_height="75dp"
+        android:inputType="number"
         android:id="@+id/Age"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/textview_age"
@@ -60,6 +61,7 @@
         android:layout_width="100dp"
         android:layout_height="75dp"
         android:id="@+id/Weight"
+        android:inputType="number"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/textview_weigh"
         android:layout_alignStart="@+id/textview_weigh" />
@@ -68,6 +70,7 @@
         android:layout_width="100dp"
         android:layout_height="75dp"
         android:id="@+id/Height"
+        android:inputType="number"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/textview_heigh"
         android:layout_alignParentStart="true" />

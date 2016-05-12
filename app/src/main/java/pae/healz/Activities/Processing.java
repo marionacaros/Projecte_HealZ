@@ -13,7 +13,7 @@ import pae.healz.UserData.User;
 /**
  * Created by Marc on 05/05/2016.
  */
-public abstract class Processing { //Correcte declaracio?
+public class Processing { //Correcte declaracio?
     //Aquesta classe conté totes les formules i calculs
     //Recull de bluetooth, calcula i escriu sobre la base de dades
     private int type =0; //TBW=1, FFM=2, FM=3
@@ -41,6 +41,16 @@ public abstract class Processing { //Correcte declaracio?
 
     }
 
+
+    public float median(float[] vector){
+        float sum=0;
+        for(int i=0; i<vector.length; i++) {
+            sum = sum + vector[i];
+        }
+        float median = sum/vector.length;
+        return median;
+    }
+
     public void parteRealImaginaria(){
         //Aqui leemos lo que nos llega del bluetooth
 
@@ -60,17 +70,10 @@ public abstract class Processing { //Correcte declaracio?
         tBW=0.7493*(((altura)*(altura))/parteReal)+0.1362*peso-0.0778*edad+2.8223*genero+5.6436;
         fFM=0.664*(((altura)*(altura))/parteReal)+0.0967*peso+0.0940*parteImaginaria-0.2429;
         fM=peso-fFM;
-        if(type == 1){
-            return tBW*100;
-        }
-        else if(type == 2){
-            return fFM*100;
-        }
-        else if(type == 3){
-            return fM*100;
-        }
-        else
-            return 1.0;
+        if(type == 1)return tBW*100;
+        else if(type == 2)return fFM*100;
+        else if(type == 3)return fM*100;
+        else return 1.0;
     }
 
     public void guardarInfoEnBD(){

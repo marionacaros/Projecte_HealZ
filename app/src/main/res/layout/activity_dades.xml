@@ -24,8 +24,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         custom:valueText="--"
-        custom:titleText="Total Body Water"
-        custom:unitText="Ticks"        
+        custom:titleText="Total Body Water "
+        custom:unitText="%"
         custom:layout_dataview="@layout/data_normal" />
         
     <com.csr.view.DataView
@@ -54,23 +54,16 @@
         custom:unitText="BPM"
         custom:layout_dataview="@layout/data_big_no_title" />
 
+    <!--
     <com.csr.view.DataView
         android:id="@+id/RRData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        custom:valueText="--"
+        custom:valueText="-"
         custom:titleText="RR value"
         custom:unitText="Ticks"
         custom:layout_dataview="@layout/data_normal" />
-
-    <com.csr.view.DataView
-        android:id="@+id/energyData"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        custom:titleText="Energy"
-        custom:unitText="KJ"
-        custom:valueText="--"
-        custom:layout_dataview="@layout/data_normal" />
+    -->
 
     <com.csr.view.DataView
         android:id="@+id/locationData"
