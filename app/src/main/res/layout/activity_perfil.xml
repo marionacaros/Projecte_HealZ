@@ -21,59 +21,64 @@
 
     <EditText
         android:layout_width="150dp"
-        android:layout_height="75dp"
+        android:layout_height="50dp"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:ems="10"
         android:id="@+id/Name"
-        android:layout_below="@+id/photoButton"
+        android:layout_below="@+id/textview_secondname"
         android:layout_alignParentStart="true" />
 
 
     <EditText
         android:layout_width="150dp"
-        android:layout_height="75dp"
+        android:layout_height="50dp"
         android:textColor="#FFFFFF"
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/Second_Name"
-        android:layout_below="@+id/photoButton"
-        android:layout_alignEnd="@+id/Sex"
-        android:layout_toEndOf="@+id/Name" />
+        android:layout_below="@+id/textview_name"
+        android:layout_alignEnd="@+id/Age"
+        android:layout_alignStart="@+id/textview_age" />
 
     <EditText
         android:layout_width="100dp"
-        android:layout_height="75dp"
+        android:layout_height="50dp"
         android:textColor="#FFFFFF"
         android:id="@+id/Sex"
-        android:layout_alignTop="@+id/Age"
-        android:layout_alignStart="@+id/textview_weigh" />
+        android:layout_below="@+id/textview_age"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/Weight" />
     <EditText
         android:layout_width="100dp"
-        android:layout_height="75dp"
+        android:layout_height="50dp"
         android:inputType="number"
         android:id="@+id/Age"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/textview_age"
-        android:layout_alignParentStart="true" />
+        android:layout_alignEnd="@+id/Height"
+        android:layout_toEndOf="@+id/textview_age"
+        android:layout_alignStart="@+id/textview_age" />
 
     <EditText
         android:layout_width="100dp"
-        android:layout_height="75dp"
+        android:layout_height="40dp"
         android:id="@+id/Weight"
         android:inputType="number"
         android:textColor="#FFFFFF"
-        android:layout_below="@+id/textview_weigh"
-        android:layout_alignStart="@+id/textview_weigh" />
+        android:layout_below="@+id/textview_heigh"
+        android:layout_alignStart="@+id/view2"
+        android:layout_alignEnd="@+id/Name" />
 
     <EditText
         android:layout_width="100dp"
-        android:layout_height="75dp"
+        android:layout_height="40dp"
         android:id="@+id/Height"
         android:inputType="number"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/textview_heigh"
-        android:layout_alignParentStart="true" />
+        android:layout_alignEnd="@+id/view2"
+        android:layout_alignStart="@+id/textview_age" />
 
 
     <Button
@@ -94,7 +99,8 @@
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:id="@+id/textview_name"
-        android:layout_below="@+id/photoButton"
+        android:layout_marginTop="27dp"
+        android:layout_below="@+id/view2"
         android:layout_alignStart="@+id/Second_Name" />
     <TextView
         android:layout_width="wrap_content"
@@ -103,7 +109,7 @@
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:id="@+id/textview_secondname"
-        android:layout_below="@+id/photoButton"
+        android:layout_alignTop="@+id/textview_name"
         android:layout_alignParentStart="true" />
     <TextView
         android:layout_width="wrap_content"
@@ -112,8 +118,8 @@
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:id="@+id/textview_age"
-        android:layout_below="@+id/Name"
-        android:layout_alignParentStart="true" />
+        android:layout_alignTop="@+id/textview_sex"
+        android:layout_alignEnd="@+id/photoButton" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -121,8 +127,8 @@
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:id="@+id/textview_sex"
-        android:layout_above="@+id/Sex"
-        android:layout_alignStart="@+id/Sex" />
+        android:layout_below="@+id/Name"
+        android:layout_alignParentStart="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -130,8 +136,8 @@
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:id="@+id/textview_heigh"
-        android:layout_below="@+id/Age"
-        android:layout_alignParentStart="true" />
+        android:layout_alignTop="@+id/textview_weigh"
+        android:layout_alignStart="@+id/Height" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -140,6 +146,24 @@
         android:textColor="#FFFFFF"
         android:id="@+id/textview_weigh"
         android:layout_below="@+id/Sex"
-        android:layout_toEndOf="@+id/photoButton" />
+        android:layout_alignParentStart="true" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="#FFFFFF"
+        android:id="@+id/view2"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_alignBottom="@+id/photoButton"
+        android:layout_centerHorizontal="true" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="#FFFFFF"
+        android:id="@+id/view"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/Weight"
+        android:layout_alignEnd="@+id/Height"
+        android:layout_marginTop="27dp" />
 
 </RelativeLayout>

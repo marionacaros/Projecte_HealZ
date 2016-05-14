@@ -43,12 +43,12 @@ public class Perfil extends AppCompatActivity {
         user = new User(getApplicationContext());
 
         if(user.getname() == null){
-            name.setHint("Introduce Name");
+            name.setHint("Name");
         }
         else name.setText(user.getname());
 
         if(user.getsecondname() == null){
-            secondName.setHint("Introduce Last Name");
+            secondName.setHint("Last Name");
         }
         else secondName.setText(user.getsecondname());
 
