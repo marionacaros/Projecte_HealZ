@@ -10,14 +10,15 @@
     android:orientation="vertical"
     android:background="@drawable/coolbg"
     tools:context=".MainActivityHeartRate" >
-
+<!--
     <com.csr.view.DataView
         android:id="@+id/impedanceDW"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
-        custom:valueText="--"
+        custom:valueText="-"
         custom:unitText="Ohms"
         custom:layout_dataview="@layout/data_big_no_title" />
+-->
 
     <com.csr.view.DataView
         android:id="@+id/totalBodyWaterDW"
@@ -32,8 +33,8 @@
         android:id="@+id/fatFreeMassDW"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        custom:titleText="Fat Free MAss"
-        custom:unitText="KJ" 
+        custom:titleText="Fat Free Mass"
+        custom:unitText="%"
         custom:valueText="--"        
         custom:layout_dataview="@layout/data_normal" />
     
@@ -42,19 +43,62 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         custom:titleText="Free Mass"
+        custom:unitText="%"
         custom:valueText="--"        
         custom:layout_dataview="@layout/data_normal" />
 
-    <!-- HEART RATE INFO - HRP_SERVICE-->
+    <com.csr.view.DataView
+        android:id="@+id/breathingDW"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:titleText="Breathing Rate"
+        custom:unitText="bpm"
+        custom:valueText="--"
+        custom:layout_dataview="@layout/data_normal" />
+
+    <com.csr.view.DataView
+        android:id="@+id/heartRateDW"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:layout_dataview="@layout/data_normal"
+        custom:titleText="Heart Rate"
+        custom:unitText="bpm"
+        custom:valueText="--" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <Button
+            android:id="@+id/button_home"
+            style="@style/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:text="Home" />
+
+        <Button
+            android:id="@+id/button_repeat"
+            style="@style/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|bottom"
+            android:layout_marginEnd="10dp"
+            android:text="Repeat" />
+
+
+        <!-- HEART RATE INFO - HRP_SERVICE-->
+    <!--
     <com.csr.view.DataView
         android:id="@+id/heartRateData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        custom:valueText="--"
+        custom:valueText="-"
         custom:unitText="BPM"
         custom:layout_dataview="@layout/data_big_no_title" />
 
-    <!--
+
     <com.csr.view.DataView
         android:id="@+id/RRData"
         android:layout_width="match_parent"
@@ -63,15 +107,15 @@
         custom:titleText="RR value"
         custom:unitText="Ticks"
         custom:layout_dataview="@layout/data_normal" />
-    -->
+
 
     <com.csr.view.DataView
         android:id="@+id/locationData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         custom:titleText="Sensor location"
-        custom:valueText="--"
+        custom:valueText="-"
         custom:layout_dataview="@layout/data_normal" />
-
-    
+-->
+    </FrameLayout>
     </LinearLayout>

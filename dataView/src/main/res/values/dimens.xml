@@ -10,9 +10,9 @@
 	<dimen name="small_text_size_unit">10sp</dimen>
 	
     <dimen name="normal_padding">4dip</dimen>	
-	<dimen name="normal_text_size_title">18sp</dimen>
-	<dimen name="normal_text_size_value">18sp</dimen>
-	<dimen name="normal_text_size_unit">12sp</dimen>
+	<dimen name="normal_text_size_title">20sp</dimen>
+	<dimen name="normal_text_size_value">22sp</dimen>
+	<dimen name="normal_text_size_unit">15sp</dimen>
 	
 	<dimen name="big_padding">5dip</dimen>	
 	<dimen name="big_text_size_title">24sp</dimen>

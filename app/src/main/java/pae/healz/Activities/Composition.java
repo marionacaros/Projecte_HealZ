@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 
+import pae.healz.BluetoothData.DataRx;
 import pae.healz.BluetoothData.ScanResultsActivity;
 import pae.healz.R;
 
@@ -47,7 +48,8 @@ public class Composition extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Intent intent = new Intent(Composition.this, MainActivityHeartRate.class);
-                Intent intent = new Intent(Composition.this, ScanResultsActivity.class);
+                //Intent intent = new Intent(Composition.this, ScanResultsActivity.class);
+                Intent intent = new Intent(Composition.this, DataRx.class);
                 startActivity(intent);
             }
         });

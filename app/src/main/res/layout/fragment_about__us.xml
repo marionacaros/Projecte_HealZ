@@ -10,13 +10,6 @@
         android:layout_height="match_parent"
         tools:context=".Fragments.About_UsFragment">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            android:gravity="center"
-            android:background="#CCFF0000">
-
             <RelativeLayout
                 android:id="@+id/fullscreen_content_controls"
                 style="?metaButtonBarStyle"
@@ -62,9 +55,5 @@
                 </ScrollView>
 
             </RelativeLayout>
-
-        </FrameLayout>
-
-
     </FrameLayout>
 </android.support.design.widget.CoordinatorLayout>
