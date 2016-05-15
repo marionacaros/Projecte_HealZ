@@ -3,6 +3,10 @@
     <color name="colorUpBar">#030720</color>
     <color name="colorBigBar">#020410</color>
     <color name="colorAccent">#1f3e91</color>
+    <color name="highred">#15508f</color>
+    <color name="lightBlue">#0fe8ec</color>
+    <color name="red">#e7f7f5f5</color>
+    <color name="red2">#f739e4ed</color>
 
 
     <!--  colors app -->

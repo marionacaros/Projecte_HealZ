@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import java.sql.SQLException;
 
+import pae.healz.BluetoothData.DataRx;
 import pae.healz.R;
 import pae.healz.SQLite.DataSourceDAO;
 import pae.healz.SQLite.ModelClassSQL;
@@ -67,7 +68,8 @@ public class Calculs extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Calculs.this, ConditionsActivity.class);
+                //Intent intent = new Intent(Calculs.this, ConditionsActivity.class);
+                Intent intent = new Intent(Calculs.this, DataRx.class);
                 startActivity(intent);
             }
         });

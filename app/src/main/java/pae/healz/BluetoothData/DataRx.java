@@ -16,8 +16,11 @@ import com.csr.btsmart.BtSmartService.BtSmartUuid;
 
 import com.csr.view.DataView;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -34,12 +37,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
-<<<<<<< HEAD
 import pae.healz.Activities.Processing;
-=======
 import pae.healz.Activities.Composition;
 import pae.healz.Activities.MainActivity;
 import pae.healz.Fragments.HomeFragment;
@@ -47,13 +52,19 @@ import pae.healz.R;
 import pae.healz.SQLite.DataSourceDAO;
 import pae.healz.SQLite.ModelClassSQL;
 
-public class DataRx extends Activity {
+public class DataRx extends Activity implements Animation.AnimationListener{
 
     private BluetoothDevice mDeviceToConnect = null;
     private BtSmartService mService = null;
     private boolean mConnected = false;
 
     private Button button;
+    private boolean loading = true;
+    private static final int PROGRESS = 0x1;
+    ProgressBar pb;
+    CountDownTimer mCountDownTimer;
+    int i=0;
+    private int mProgressStatus = 0;
 
     // For connect timeout.
     private static Handler mHandler = new Handler();
@@ -119,27 +130,81 @@ public class DataRx extends Activity {
         modelmodule = new ModelClassSQL(0, 0, data, date);
         modelphase = new ModelClassSQL(1, 0, data, date);
 
-        setContentView(R.layout.activity_dades);
 
-        heartRateDW= (DataView) findViewById(R.id.heartRateDW);
-        breathingDW= (DataView) findViewById(R.id.breathingDW);
-        totalBodyWaterDW = (DataView) findViewById(R.id.totalBodyWaterDW);
-        fatFreeMassDW = (DataView) findViewById(R.id.fatFreeMassDW);
-        freeMassDW = (DataView) findViewById(R.id.freeMassDW);
+        if (loading) {
+            setContentView(R.layout.loading_data);
+           // Animation an = new RotateAnimation(0.0f, 90.0f, 250f, 273f);
+           // onAnimationStart(an);
 
-        Button_Home();
-        Button_Repeat();
+            pb=(ProgressBar)findViewById(R.id.progressBar);
+
+            ObjectAnimator animation = ObjectAnimator.ofInt(pb, "progress", 0, 10000);
+            animation.setDuration(2000000);
+            animation.setInterpolator(new DecelerateInterpolator());
+            animation.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animator) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animator) {
+                    //do something when the countdown is complete
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animator) { }
+
+                @Override
+                public void onAnimationRepeat(Animator animator) { }
+            });
+            animation.start();
+
+
+
+            // Start lengthy operation in a background thread
+/*            new Thread(new Runnable() {
+                public void run() {
+                    while (mProgressStatus < 100) {
+                        mProgressStatus = increase();
+
+                        // Update the progress bar
+                        mHandler.post(new Runnable() {
+                            public void run() {
+                                mProgress.setProgress(mProgressStatus);
+                            }
+                        });
+                    }
+                }
+            }).start();*/
+
+        }else if (!loading) {
+
+            setContentView(R.layout.activity_dades);
+
+            heartRateDW = (DataView) findViewById(R.id.heartRateDW);
+            breathingDW = (DataView) findViewById(R.id.breathingDW);
+            totalBodyWaterDW = (DataView) findViewById(R.id.totalBodyWaterDW);
+            fatFreeMassDW = (DataView) findViewById(R.id.fatFreeMassDW);
+            freeMassDW = (DataView) findViewById(R.id.freeMassDW);
+            Button_Home();
+            Button_Repeat();
+        }
+
+
+
 
         // Get the device to connect to that was passed to us by the scan results Activity.
-        Intent intent = getIntent();
+        /*Intent intent = getIntent();
         if (intent != null) {
             mDeviceToConnect = intent.getExtras().getParcelable(BluetoothDevice.EXTRA_DEVICE);
 
             // Make a connection to BtSmartService to enable us to use its services.
             Intent bindIntent = new Intent(this, BtSmartService.class);
             bindService(bindIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
-        }
+        }*/
     }
+
 
 
     @Override
@@ -193,6 +258,21 @@ public class DataRx extends Activity {
      * This is the handler for general messages about the connection.
      */
     private final DeviceHandler mDeviceHandler = new DeviceHandler(this);
+
+    @Override
+    public void onAnimationStart(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+
+    }
 
     private static class DeviceHandler extends Handler {
         private final WeakReference<DataRx> mActivity;
@@ -411,7 +491,6 @@ public class DataRx extends Activity {
             //impedanceDW.setValueText(String.valueOf(fModule));
             //heartRateData.setValueText(String.valueOf(fPhase));
 
-<<<<<<< HEAD
 
             //Calcul dels valors FFM, FM I TBW i guardar a database
             pro = new Processing(getApplicationContext());
@@ -422,9 +501,7 @@ public class DataRx extends Activity {
             double fm = pro.calcula_datos(1, real, imag);
 
             //modificar per posarho be a la base de dades alejandra fea i lletja
-=======
             //Saved in DataBase
->>>>>>> 19ba9f8897af1c82d9aeec977d29896eada4d48e
             modelmodule = new ModelClassSQL(0, 0, fModule, date);
             modelphase = new ModelClassSQL(1, 0, fPhase, date);
 
