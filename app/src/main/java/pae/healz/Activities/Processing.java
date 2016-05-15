@@ -66,9 +66,9 @@ public class Processing { //Correcte declaracio?
 
     }
 
-    public double calcula_datos(int type){
-        tBW=0.7493*(((altura)*(altura))/parteReal)+0.1362*peso-0.0778*edad+2.8223*genero+5.6436;
-        fFM=0.664*(((altura)*(altura))/parteReal)+0.0967*peso+0.0940*parteImaginaria-0.2429;
+    public double calcula_datos(int type, double real, double imag){
+        tBW=0.7493*(((altura)*(altura))/real)+0.1362*peso-0.0778*edad+2.8223*genero+5.6436;
+        fFM=0.664*(((altura)*(altura))/real)+0.0967*peso+0.0940*imag-0.2429;
         fM=peso-fFM;
         if(type == 1)return tBW*100;
         else if(type == 2)return fFM*100;
