@@ -9,30 +9,37 @@
     <string name="navigation_drawer_open">Navigation drawer open</string>
     <string name="navigation_drawer_close">Navigation drawer close</string>
 
-    <string name="fc_fr_text">1. Put your hands around <b>Zteero</b>.\n\n2. Be sure your palms are in contact with the electrodes as you can see on the image, but not in contact between them.\n\n3. Press <b>CONNECT</b> to establish communication with Zteero.\n\n4. When Zteero is connected with the app you can start the measurement!</string>
-    <string name="about_us_text">We are a company that has developed a product able of analyzing the nutritional state of a person which is called Zteero.\n\nZteero is only though for fitness purpouse. You can find more information about the product at\: <u>www.Zteero.com</u> or you can contact by sending an email at <u>ZteeroCompany@gmail.com</u>\n\nThis idea came to observe the bad eating habits of the population, and how these habits affect their nutritional status.\n\n
+    <string name="fc_fr_text">1. Put your hands around <b>Zteero</b>.\n\n2. Be sure your palms are
+        in contact with the electrodes as you can see on the image, but not in contact between them.
+        \n\n3. Press <b>CONNECT</b> to establish communication with Zteero.\n\n4. When Zteero is
+        connected with the app you can start the measure!</string>
+
+    <string name="about_us_text">We are a company that has developed a product able of analyzing the
+        nutritional state of a person which is called Zteero.\n\nZteero is only though for fitness
+        purpouse. You can find more information about the product at\: <u>www.Zteero.com</u> or you
+        can contact by sending an email at <u>ZteeroCompany@gmail.com</u>\n\nThis idea came to observe
+        the bad eating habits of the population, and how these habits affect their nutritional status.\n\n
 </string>
 
-    <string name="composition_steps">1. Put <b>Zteero</b> between your hand and your leg as you can
-        see on the image.\n\n2. Be sure that your hand are not in contact with your leg. In case of
-        contact results will be wrong.\n\n3. Press the button CONNECT to establish connection with
+    <string name="composition_steps">1. Put <b>Zteero</b> between one of your hands and one of your legs as you can
+        see on the image.\n\n2. Be sure that your hand is not in contact with your leg. In case of
+        contact results will be wrong!\n\n3. Press the button CONNECT to establish connection with
         Zteero Device.\n\n4. When Zteero is connected with the app you can start the measurement.
 </string>
 
     <string name="conditions_text">
-    It is recommended that at the time of measurement, the user is under these conditions:\n\n
+    Before the measure, the user must be under these conditions:\n\n
         <!--TODO-->
         \t- Have not eaten 2 hours before.\n\n
     \t- Have urinated before the measure.\n\n
     \t- Update weight before each evaluation.\n\n
     \t- Correct positioning of the electrodes.\n\n
     \t- Hands should not be in contact during the measure.\n\n
-    \t- Remove metal elements
     \t- Do not use Zteero when carrying metal elements (i.e. pacemaker, prosthesis)
         \n\n</string>
 
 
-    <string name="info_text">Zteero is a personal monitoring device that allows one to measure in real time: <b>\n\n-
+    <string name="info_text">Zteero is a personal monitoring handy device that allows one to measure in real time: <b>\n\n-
         Heart and breathing rate\n\n- Percentage of Fat Free Mass \n\n- Fat Mass\n\n- Total Body Water</b>\n\nIt is largely used by performers
         of various types of physical exercise.\n\nThis app records all your measures that can be find at <b>history</b> menu option for later study and to follow the evolution of your body.\n\n</string>
 

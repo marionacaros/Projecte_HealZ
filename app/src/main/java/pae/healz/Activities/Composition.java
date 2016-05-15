@@ -48,8 +48,7 @@ public class Composition extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Intent intent = new Intent(Composition.this, MainActivityHeartRate.class);
-                //Intent intent = new Intent(Composition.this, ScanResultsActivity.class);
-                Intent intent = new Intent(Composition.this, DataRx.class);
+                Intent intent = new Intent(Composition.this, ScanResultsActivity.class);
                 startActivity(intent);
             }
         });

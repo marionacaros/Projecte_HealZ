@@ -127,14 +127,14 @@ public class DataRx extends Activity {
         Button_Repeat();
 
         // Get the device to connect to that was passed to us by the scan results Activity.
-       /* Intent intent = getIntent();
+        Intent intent = getIntent();
         if (intent != null) {
             mDeviceToConnect = intent.getExtras().getParcelable(BluetoothDevice.EXTRA_DEVICE);
 
             // Make a connection to BtSmartService to enable us to use its services.
             Intent bindIntent = new Intent(this, BtSmartService.class);
             bindService(bindIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
-        }*/
+        }
     }
 
 
