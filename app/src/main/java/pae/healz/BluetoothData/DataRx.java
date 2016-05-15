@@ -37,6 +37,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+<<<<<<< HEAD
+import pae.healz.Activities.Processing;
+=======
 import pae.healz.Activities.Composition;
 import pae.healz.Activities.MainActivity;
 import pae.healz.Fragments.HomeFragment;
@@ -81,6 +84,7 @@ public class DataRx extends Activity {
     private DataSourceDAO BD;
     private float data = 0;
     private long date = System.currentTimeMillis();
+    private Processing pro;
 
 
     private static final int REQUEST_MANUFACTURER = 0;
@@ -407,7 +411,20 @@ public class DataRx extends Activity {
             //impedanceDW.setValueText(String.valueOf(fModule));
             //heartRateData.setValueText(String.valueOf(fPhase));
 
+<<<<<<< HEAD
+
+            //Calcul dels valors FFM, FM I TBW i guardar a database
+            pro = new Processing(getApplicationContext());
+            double real = fModule*Math.cos(fPhase);
+            double imag = fModule*Math.sin(fPhase);
+            double tbw = pro.calcula_datos(1, real, imag);
+            double ffm = pro.calcula_datos(2, real, imag);
+            double fm = pro.calcula_datos(1, real, imag);
+
+            //modificar per posarho be a la base de dades alejandra fea i lletja
+=======
             //Saved in DataBase
+>>>>>>> 19ba9f8897af1c82d9aeec977d29896eada4d48e
             modelmodule = new ModelClassSQL(0, 0, fModule, date);
             modelphase = new ModelClassSQL(1, 0, fPhase, date);
 
