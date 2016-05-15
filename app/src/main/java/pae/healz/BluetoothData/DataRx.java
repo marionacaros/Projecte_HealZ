@@ -1,6 +1,8 @@
 
 package pae.healz.BluetoothData;
-
+/**
+ * Created by Mariona on 3/05/2016.
+ */
 import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
 import java.nio.ByteBuffer;
@@ -31,9 +33,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 import pae.healz.Activities.Processing;
+=======
+import pae.healz.Activities.Composition;
+import pae.healz.Activities.MainActivity;
+import pae.healz.Fragments.HomeFragment;
+>>>>>>> 19ba9f8897af1c82d9aeec977d29896eada4d48e
 import pae.healz.R;
 import pae.healz.SQLite.DataSourceDAO;
 import pae.healz.SQLite.ModelClassSQL;
@@ -44,6 +54,7 @@ public class DataRx extends Activity {
     private BtSmartService mService = null;
     private boolean mConnected = false;
 
+    private Button button;
 
     // For connect timeout.
     private static Handler mHandler = new Handler();
@@ -68,14 +79,6 @@ public class DataRx extends Activity {
     public ArrayList<Float> moduls;
     public ArrayList<Float> fases;
 
-    //strings info device
-    private String mManufacturer;
-    private String mHardwareRev;
-    private String mFwRev;
-    private String mSwRev;
-    private String mSerialNo;
-    private String mBatteryPercent;
-
     //Database   taula heartrate-modul, taula ffreemass-phase
     private ModelClassSQL modelmodule;
     private ModelClassSQL modelphase;
@@ -83,8 +86,6 @@ public class DataRx extends Activity {
     private float data = 0;
     private long date = System.currentTimeMillis();
     private Processing pro;
-
-
 
 
     private static final int REQUEST_MANUFACTURER = 0;
@@ -121,26 +122,26 @@ public class DataRx extends Activity {
 
         setContentView(R.layout.activity_dades);
 
-        impedanceDW = (DataView) findViewById(R.id.impedanceDW);
-        //totalBodyWaterDW = (DataView) findViewById(R.id.totalBodyWaterDW);
-        //fatFreeMassDW = (DataView) findViewById(R.id.fatFreeMassDW);
-        //freeMassDW = (DataView) findViewById(R.id.freeMassDW);
-        heartRateData = (DataView) findViewById(R.id.heartRateData);
-        rrData = (DataView) findViewById(R.id.RRData);
-        energyData = (DataView) findViewById(R.id.energyData);
-        locationData = (DataView) findViewById(R.id.locationData);
+        heartRateDW= (DataView) findViewById(R.id.heartRateDW);
+        breathingDW= (DataView) findViewById(R.id.breathingDW);
+        totalBodyWaterDW = (DataView) findViewById(R.id.totalBodyWaterDW);
+        fatFreeMassDW = (DataView) findViewById(R.id.fatFreeMassDW);
+        freeMassDW = (DataView) findViewById(R.id.freeMassDW);
 
+        Button_Home();
+        Button_Repeat();
 
         // Get the device to connect to that was passed to us by the scan results Activity.
-        Intent intent = getIntent();
+       /* Intent intent = getIntent();
         if (intent != null) {
             mDeviceToConnect = intent.getExtras().getParcelable(BluetoothDevice.EXTRA_DEVICE);
 
             // Make a connection to BtSmartService to enable us to use its services.
             Intent bindIntent = new Intent(this, BtSmartService.class);
             bindService(bindIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
-        }
+        }*/
     }
+
 
     @Override
     public void onDestroy() {
@@ -251,7 +252,7 @@ public class DataRx extends Activity {
                                     BtSmartUuid.HRP_SERVICE.getUuid(), BtSmartUuid.HEART_RATE_MEASUREMENT.getUuid(),
                                     parentActivity.mHeartHandler);
 */
-                            //???? UART ???? para que sirve esto?*
+                            //REQUEST UART
                             smartService.requestCharacteristicNotification(REQUEST_NEW_VALUES,
                                     BtSmartUuid.UART_SERVICE.getUuid(), BtSmartUuid.TX_CHARACTERISTIC.getUuid(),
                                     parentActivity.mHeartHandler);
@@ -303,19 +304,18 @@ public class DataRx extends Activity {
 
                         Log.d("DataRx", "MESSAGE_CHARACTERISTIC_VALUE");
                         Bundle msgExtra = msg.getData();
-                        UUID serviceUuid =
+                        /*UUID serviceUuid =
                                 ((ParcelUuid) msgExtra.getParcelable(BtSmartService.EXTRA_SERVICE_UUID)).getUuid();
                         UUID characteristicUuid =
                                 ((ParcelUuid) msgExtra.getParcelable(BtSmartService.EXTRA_CHARACTERISTIC_UUID)).getUuid();
-
+*/
                         //UART
                     //    if (serviceUuid.compareTo(BtSmartUuid.UART_SERVICE.getUuid()) == 0
                              //   && characteristicUuid.compareTo(BtSmartUuid.TX_CHARACTERISTIC.getUuid()) == 0) {
                           parentActivity.UARTHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE));
 
-//                            Toast.makeText(parentActivity, "Failed to register for heart rate notifications.",
-  //                                  Toast.LENGTH_SHORT).show();
                         //}
+     /*
                         // Heart rate notification.
                         if (serviceUuid.compareTo(BtSmartUuid.HRP_SERVICE.getUuid()) == 0
                                 && characteristicUuid.compareTo(BtSmartUuid.HEART_RATE_MEASUREMENT.getUuid()) == 0) {
@@ -352,7 +352,7 @@ public class DataRx extends Activity {
                                 && characteristicUuid.compareTo(BtSmartUuid.HEART_RATE_LOCATION.getUuid()) == 0) {
                             parentActivity.sensorLocationHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE)[0]);
                         }
-                        break;
+                        break; */
 
                     }
                 }
@@ -364,20 +364,17 @@ public class DataRx extends Activity {
             BluetoothGattCharacteristic characteristic =
                     new BluetoothGattCharacteristic(BtSmartService.BtSmartUuid.TX_CHARACTERISTIC.getUuid(), 0, 0);
             characteristic.setValue(value);
+
             Byte b=new Byte(value[0]);
             Log.d("DataRx",b.toString());
 
-
-
-
-
+            //Módulo impedancia
             byte numT = characteristic.getValue()[0]; //número Trama
             byte r0 = characteristic.getValue()[1];
             byte r1 = characteristic.getValue()[2];
             byte r2 = characteristic.getValue()[3];
             byte r3 = characteristic.getValue()[4];
-            newModule = new byte[]{r0, r1, r2, r3};
-            byte[] newModule3 = new byte[]{r3,r2,r1,r0};
+            newModule = new byte[]{r3,r2,r1,r0};
 
             Log.d("DataRxUART","numtrama:" + String.valueOf(numT));
             Log.d("DataRxUART","R0:" + String.valueOf(r0));
@@ -386,19 +383,14 @@ public class DataRx extends Activity {
             Log.d("DataRxUART","R3:" + String.valueOf(r3));
             //Log.d("DataRxUART","R4:" + String.valueOf(r4));
 
-            //7int module2 = ByteBuffer.wrap(newModule).order(ByteOrder.LITTLE_ENDIAN).getInt();
-            ///int module = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_SINT32, 1);
-            int module = ByteBuffer.wrap(newModule3).order(ByteOrder.LITTLE_ENDIAN).getInt();
+            //int module = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_SINT32, 1);
+            int module = ByteBuffer.wrap(newModule).order(ByteOrder.LITTLE_ENDIAN).getInt();
             Float fModule= new Float(module);
             fModule=fModule/100.f;
 
-            Log.d("DataRxUART","MODULE:" + String.valueOf(module));
- //           Log.d("DataRxUART","MODULE 2:" + String.valueOf(module));
-   ///         Log.d("DataRxUART","MODULE 3:" + String.valueOf(module3));
+            //Log.d("DataRxUART","MODULE:" + String.valueOf(module));
 
-
-
-
+            //Fase impedancia
             byte i0 = characteristic.getValue()[5];
             byte i1 = characteristic.getValue()[6];
             byte i2 = characteristic.getValue()[7];
@@ -408,6 +400,7 @@ public class DataRx extends Activity {
             int phase = ByteBuffer.wrap(newPhase).order(ByteOrder.LITTLE_ENDIAN).getInt();
             Float fPhase = new Float(phase);
             fPhase = fPhase/100.f;
+
             //float R2 = characteristic.getFloatValue(BluetoothGattCharacteristic.FORMAT_SFLOAT,5);
 
             //IF
@@ -415,12 +408,11 @@ public class DataRx extends Activity {
             //moduls.add(module);
             //fases[cont] = phase;
 
-            //Float.MIN_VALUE
-                    //añadir boton home y repetir medida
 
-            impedanceDW.setValueText(String.valueOf(fModule));
-            heartRateData.setValueText(String.valueOf(fPhase));
+            //impedanceDW.setValueText(String.valueOf(fModule));
+            //heartRateData.setValueText(String.valueOf(fPhase));
 
+<<<<<<< HEAD
 
             //Calcul dels valors FFM, FM I TBW i guardar a database
             pro = new Processing(getApplicationContext());
@@ -431,6 +423,9 @@ public class DataRx extends Activity {
             double fm = pro.calcula_datos(1, real, imag);
 
             //modificar per posarho be a la base de dades alejandra fea i lletja
+=======
+            //Saved in DataBase
+>>>>>>> 19ba9f8897af1c82d9aeec977d29896eada4d48e
             modelmodule = new ModelClassSQL(0, 0, fModule, date);
             modelphase = new ModelClassSQL(1, 0, fPhase, date);
 
@@ -441,13 +436,38 @@ public class DataRx extends Activity {
                 e.printStackTrace();
             }
 
+
+
         }
+    private void Button_Home() {
+        button = (Button) findViewById(R.id.button_home);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DataRx.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+    private void Button_Repeat() {
+        button = (Button) findViewById(R.id.button_repeat);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DataRx.this, ScanResultsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
 
         /**
          * Do something with the battery level received in a notification.
          *
          * @param value The battery percentage value.
          */
+
+        /*
         public void batteryNotificationHandler(byte value) {
             mBatteryPercent = String.valueOf(value + "%");
         }
@@ -513,5 +533,5 @@ public class DataRx extends Activity {
                         characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, value.length - SIZEOF_UINT16);
                 rrData.setValueText(String.valueOf(lastRR));
             }
-        }
+        }*/
     }
