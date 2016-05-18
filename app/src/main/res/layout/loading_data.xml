@@ -4,17 +4,48 @@
     android:layout_height="match_parent"
     android:background="@drawable/coolbg">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_centerInParent="true"
         android:indeterminate="false"
         android:max="48"
         android:progress="45"
         android:progressDrawable="@drawable/loading_circle"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Measuring..."
+        android:id="@+id/measuring"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_above="@+id/progressBar"
+        android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="--%"
+        android:id="@+id/porcentaje"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
 </FrameLayout>

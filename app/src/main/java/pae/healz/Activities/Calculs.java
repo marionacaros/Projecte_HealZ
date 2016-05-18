@@ -40,27 +40,6 @@ public class Calculs extends AppCompatActivity {
         button_Conditions();
         button_savedata();
 
-        //BLE
-        /*
-        final BluetoothManager bluetoothManager =
-                (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
-        mBluetoothAdapter = bluetoothManager.getAdapter();
-
-        // Use this check to determine whether BLE is supported on the device. Then
-        // you can selectively disable BLE-related features.
-        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
-            Toast.makeText(this, R.string.ble_not_supported, Toast.LENGTH_SHORT).show();
-            //finish();
-        }
-
-        // Ensures Bluetooth is available on the device and it is enabled. If not,
-        // displays a dialog requesting user permission to enable Bluetooth.
-        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-        }*/
-
-
     }
 
     private void button_Conditions() {
@@ -68,13 +47,10 @@ public class Calculs extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(Calculs.this, ConditionsActivity.class);
-                Intent intent = new Intent(Calculs.this, DataRx.class);
+                Intent intent = new Intent(Calculs.this, ConditionsActivity.class);
                 startActivity(intent);
             }
         });
-
-
     }
 
     private void button_FCFR() {
@@ -86,8 +62,6 @@ public class Calculs extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
     private void button_Composition() {
@@ -99,7 +73,6 @@ public class Calculs extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     private void button_savedata() {
