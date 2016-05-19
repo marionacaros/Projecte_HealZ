@@ -145,9 +145,13 @@ public class DataRx extends Activity implements Animation.AnimationListener {
                 mHandler.post(new Runnable() {
                     public void run() {
 
-                        float medianValueFM = (float)pro.mean(listaFM);
-                        float medianValueFFM = (float)pro.mean(listaFFM);
-                        float medianValueTBW = (float)pro.mean(listaTBW);
+                        float medianValueFM = (float) pro.mean(listaFM);
+                        float medianValueFFM = (float) pro.mean(listaFFM);
+                        float medianValueTBW = (float) pro.mean(listaTBW);
+
+                        listaFFM = new ArrayList<Double>();
+                        listaTBW = new ArrayList<Double>();
+                        listaFM = new ArrayList<Double>();
 
                         //Construcció d'objecte a la base de dades
                         modeltbw = new ModelClassSQL(2, 0, medianValueTBW, date);
@@ -162,14 +166,15 @@ public class DataRx extends Activity implements Animation.AnimationListener {
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }
-                        listaFFM.clear();
-                        listaTBW.clear();
-                        listaFM.clear();
+
 
                         finish();
                     }
                 });
                 //onDestroy();
+
+
+
 
                 Intent intent = new Intent(DataRx.this, ShowData.class);
                 startActivity(intent);
