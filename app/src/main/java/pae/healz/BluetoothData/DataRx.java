@@ -66,6 +66,13 @@ public class DataRx extends Activity implements Animation.AnimationListener{
     int i=0;
     private int mProgressStatus = 0;
 
+    private ArrayList<Double> listaTBW = new ArrayList<Double>();
+    private ArrayList<Double> listaFFM = new ArrayList<Double>();
+    private ArrayList<Double> listaFM = new ArrayList<Double>();
+
+
+    private int puntero;
+    private int cantidaddemedias=20;
     // For connect timeout.
     private static Handler mHandler = new Handler();
 
@@ -90,8 +97,7 @@ public class DataRx extends Activity implements Animation.AnimationListener{
     public ArrayList<Float> fases;
 
     //Database   taula heartrate-modul, taula ffreemass-phase
-    private ModelClassSQL modelmodule;
-    private ModelClassSQL modelphase;
+    private ModelClassSQL modeltbw, modelffm, modelfm;
     private DataSourceDAO BD;
     private float data = 0;
     private long date = System.currentTimeMillis();
@@ -127,8 +133,9 @@ public class DataRx extends Activity implements Animation.AnimationListener{
         // getActionBar().setDisplayHomeAsUpEnabled(true);
 
         BD = new DataSourceDAO(this.getApplicationContext());
-        modelmodule = new ModelClassSQL(0, 0, data, date);
-        modelphase = new ModelClassSQL(1, 0, data, date);
+        modelffm = new ModelClassSQL(1, 0, data, date);
+        modelfm = new ModelClassSQL(4, 0, data, date);
+        modeltbw = new ModelClassSQL(2, 0, data, date);
 
 
         if (loading) {
@@ -150,6 +157,27 @@ public class DataRx extends Activity implements Animation.AnimationListener{
                 @Override
                 public void onAnimationEnd(Animator animator) {
                     //do something when the countdown is complete
+
+
+
+                    //Construccio de les mitjanes
+                    float medianValueFM = (float)pro.median(listaFM);
+                    float medianValueFFM = (float)pro.median(listaFFM);
+                    float medianValueTBW = (float)pro.median(listaTBW);
+
+                    //Construcció d'objecte a la base de dades
+                    modeltbw = new ModelClassSQL(2, 0, medianValueTBW, date);
+                    modelfm = new ModelClassSQL(4, 0, medianValueFM, date);
+                    modelffm = new ModelClassSQL(1, 0, medianValueFFM, date);
+
+                    //Guardar base de dades
+                    try {
+                        BD.addparameters(modelffm);
+                        BD.addparameters(modelfm);
+                        BD.addparameters(modelffm);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 @Override
@@ -496,24 +524,15 @@ public class DataRx extends Activity implements Animation.AnimationListener{
             pro = new Processing(getApplicationContext());
             double real = fModule*Math.cos(fPhase);
             double imag = fModule*Math.sin(fPhase);
+
+            //Calculo de las formulas en processing
             double tbw = pro.calcula_datos(1, real, imag);
             double ffm = pro.calcula_datos(2, real, imag);
             double fm = pro.calcula_datos(1, real, imag);
 
-            //modificar per posarho be a la base de dades alejandra fea i lletja
-            //Saved in DataBase
-            modelmodule = new ModelClassSQL(0, 0, fModule, date);
-            modelphase = new ModelClassSQL(1, 0, fPhase, date);
-
-            try {
-                BD.addparameters(modelmodule);
-                BD.addparameters(modelphase);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-
-
+            listaFFM.add(ffm);
+            listaTBW.add(tbw);
+            listaFM.add(fm);
         }
     private void Button_Home() {
         button = (Button) findViewById(R.id.button_home);

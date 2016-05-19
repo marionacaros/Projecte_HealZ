@@ -5,6 +5,7 @@ import android.provider.ContactsContract;
 
 import java.lang.reflect.Array;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import pae.healz.SQLite.DataSourceDAO;
 import pae.healz.SQLite.ModelClassSQL;
@@ -42,12 +43,12 @@ public class Processing { //Correcte declaracio?
     }
 
 
-    public float median(float[] vector){
-        float sum=0;
-        for(int i=0; i<vector.length; i++) {
-            sum = sum + vector[i];
+    public double median(ArrayList<Double> vector){
+        double sum=0;
+        for(int i=0; i<vector.size(); i++) {
+            sum = sum + vector.get(i);
         }
-        float median = sum/vector.length;
+        double median = sum/vector.size();
         return median;
     }
 
