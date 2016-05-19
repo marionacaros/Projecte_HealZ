@@ -91,12 +91,17 @@ public class DataRx extends Activity implements Animation.AnimationListener {
     public ArrayList<Float> fases;
 
     //Database   taula heartrate-modul, taula ffreemass-phase
-    private ModelClassSQL modelmodule;
-    private ModelClassSQL modelphase;
+    private ModelClassSQL modeltbw, modelfm, modelffm;
     private DataSourceDAO BD;
     private float data = 0;
     private long date = System.currentTimeMillis();
     private Processing pro;
+    private int numMesuresErronies = 0;
+
+    private ArrayList<Double> listaFM = new ArrayList<>();
+    private ArrayList<Double> listaFFM = new ArrayList<>();
+    private ArrayList<Double> listaTBW = new ArrayList<>();
+
 
 
     private static final int REQUEST_MANUFACTURER = 0;
@@ -128,8 +133,9 @@ public class DataRx extends Activity implements Animation.AnimationListener {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
         BD = new DataSourceDAO(this.getApplicationContext());
-        modelmodule = new ModelClassSQL(0, 0, data, date);
-        modelphase = new ModelClassSQL(1, 0, data, date);
+        modeltbw = new ModelClassSQL(2, 0, data, date);
+        modelfm = new ModelClassSQL(4, 0, data, date);
+        modelffm = new ModelClassSQL(1, 0, data, date);
 
 
         setContentView(R.layout.loading_data);
@@ -150,8 +156,31 @@ public class DataRx extends Activity implements Animation.AnimationListener {
             @Override
             public void onAnimationEnd(Animator animator) {
                 //do something when the countdown is complete
+
                 mHandler.post(new Runnable() {
                     public void run() {
+
+                        float medianValueFM = (float)pro.median(listaFM);
+                        float medianValueFFM = (float)pro.median(listaFFM);
+                        float medianValueTBW = (float)pro.median(listaTBW);
+
+                        //Construcció d'objecte a la base de dades
+                        modeltbw = new ModelClassSQL(2, 0, medianValueTBW, date);
+                        modelfm = new ModelClassSQL(4, 0, medianValueFM, date);
+                        modelffm = new ModelClassSQL(1, 0, medianValueFFM, date);
+
+                        //Guardar base de dades
+                        try {
+                            BD.addparameters(modelffm);
+                            BD.addparameters(modelfm);
+                            BD.addparameters(modelffm);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        listaFFM.clear();
+                        listaTBW.clear();
+                        listaFM.clear();
+
                         finish();
                     }
                 });
@@ -386,11 +415,11 @@ public class DataRx extends Activity implements Animation.AnimationListener {
                         UUID characteristicUuid =
                                 ((ParcelUuid) msgExtra.getParcelable(BtSmartService.EXTRA_CHARACTERISTIC_UUID)).getUuid();
                         //UART
-                        //    if (serviceUuid.compareTo(BtSmartUuid.UART_SERVICE.getUuid()) == 0
-                        //   && characteristicUuid.compareTo(BtSmartUuid.TX_CHARACTERISTIC.getUuid()) == 0) {
-                        //parentActivity.UARTHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE));
+                            if (serviceUuid.compareTo(BtSmartUuid.UART_SERVICE.getUuid()) == 0
+                           && characteristicUuid.compareTo(BtSmartUuid.TX_CHARACTERISTIC.getUuid()) == 0) {
+                        parentActivity.UARTHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE));
 
-                        //}
+                        }
                         // Heart rate notification.
                         if (serviceUuid.compareTo(BtSmartUuid.HRP_SERVICE.getUuid()) == 0
                                 && characteristicUuid.compareTo(BtSmartUuid.HEART_RATE_MEASUREMENT.getUuid()) == 0) {
@@ -490,25 +519,29 @@ public class DataRx extends Activity implements Animation.AnimationListener {
         //impedanceDW.setValueText(String.valueOf(fModule));
         //heartRateData.setValueText(String.valueOf(fPhase));
 
-
-        //Calcul dels valors FFM, FM I TBW i guardar a database
         pro = new Processing(getApplicationContext());
-        double real = fModule * Math.cos(fPhase);
-        double imag = fModule * Math.sin(fPhase);
-        double tbw = pro.calcula_datos(1, real, imag);
-        double ffm = pro.calcula_datos(2, real, imag);
-        double fm = pro.calcula_datos(1, real, imag);
 
-        //modificar per posarho be a la base de dades alejandra fea i lletja
-        //Saved in DataBase
-        modelmodule = new ModelClassSQL(0, 0, fModule, date);
-        modelphase = new ModelClassSQL(1, 0, (float)ffm, date);
+        if(pro.measureIsOk(fModule)){
+            double real = fModule*Math.cos(fPhase);
+            double imag = fModule*Math.sin(fPhase);
 
-        try {
-            BD.addparameters(modelmodule);
-            BD.addparameters(modelphase);
-        } catch (SQLException e) {
-            e.printStackTrace();
+            //Calculo de las formulas en processing
+            double tbw = pro.calcula_datos(1, real, imag);
+            double ffm = pro.calcula_datos(2, real, imag);
+            double fm = pro.calcula_datos(1, real, imag);
+
+
+            listaFFM.add(ffm);
+            listaTBW.add(tbw);
+            listaFM.add(fm);
+        }
+        else {
+            numMesuresErronies++;
+            if(numMesuresErronies == 100){
+                CharSequence text = "Attention, we recommend you to repeat the measure";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+                toast.show();            }
         }
 
 

@@ -68,8 +68,8 @@ public class Processing { //Correcte declaracio?
     }
 
     public double calcula_datos(int type, double real, double imag){
-        tBW=0.7493*(((altura)*(altura))/real)+0.1362*peso-0.0778*edad+2.8223*genero+5.6436;
-        fFM=0.664*(((altura)*(altura))/real)+0.0967*peso+0.0940*imag-0.2429;
+        tBW=0.648574*(((altura)*(altura))/real)+0.1108175*peso-0.162821;
+        fFM=0.664*(((altura)*(altura))/real)+0.0967*peso+0.0940*imag-0.1592;
         fM=peso-fFM;
         if(type == 1)return tBW*100;
         else if(type == 2)return fFM*100;
@@ -94,6 +94,14 @@ public class Processing { //Correcte declaracio?
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean measureIsOk(float module){
+        //Type 0 - TBW // 1 - ffm // 2- fm
+        if(module<1000 && module>100){
+            return true;
+        }
+        return false;
     }
 
     //Funcion para el calculo de la Frecuencia Respiratoria

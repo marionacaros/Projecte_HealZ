@@ -37,10 +37,13 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import pae.healz.Activities.MainActivity;
 import pae.healz.Activities.Processing;
 import pae.healz.R;
+import pae.healz.SQLite.Atribute;
 import pae.healz.SQLite.DataSourceDAO;
 import pae.healz.SQLite.ModelClassSQL;
 
@@ -70,6 +73,9 @@ public class ShowData extends Activity {
     private float data = 0;
     private long date = System.currentTimeMillis();
     private Processing pro;
+    private List<Atribute> atrFFM, atrFM, atrTBW;
+    private Atribute atributeFFM=null, atributeFM=null, atributeTBW=null;
+
 
 
     @Override
@@ -96,6 +102,7 @@ public class ShowData extends Activity {
         freeMassDW = (DataView) findViewById(R.id.freeMassDW);
         Button_Home();
         Button_Repeat();
+        setDataToLayout();
 
     }
 
@@ -141,5 +148,36 @@ public class ShowData extends Activity {
                         //onDestroy()???
                     }
                 }).create().show();
+    }
+    public void setDataToLayout(){
+        totalBodyWaterDW = (DataView) findViewById(R.id.totalBodyWaterDW);
+        fatFreeMassDW = (DataView) findViewById(R.id.fatFreeMassDW);
+        freeMassDW = (DataView) findViewById(R.id.freeMassDW);
+
+        //Mostramos el ultimo Atributo
+        try {
+            atrFFM = BD.getAtributes(1);
+            atrFM = BD.getAtributes(4);
+            atrTBW = BD.getAtributes(2);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        Iterator it=atrFFM.iterator();
+        Iterator it2=atrFM.iterator();
+        Iterator it3=atrTBW.iterator();
+
+        while(it.hasNext()){
+            atributeFFM=(Atribute)it.next();
+        }
+        while(it2.hasNext()){
+            atributeFM=(Atribute)it.next();
+        }
+        while(it3.hasNext()){
+            atributeTBW=(Atribute)it.next();
+        }
+        totalBodyWaterDW.setValueText(String.valueOf(atributeTBW.getVar()));
+        fatFreeMassDW.setValueText(String.valueOf(atributeFFM.getVar()));
+        freeMassDW.setValueText(String.valueOf(atributeFM.getVar()));
     }
 }
