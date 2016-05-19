@@ -43,7 +43,7 @@ public class Processing { //Correcte declaracio?
     }
 
 
-    public double median(ArrayList<Double> vector){
+    public double mean(ArrayList<Double> vector){
         double sum=0;
         for(int i=0; i<vector.size(); i++) {
             sum = sum + vector.get(i);
@@ -68,13 +68,13 @@ public class Processing { //Correcte declaracio?
     }
 
     public double calcula_datos(int type, double real, double imag){
-        tBW=0.648574*(((altura)*(altura))/real)+0.1108175*peso-0.162821;
-        fFM=0.664*(((altura)*(altura))/real)+0.0967*peso+0.0940*imag-0.1592;
-        fM=peso-fFM;
-        if(type == 1)return tBW*100;
-        else if(type == 2)return fFM*100;
-        else if(type == 3)return fM*100;
-        else return 1.0;
+        tBW=(0.648574*(((altura)*(altura))/real)+0.1108175*peso-0.162821)/peso;
+        fFM=(0.664*(((altura)*(altura))/real)+0.0967*peso+0.0940*imag-0.1592)/peso;
+        fM=(1-fFM);
+        if(type == 2)return tBW*100;
+        else if(type == 1)return fFM*100;
+        else if(type==4) return fM*100;
+        else return -1.0;
     }
 
     public void guardarInfoEnBD(){

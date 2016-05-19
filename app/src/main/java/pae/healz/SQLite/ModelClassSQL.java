@@ -8,11 +8,7 @@ public class ModelClassSQL {
     user interface*/
 
     private long id;
-    private float heartRate;//type=0
-    private float fatFreeMass;//type=1
-    private float bodyWater;//type=2
-    private float weight;//type=3
-    private float fatmass; //type=4
+    private float valor;
     private long date;
     public int type;
 
@@ -20,21 +16,10 @@ public class ModelClassSQL {
         this.type=type;
         this.id=id;
         this.date=date;
-        if(type==0) heartRate=var;
-        else if(type==1)fatFreeMass=var;
-        else if(type==2)bodyWater=var;
-        else if(type==3)weight=var;
-        else fatmass = var;
+        this.valor=var;
     }
     public Atribute getAtribute(){
-        Atribute atribut=null;
-
-        if(type==0) atribut=new Atribute(id,heartRate,date);
-        else if(type==1)atribut=new Atribute(id,fatFreeMass,date);
-        else if(type==2)atribut=new Atribute(id,bodyWater,date);
-        else if(type == 3)atribut=new Atribute(id,weight,date);
-        else atribut = new Atribute(id, fatmass, date);
-        return atribut;
+      return new Atribute(id, valor, date);
     }
     public long getId() {
         return id;
@@ -43,43 +28,4 @@ public class ModelClassSQL {
         this.id = id;
     }
 
-
-    public float getBodyWater() {
-        return bodyWater;
-    }
-    public void setBodyWater(float bodywater){
-        this.bodyWater = bodywater;
-    }
-
-
-    public float getFatFreeMass() {
-        return fatFreeMass;
-    }
-    public void setFatFreeMass(float mass){
-        this.fatFreeMass=mass;
-    }
-
-
-    public float getHeartRate() {
-        return heartRate;
-    }
-    public void setHeartRate(float Heartrate){
-        this.heartRate = Heartrate;
-    }
-
-
-    public float getWeight() {
-        return weight;
-    }
-    public void setWeight(float Weight){
-        this.weight = Weight;
-    }
-
-
-    public float getAux() {
-        return fatmass;
-    }
-    public void setAux(float Weight){
-        this.fatmass = fatmass;
-    }
 }

@@ -40,7 +40,7 @@ public class DataSourceDAO {
         Atribute atr=model.getAtribute();
         ContentValues values= new ContentValues();
         values.put(SQLiteHelper.COLUMN_TYPE,atr.var);
-        values.put(SQLiteHelper.COLUMN_FECHA,atr.date);
+        values.put(SQLiteHelper.COLUMN_FECHA, atr.date);
 
         if(model.type==0) atr.id = database.insert(SQLiteHelper.TABLE_HEARTRATE, null, values);
         else if(model.type==1)atr.id = database.insert(SQLiteHelper.TABLE_FATFREEMASS, null, values);
@@ -52,16 +52,37 @@ public class DataSourceDAO {
 
     public List<Atribute> getAtributes(int type) throws SQLException {
         open();
-        List<Atribute> atributes = new ArrayList<Atribute>();
 
         Cursor cursor = null;
+        String nombreTabla=new String();
+        switch (type){
+            case 0:
+                nombreTabla = SQLiteHelper.TABLE_HEARTRATE;
+                break;
+            case 1:
+                nombreTabla = SQLiteHelper.TABLE_FATFREEMASS;
+                break;
+            case 2:
+                nombreTabla = SQLiteHelper.TABLE_BODYWATER;
+                break;
+            case 3:
+                nombreTabla = SQLiteHelper.TABLE_WEIGHT;
+                break;
+            default:
+                nombreTabla = SQLiteHelper.TABLE_FATMASS;
+                break;
+        }
+
+        cursor=database.query(nombreTabla, allColumns, null, null, null, null, null);
+        /*
         if(type==0)cursor=database.query(SQLiteHelper.TABLE_HEARTRATE,allColumns, null, null, null, null, null);
         else if(type==1)cursor=database.query(SQLiteHelper.TABLE_FATFREEMASS,allColumns, null, null, null, null, null);
         else if(type==2)cursor=database.query(SQLiteHelper.TABLE_BODYWATER,allColumns, null, null, null, null, null);
         else if(type==3)cursor=database.query(SQLiteHelper.TABLE_WEIGHT, allColumns, null, null, null, null, null);
         else cursor=database.query(SQLiteHelper.TABLE_FATMASS, allColumns, null, null, null, null, null);
-
+*/
         cursor.moveToFirst();
+        List<Atribute> atributes = new ArrayList<Atribute>();
         while (!cursor.isAfterLast()) {
             Atribute atribute = cursorToAtribute(cursor);
             atributes.add(atribute);
@@ -74,12 +95,6 @@ public class DataSourceDAO {
     }
 
     private Atribute cursorToAtribute(Cursor cursor){
-        /*long a=cursor.getLong(0);
-        float b=cursor.getFloat(1);
-        long x=cursor.getLong(2);
-        long c=a;
-        float d=b;
-        long y=x;*/
         Atribute atr = new Atribute(cursor.getLong(0),cursor.getFloat(1),cursor.getLong(2));
 
         return atr;

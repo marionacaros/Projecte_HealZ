@@ -4,13 +4,11 @@ package pae.healz.BluetoothData;
  * Created by Mariona on 3/05/2016.
  */
 
-import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.UUID;
 
 import com.csr.btsmart.BtSmartService;
 import com.csr.btsmart.BtSmartService.BtSmartUuid;
@@ -21,7 +19,6 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -32,26 +29,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.ActivityInfo;
-import android.os.ParcelUuid;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.BounceInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import pae.healz.Activities.Processing;
-import pae.healz.Activities.Composition;
-import pae.healz.Activities.MainActivity;
-import pae.healz.Fragments.HomeFragment;
 import pae.healz.R;
 import pae.healz.SQLite.DataSourceDAO;
 import pae.healz.SQLite.ModelClassSQL;
@@ -160,9 +145,9 @@ public class DataRx extends Activity implements Animation.AnimationListener {
                 mHandler.post(new Runnable() {
                     public void run() {
 
-                        float medianValueFM = (float)pro.median(listaFM);
-                        float medianValueFFM = (float)pro.median(listaFFM);
-                        float medianValueTBW = (float)pro.median(listaTBW);
+                        float medianValueFM = (float)pro.mean(listaFM);
+                        float medianValueFFM = (float)pro.mean(listaFFM);
+                        float medianValueTBW = (float)pro.mean(listaTBW);
 
                         //Construcció d'objecte a la base de dades
                         modeltbw = new ModelClassSQL(2, 0, medianValueTBW, date);
@@ -171,7 +156,7 @@ public class DataRx extends Activity implements Animation.AnimationListener {
 
                         //Guardar base de dades
                         try {
-                            BD.addparameters(modelffm);
+                            BD.addparameters(modeltbw);
                             BD.addparameters(modelfm);
                             BD.addparameters(modelffm);
                         } catch (SQLException e) {
@@ -324,38 +309,38 @@ public class DataRx extends Activity implements Animation.AnimationListener {
                             parentActivity.setProgressBarIndeterminateVisibility(false);
                             // Get the device information - this will come back to
                             // us in a MESSAGE_CHARACTERISTIC_VALUE event.
-                            smartService.requestCharacteristicValue(REQUEST_MANUFACTURER,
-                                    BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(),
-                                    BtSmartUuid.MANUFACTURER_NAME.getUuid(), parentActivity.mHeartHandler);
-
-                            smartService.requestCharacteristicValue(REQUEST_LOCATION, BtSmartUuid.HRP_SERVICE.getUuid(),
-                                    BtSmartUuid.HEART_RATE_LOCATION.getUuid(), parentActivity.mHeartHandler);
-
-                            smartService.requestCharacteristicValue(REQUEST_HARDWARE_REV,
-                                    BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(),
-                                    BtSmartUuid.HARDWARE_REVISION.getUuid(), parentActivity.mHeartHandler);
-
-                            smartService.requestCharacteristicValue(REQUEST_FW_REV,
-                                    BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(),
-                                    BtSmartUuid.FIRMWARE_REVISION.getUuid(), parentActivity.mHeartHandler);
-
-                            smartService.requestCharacteristicValue(REQUEST_SW_REV,
-                                    BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(),
-                                    BtSmartUuid.SOFTWARE_REVISION.getUuid(), parentActivity.mHeartHandler);
-
-                            smartService.requestCharacteristicValue(REQUEST_SERIAL_NO,
-                                    BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(), BtSmartUuid.SERIAL_NUMBER.getUuid(),
-                                    parentActivity.mHeartHandler);
-
-                            // Register to be told about battery level.
-                            smartService.requestCharacteristicNotification(REQUEST_BATTERY,
-                                    BtSmartUuid.BATTERY_SERVICE.getUuid(), BtSmartUuid.BATTERY_LEVEL.getUuid(),
-                                    parentActivity.mHeartHandler);
-
-                            // Register to be told about heart rate values.
-                            smartService.requestCharacteristicNotification(REQUEST_HEART_RATE,
-                                    BtSmartUuid.HRP_SERVICE.getUuid(), BtSmartUuid.HEART_RATE_MEASUREMENT.getUuid(),
-                                    parentActivity.mHeartHandler);
+//                            smartService.requestCharacteristicValue(REQUEST_MANUFACTURER,
+//                                    BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(),
+//                                    BtSmartUuid.MANUFACTURER_NAME.getUuid(), parentActivity.mHeartHandler);
+//
+//                            smartService.requestCharacteristicValue(REQUEST_LOCATION, BtSmartUuid.HRP_SERVICE.getUuid(),
+//                                    BtSmartUuid.HEART_RATE_LOCATION.getUuid(), parentActivity.mHeartHandler);
+//
+//                            smartService.requestCharacteristicValue(REQUEST_HARDWARE_REV,
+//                                    BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(),
+//                                    BtSmartUuid.HARDWARE_REVISION.getUuid(), parentActivity.mHeartHandler);
+//
+//                            smartService.requestCharacteristicValue(REQUEST_FW_REV,
+//                                    BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(),
+//                                    BtSmartUuid.FIRMWARE_REVISION.getUuid(), parentActivity.mHeartHandler);
+//
+//                            smartService.requestCharacteristicValue(REQUEST_SW_REV,
+//                                    BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(),
+//                                    BtSmartUuid.SOFTWARE_REVISION.getUuid(), parentActivity.mHeartHandler);
+//
+//                            smartService.requestCharacteristicValue(REQUEST_SERIAL_NO,
+//                                    BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(), BtSmartUuid.SERIAL_NUMBER.getUuid(),
+//                                    parentActivity.mHeartHandler);
+//
+//                            // Register to be told about battery level.
+//                            smartService.requestCharacteristicNotification(REQUEST_BATTERY,
+//                                    BtSmartUuid.BATTERY_SERVICE.getUuid(), BtSmartUuid.BATTERY_LEVEL.getUuid(),
+//                                    parentActivity.mHeartHandler);
+//
+//                            // Register to be told about heart rate values.
+//                            smartService.requestCharacteristicNotification(REQUEST_HEART_RATE,
+//                                    BtSmartUuid.HRP_SERVICE.getUuid(), BtSmartUuid.HEART_RATE_MEASUREMENT.getUuid(),
+//                                    parentActivity.mHeartHandler);
                             //REQUEST UART
                             smartService.requestCharacteristicNotification(REQUEST_NEW_VALUES,
                                     BtSmartUuid.UART_SERVICE.getUuid(), BtSmartUuid.TX_CHARACTERISTIC.getUuid(),
@@ -410,21 +395,21 @@ public class DataRx extends Activity implements Animation.AnimationListener {
 
                         Log.d("DataRx", "MESSAGE_CHARACTERISTIC_VALUE");
                         Bundle msgExtra = msg.getData();
-                        UUID serviceUuid =
-                                ((ParcelUuid) msgExtra.getParcelable(BtSmartService.EXTRA_SERVICE_UUID)).getUuid();
-                        UUID characteristicUuid =
-                                ((ParcelUuid) msgExtra.getParcelable(BtSmartService.EXTRA_CHARACTERISTIC_UUID)).getUuid();
+//                        UUID serviceUuid =
+//                                ((ParcelUuid) msgExtra.getParcelable(BtSmartService.EXTRA_SERVICE_UUID)).getUuid();
+//                        UUID characteristicUuid =
+//                                ((ParcelUuid) msgExtra.getParcelable(BtSmartService.EXTRA_CHARACTERISTIC_UUID)).getUuid();
                         //UART
-                            if (serviceUuid.compareTo(BtSmartUuid.UART_SERVICE.getUuid()) == 0
-                           && characteristicUuid.compareTo(BtSmartUuid.TX_CHARACTERISTIC.getUuid()) == 0) {
+//                            if (serviceUuid.compareTo(BtSmartUuid.UART_SERVICE.getUuid()) == 0
+//                           && characteristicUuid.compareTo(BtSmartUuid.TX_CHARACTERISTIC.getUuid()) == 0) {
                         parentActivity.UARTHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE));
 
-                        }
-                        // Heart rate notification.
-                        if (serviceUuid.compareTo(BtSmartUuid.HRP_SERVICE.getUuid()) == 0
-                                && characteristicUuid.compareTo(BtSmartUuid.HEART_RATE_MEASUREMENT.getUuid()) == 0) {
-                            parentActivity.heartRateHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE));
-                        }
+//                        }
+//           /*             // Heart rate notification.
+//                        if (serviceUuid.compareTo(BtSmartUuid.HRP_SERVICE.getUuid()) == 0
+//                                && characteristicUuid.compareTo(BtSmartUuid.HEART_RATE_MEASUREMENT.getUuid()) == 0) {
+//                            parentActivity.heartRateHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE));
+//                        }*/
 //                        // Device information
 //                        else if (serviceUuid.compareTo(BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid()) == 0) {
 //                            String value;
@@ -526,9 +511,9 @@ public class DataRx extends Activity implements Animation.AnimationListener {
             double imag = fModule*Math.sin(fPhase);
 
             //Calculo de las formulas en processing
-            double tbw = pro.calcula_datos(1, real, imag);
-            double ffm = pro.calcula_datos(2, real, imag);
-            double fm = pro.calcula_datos(1, real, imag);
+            double tbw = pro.calcula_datos(2, real, imag);
+            double ffm = pro.calcula_datos(1, real, imag);
+            double fm = pro.calcula_datos(4, real, imag);
 
 
             listaFFM.add(ffm);
@@ -537,7 +522,7 @@ public class DataRx extends Activity implements Animation.AnimationListener {
         }
         else {
             numMesuresErronies++;
-            if(numMesuresErronies == 100){
+            if(numMesuresErronies == 20){ //5 mostres per segon
                 CharSequence text = "Attention, we recommend you to repeat the measure";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(getApplicationContext(), text, duration);

@@ -95,15 +95,15 @@ public class ShowData extends Activity {
 
         setContentView(R.layout.activity_dades);
 
-        heartRateDW = (DataView) findViewById(R.id.heartRateDW);
-        breathingDW = (DataView) findViewById(R.id.breathingDW);
+
+       // heartRateDW = (DataView) findViewById(R.id.heartRateDW);
+       // breathingDW = (DataView) findViewById(R.id.breathingDW);
         totalBodyWaterDW = (DataView) findViewById(R.id.totalBodyWaterDW);
         fatFreeMassDW = (DataView) findViewById(R.id.fatFreeMassDW);
         freeMassDW = (DataView) findViewById(R.id.freeMassDW);
         Button_Home();
         Button_Repeat();
         setDataToLayout();
-
     }
 
 
@@ -149,16 +149,22 @@ public class ShowData extends Activity {
                     }
                 }).create().show();
     }
+
     public void setDataToLayout(){
-        totalBodyWaterDW = (DataView) findViewById(R.id.totalBodyWaterDW);
-        fatFreeMassDW = (DataView) findViewById(R.id.fatFreeMassDW);
-        freeMassDW = (DataView) findViewById(R.id.freeMassDW);
+//        totalBodyWaterDW = (DataView) findViewById(R.id.totalBodyWaterDW);
+//        fatFreeMassDW = (DataView) findViewById(R.id.fatFreeMassDW);
+//        freeMassDW = (DataView) findViewById(R.id.freeMassDW);
 
         //Mostramos el ultimo Atributo
         try {
             atrFFM = BD.getAtributes(1);
             atrFM = BD.getAtributes(4);
             atrTBW = BD.getAtributes(2);
+            Log.d("ShowData.java", "ffm="+atrFFM);
+            Log.d("ShowData.java", "fm="+atrFM);
+            Log.d("ShowData.java", "tbw="+atrTBW);
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -169,15 +175,22 @@ public class ShowData extends Activity {
 
         while(it.hasNext()){
             atributeFFM=(Atribute)it.next();
+            fatFreeMassDW.setValueText(""+String.valueOf(atributeFFM.getVar())+" %");
+
+
         }
         while(it2.hasNext()){
-            atributeFM=(Atribute)it.next();
+            atributeFM=(Atribute)it2.next();
+            freeMassDW.setValueText("" + String.valueOf(atributeFM.getVar()) + " %");
+
         }
         while(it3.hasNext()){
-            atributeTBW=(Atribute)it.next();
+            Log.d("ShowData.java", "it3.hasNext()");
+            atributeTBW=(Atribute)it3.next();
+            totalBodyWaterDW.setValueText(""+String.valueOf(atributeTBW.getVar())+" %");
+
         }
-        totalBodyWaterDW.setValueText(String.valueOf(atributeTBW.getVar()));
-        fatFreeMassDW.setValueText(String.valueOf(atributeFFM.getVar()));
-        freeMassDW.setValueText(String.valueOf(atributeFM.getVar()));
+
+
     }
 }
