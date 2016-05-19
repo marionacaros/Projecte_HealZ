@@ -55,8 +55,8 @@ public class DataRx extends Activity implements Animation.AnimationListener {
     private static Handler mHandler = new Handler();
 
     // Data Views to update on the display.
-    DataView heartRateDW = null;
-    DataView breathingDW = null;
+    DataView modulTest = null;
+    DataView faseTest = null;
     DataView impedanceDW = null; //SE TIENE QUE TRATAR PARA MOSTRAR TOTAL BODY WATER, FAT FREE MASS PERCENTAGE, FAT MASS PERCENTAGE
     DataView totalBodyWaterDW = null;
     DataView fatFreeMassDW = null;
@@ -75,7 +75,7 @@ public class DataRx extends Activity implements Animation.AnimationListener {
     public ArrayList<Float> moduls;
     public ArrayList<Float> fases;
 
-    //Database   taula heartrate-modul, taula ffreemass-phase
+    //Database   taula heartrate-moduuul, taula ffreemass-phase
     private ModelClassSQL modeltbw, modelfm, modelffm;
     private DataSourceDAO BD;
     private float data = 0;
@@ -86,6 +86,9 @@ public class DataRx extends Activity implements Animation.AnimationListener {
     private ArrayList<Double> listaFM = new ArrayList<>();
     private ArrayList<Double> listaFFM = new ArrayList<>();
     private ArrayList<Double> listaTBW = new ArrayList<>();
+    private ArrayList<Double> listamoduls = new ArrayList<>();
+    private ArrayList<Double> listafases = new ArrayList<>();
+
 
 
 
@@ -124,7 +127,8 @@ public class DataRx extends Activity implements Animation.AnimationListener {
 
 
         setContentView(R.layout.loading_data);
-
+        modulTest = (DataView) findViewById(R.id.modul);
+        faseTest = (DataView) findViewById(R.id.fase);
 
         pb = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -501,11 +505,12 @@ public class DataRx extends Activity implements Animation.AnimationListener {
         //fases[cont] = phase;
 
 
-        //impedanceDW.setValueText(String.valueOf(fModule));
-        //heartRateData.setValueText(String.valueOf(fPhase));
+        modulTest.setValueText(String.valueOf(fModule));
+        faseTest.setValueText(String.valueOf(fPhase));
 
         pro = new Processing(getApplicationContext());
 
+        //Comprobacio errors 100<Z<1000
         if(pro.measureIsOk(fModule)){
             double real = fModule*Math.cos(fPhase);
             double imag = fModule*Math.sin(fPhase);
@@ -524,7 +529,7 @@ public class DataRx extends Activity implements Animation.AnimationListener {
             numMesuresErronies++;
             if(numMesuresErronies == 20){ //5 mostres per segon
                 CharSequence text = "Attention, we recommend you to repeat the measure";
-                int duration = Toast.LENGTH_SHORT;
+                int duration = Toast.LENGTH_LONG;
                 Toast toast = Toast.makeText(getApplicationContext(), text, duration);
                 toast.show();            }
         }
