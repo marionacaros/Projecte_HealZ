@@ -66,7 +66,7 @@ public class ShowData extends Activity {
     DataView energyData = null;
     DataView locationData = null;
 
-    //Database   taula heartrate-modul, taula ffreemass-phase
+    //Database   taula heartrate-moduuul, taula ffreemass-phase
     private ModelClassSQL modelmodule;
     private ModelClassSQL modelphase;
     private DataSourceDAO BD;
