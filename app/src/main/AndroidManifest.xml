@@ -79,6 +79,10 @@
             android:label="@string/title_activity_data_rx"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
+            android:name=".BluetoothData.ShowData"
+            android:label="@string/title_activity_show_data"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".BluetoothData.ScanResultsActivity"
             android:label="@string/title_activity_scanresults"
             android:theme="@style/AppTheme.NoActionBar"></activity>

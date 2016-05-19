@@ -32,7 +32,6 @@
                 android:textStyle="bold"
                 android:textSize="25sp"
                 android:textColor="#FFFFFF"
-
                 android:id="@+id/text_title_composition"
                 android:gravity="center_horizontal"
                 android:layout_gravity="center_horizontal|top"

@@ -71,6 +71,8 @@
     <string name="title_activity_animation">AnimationActivity</string>
     <string name="title_activity_conditions">ConditionsActivity</string>
     <string name="title_activity_data_rx">DataRx</string>
+    <string name="title_activity_show_data">ShowData</string>
+
     <string name="title_activity_scanresults">ScanResultsActivity</string>
 
 

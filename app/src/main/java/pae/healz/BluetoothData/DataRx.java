@@ -3,6 +3,7 @@ package pae.healz.BluetoothData;
 /**
  * Created by Mariona on 3/05/2016.
  */
+
 import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
 import java.nio.ByteBuffer;
@@ -38,9 +39,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.BounceInterpolator;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -52,27 +56,16 @@ import pae.healz.R;
 import pae.healz.SQLite.DataSourceDAO;
 import pae.healz.SQLite.ModelClassSQL;
 
-public class DataRx extends Activity implements Animation.AnimationListener{
+public class DataRx extends Activity implements Animation.AnimationListener {
 
     private BluetoothDevice mDeviceToConnect = null;
     private BtSmartService mService = null;
     private boolean mConnected = false;
 
-    private Button button;
-    private boolean loading = true;
-    private static final int PROGRESS = 0x1;
     ProgressBar pb;
-    CountDownTimer mCountDownTimer;
-    int i=0;
+
     private int mProgressStatus = 0;
 
-    private ArrayList<Double> listaTBW = new ArrayList<Double>();
-    private ArrayList<Double> listaFFM = new ArrayList<Double>();
-    private ArrayList<Double> listaFM = new ArrayList<Double>();
-
-
-    private int puntero;
-    private int cantidaddemedias=20;
     // For connect timeout.
     private static Handler mHandler = new Handler();
 
@@ -89,6 +82,7 @@ public class DataRx extends Activity implements Animation.AnimationListener{
     DataView energyData = null;
     DataView locationData = null;
 
+    EditText editView = null;
     //UART info
     public byte[] newModule;
     public byte[] newPhase;
@@ -97,7 +91,8 @@ public class DataRx extends Activity implements Animation.AnimationListener{
     public ArrayList<Float> fases;
 
     //Database   taula heartrate-modul, taula ffreemass-phase
-    private ModelClassSQL modeltbw, modelffm, modelfm;
+    private ModelClassSQL modelmodule;
+    private ModelClassSQL modelphase;
     private DataSourceDAO BD;
     private float data = 0;
     private long date = System.currentTimeMillis();
@@ -115,6 +110,8 @@ public class DataRx extends Activity implements Animation.AnimationListener{
     private static final int REQUEST_NEW_VALUES = 8;
 
     private static final int CONNECT_TIMEOUT_MILLIS = 5000;
+    private static final int TIMEOUT_MEASURING_MILLIS = 20000;
+
 
     private static final int INFO_ACTIVITY_REQUEST = 1;
 
@@ -129,69 +126,55 @@ public class DataRx extends Activity implements Animation.AnimationListener{
         // Prevent screen rotation.
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-        // Display back button in action bar.
-        // getActionBar().setDisplayHomeAsUpEnabled(true);
 
         BD = new DataSourceDAO(this.getApplicationContext());
-        modelffm = new ModelClassSQL(1, 0, data, date);
-        modelfm = new ModelClassSQL(4, 0, data, date);
-        modeltbw = new ModelClassSQL(2, 0, data, date);
+        modelmodule = new ModelClassSQL(0, 0, data, date);
+        modelphase = new ModelClassSQL(1, 0, data, date);
 
 
-        if (loading) {
-            setContentView(R.layout.loading_data);
-           // Animation an = new RotateAnimation(0.0f, 90.0f, 250f, 273f);
-           // onAnimationStart(an);
-
-            pb=(ProgressBar)findViewById(R.id.progressBar);
-
-            ObjectAnimator animation = ObjectAnimator.ofInt(pb, "progress", 0, 10000);
-            animation.setDuration(2000000);
-            animation.setInterpolator(new DecelerateInterpolator());
-            animation.addListener(new Animator.AnimatorListener() {
-                @Override
-                public void onAnimationStart(Animator animator) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animator animator) {
-                    //do something when the countdown is complete
+        setContentView(R.layout.loading_data);
 
 
+        pb = (ProgressBar) findViewById(R.id.progressBar);
 
-                    //Construccio de les mitjanes
-                    float medianValueFM = (float)pro.median(listaFM);
-                    float medianValueFFM = (float)pro.median(listaFFM);
-                    float medianValueTBW = (float)pro.median(listaTBW);
+        ObjectAnimator animation = ObjectAnimator.ofInt(pb, "progress", 0, 50);
 
-                    //Construcció d'objecte a la base de dades
-                    modeltbw = new ModelClassSQL(2, 0, medianValueTBW, date);
-                    modelfm = new ModelClassSQL(4, 0, medianValueFM, date);
-                    modelffm = new ModelClassSQL(1, 0, medianValueFFM, date);
+        animation.setDuration(TIMEOUT_MEASURING_MILLIS);
+        animation.setInterpolator(new LinearInterpolator());
+        animation.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
 
-                    //Guardar base de dades
-                    try {
-                        BD.addparameters(modelffm);
-                        BD.addparameters(modelfm);
-                        BD.addparameters(modelffm);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                //do something when the countdown is complete
+                mHandler.post(new Runnable() {
+                    public void run() {
+                        finish();
                     }
-                }
+                });
+                //onDestroy();
 
-                @Override
-                public void onAnimationCancel(Animator animator) { }
+                Intent intent = new Intent(DataRx.this, ShowData.class);
+                startActivity(intent);
 
-                @Override
-                public void onAnimationRepeat(Animator animator) { }
-            });
-            animation.start();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+            }
+        });
+        animation.start();
 
 
-
-            // Start lengthy operation in a background thread
-/*            new Thread(new Runnable() {
+/*        // Start lengthy operation in a background thread
+            new Thread(new Runnable() {
                 public void run() {
                     while (mProgressStatus < 100) {
                         mProgressStatus = increase();
@@ -206,33 +189,17 @@ public class DataRx extends Activity implements Animation.AnimationListener{
                 }
             }).start();*/
 
-        }else if (!loading) {
-
-            setContentView(R.layout.activity_dades);
-
-            heartRateDW = (DataView) findViewById(R.id.heartRateDW);
-            breathingDW = (DataView) findViewById(R.id.breathingDW);
-            totalBodyWaterDW = (DataView) findViewById(R.id.totalBodyWaterDW);
-            fatFreeMassDW = (DataView) findViewById(R.id.fatFreeMassDW);
-            freeMassDW = (DataView) findViewById(R.id.freeMassDW);
-            Button_Home();
-            Button_Repeat();
-        }
-
-
-
 
         // Get the device to connect to that was passed to us by the scan results Activity.
-        /*Intent intent = getIntent();
+        Intent intent = getIntent();
         if (intent != null) {
             mDeviceToConnect = intent.getExtras().getParcelable(BluetoothDevice.EXTRA_DEVICE);
 
             // Make a connection to BtSmartService to enable us to use its services.
             Intent bindIntent = new Intent(this, BtSmartService.class);
             bindService(bindIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
-        }*/
+        }
     }
-
 
 
     @Override
@@ -245,6 +212,7 @@ public class DataRx extends Activity implements Animation.AnimationListener{
         Toast.makeText(this, "Disconnected from the sensor.", Toast.LENGTH_SHORT).show();
         finishActivity(INFO_ACTIVITY_REQUEST);
         super.onDestroy();
+
     }
 
     /**
@@ -281,7 +249,6 @@ public class DataRx extends Activity implements Animation.AnimationListener{
     };
 
 
-
     /**
      * This is the handler for general messages about the connection.
      */
@@ -295,12 +262,14 @@ public class DataRx extends Activity implements Animation.AnimationListener{
     @Override
     public void onAnimationEnd(Animation animation) {
 
+
     }
 
     @Override
     public void onAnimationRepeat(Animation animation) {
 
     }
+
 
     private static class DeviceHandler extends Handler {
         private final WeakReference<DataRx> mActivity;
@@ -326,7 +295,7 @@ public class DataRx extends Activity implements Animation.AnimationListener{
                             parentActivity.setProgressBarIndeterminateVisibility(false);
                             // Get the device information - this will come back to
                             // us in a MESSAGE_CHARACTERISTIC_VALUE event.
- /*                           smartService.requestCharacteristicValue(REQUEST_MANUFACTURER,
+                            smartService.requestCharacteristicValue(REQUEST_MANUFACTURER,
                                     BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid(),
                                     BtSmartUuid.MANUFACTURER_NAME.getUuid(), parentActivity.mHeartHandler);
 
@@ -358,7 +327,6 @@ public class DataRx extends Activity implements Animation.AnimationListener{
                             smartService.requestCharacteristicNotification(REQUEST_HEART_RATE,
                                     BtSmartUuid.HRP_SERVICE.getUuid(), BtSmartUuid.HEART_RATE_MEASUREMENT.getUuid(),
                                     parentActivity.mHeartHandler);
-*/
                             //REQUEST UART
                             smartService.requestCharacteristicNotification(REQUEST_NEW_VALUES,
                                     BtSmartUuid.UART_SERVICE.getUuid(), BtSmartUuid.TX_CHARACTERISTIC.getUuid(),
@@ -375,7 +343,9 @@ public class DataRx extends Activity implements Animation.AnimationListener{
                 }
             }
         }
-    };
+    }
+
+    ;
 
     /**
      * This is the handler for characteristic value updates.
@@ -411,161 +381,150 @@ public class DataRx extends Activity implements Animation.AnimationListener{
 
                         Log.d("DataRx", "MESSAGE_CHARACTERISTIC_VALUE");
                         Bundle msgExtra = msg.getData();
-                        /*UUID serviceUuid =
+                        UUID serviceUuid =
                                 ((ParcelUuid) msgExtra.getParcelable(BtSmartService.EXTRA_SERVICE_UUID)).getUuid();
                         UUID characteristicUuid =
                                 ((ParcelUuid) msgExtra.getParcelable(BtSmartService.EXTRA_CHARACTERISTIC_UUID)).getUuid();
-*/
                         //UART
-                    //    if (serviceUuid.compareTo(BtSmartUuid.UART_SERVICE.getUuid()) == 0
-                             //   && characteristicUuid.compareTo(BtSmartUuid.TX_CHARACTERISTIC.getUuid()) == 0) {
-                          parentActivity.UARTHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE));
+                        //    if (serviceUuid.compareTo(BtSmartUuid.UART_SERVICE.getUuid()) == 0
+                        //   && characteristicUuid.compareTo(BtSmartUuid.TX_CHARACTERISTIC.getUuid()) == 0) {
+                        //parentActivity.UARTHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE));
 
                         //}
-     /*
                         // Heart rate notification.
                         if (serviceUuid.compareTo(BtSmartUuid.HRP_SERVICE.getUuid()) == 0
                                 && characteristicUuid.compareTo(BtSmartUuid.HEART_RATE_MEASUREMENT.getUuid()) == 0) {
                             parentActivity.heartRateHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE));
                         }
-                        // Device information
-                        else if (serviceUuid.compareTo(BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid()) == 0) {
-                            String value;
-                            try {
-                                value = new String(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE), "UTF-8");
-                            } catch (UnsupportedEncodingException e) {
-                                value = "--";
-                            }
-                            if (characteristicUuid.compareTo(BtSmartUuid.MANUFACTURER_NAME.getUuid()) == 0) {
-                                parentActivity.mManufacturer = value;
-                            } else if (characteristicUuid.compareTo(BtSmartUuid.HARDWARE_REVISION.getUuid()) == 0) {
-                                parentActivity.mHardwareRev = value;
-                            } else if (characteristicUuid.compareTo(BtSmartUuid.FIRMWARE_REVISION.getUuid()) == 0) {
-                                parentActivity.mFwRev = value;
-                            } else if (characteristicUuid.compareTo(BtSmartUuid.SOFTWARE_REVISION.getUuid()) == 0) {
-                                parentActivity.mSwRev = value;
-                            } else if (characteristicUuid.compareTo(BtSmartUuid.SERIAL_NUMBER.getUuid()) == 0) {
-                                parentActivity.mSerialNo = value;
-                            }
-
-                        }
-                        // Battery level notification.
-                        else if (serviceUuid.compareTo(BtSmartUuid.BATTERY_SERVICE.getUuid()) == 0
-                                && characteristicUuid.compareTo(BtSmartUuid.BATTERY_LEVEL.getUuid()) == 0) {
-                            parentActivity.batteryNotificationHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE)[0]);
-                        }
+//                        // Device information
+//                        else if (serviceUuid.compareTo(BtSmartUuid.DEVICE_INFORMATION_SERVICE.getUuid()) == 0) {
+//                            String value;
+//                            try {
+//                                value = new String(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE), "UTF-8");
+//                            } catch (UnsupportedEncodingException e) {
+//                                value = "--";
+//                            }
+//                            if (characteristicUuid.compareTo(BtSmartUuid.MANUFACTURER_NAME.getUuid()) == 0) {
+//                                parentActivity.mManufacturer = value;
+//                            } else if (characteristicUuid.compareTo(BtSmartUuid.HARDWARE_REVISION.getUuid()) == 0) {
+//                                parentActivity.mHardwareRev = value;
+//                            } else if (characteristicUuid.compareTo(BtSmartUuid.FIRMWARE_REVISION.getUuid()) == 0) {
+//                                parentActivity.mFwRev = value;
+//                            } else if (characteristicUuid.compareTo(BtSmartUuid.SOFTWARE_REVISION.getUuid()) == 0) {
+//                                parentActivity.mSwRev = value;
+//                            } else if (characteristicUuid.compareTo(BtSmartUuid.SERIAL_NUMBER.getUuid()) == 0) {
+//                                parentActivity.mSerialNo = value;
+//                            }
+//
+//                        }
+//                        // Battery level notification.
+//                        else if (serviceUuid.compareTo(BtSmartUuid.BATTERY_SERVICE.getUuid()) == 0
+//                                && characteristicUuid.compareTo(BtSmartUuid.BATTERY_LEVEL.getUuid()) == 0) {
+//                            parentActivity.batteryNotificationHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE)[0]);
+//                        }
                         // Sensor location
-                        else if (serviceUuid.compareTo(BtSmartUuid.HRP_SERVICE.getUuid()) == 0
-                                && characteristicUuid.compareTo(BtSmartUuid.HEART_RATE_LOCATION.getUuid()) == 0) {
-                            parentActivity.sensorLocationHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE)[0]);
-                        }
-                        break; */
+//                        else if (serviceUuid.compareTo(BtSmartUuid.HRP_SERVICE.getUuid()) == 0
+//                                && characteristicUuid.compareTo(BtSmartUuid.HEART_RATE_LOCATION.getUuid()) == 0) {
+//                            parentActivity.sensorLocationHandler(msgExtra.getByteArray(BtSmartService.EXTRA_VALUE)[0]);
+//                        }
+                        break;
 
                     }
                 }
             }
         }
-    };
-        private void UARTHandler(byte[] value) {
+    }
 
-            BluetoothGattCharacteristic characteristic =
-                    new BluetoothGattCharacteristic(BtSmartService.BtSmartUuid.TX_CHARACTERISTIC.getUuid(), 0, 0);
-            characteristic.setValue(value);
+    ;
 
-            Byte b=new Byte(value[0]);
-            Log.d("DataRx",b.toString());
+    private void UARTHandler(byte[] value) {
 
-            //Módulo impedancia
-            byte numT = characteristic.getValue()[0]; //número Trama
-            byte r0 = characteristic.getValue()[1];
-            byte r1 = characteristic.getValue()[2];
-            byte r2 = characteristic.getValue()[3];
-            byte r3 = characteristic.getValue()[4];
-            newModule = new byte[]{r3,r2,r1,r0};
+        BluetoothGattCharacteristic characteristic =
+                new BluetoothGattCharacteristic(BtSmartService.BtSmartUuid.TX_CHARACTERISTIC.getUuid(), 0, 0);
+        characteristic.setValue(value);
 
-            Log.d("DataRxUART","numtrama:" + String.valueOf(numT));
-            Log.d("DataRxUART","R0:" + String.valueOf(r0));
-            Log.d("DataRxUART","R1:" + String.valueOf(r1));
-            Log.d("DataRxUART","R2:" + String.valueOf(r2));
-            Log.d("DataRxUART","R3:" + String.valueOf(r3));
-            //Log.d("DataRxUART","R4:" + String.valueOf(r4));
+        Byte b = new Byte(value[0]);
+        Log.d("DataRx", b.toString());
 
-            //int module = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_SINT32, 1);
-            int module = ByteBuffer.wrap(newModule).order(ByteOrder.LITTLE_ENDIAN).getInt();
-            Float fModule= new Float(module);
-            fModule=fModule/100.f;
+        //Módulo impedancia
+        byte numT = characteristic.getValue()[0]; //número Trama
+        byte r0 = characteristic.getValue()[1];
+        byte r1 = characteristic.getValue()[2];
+        byte r2 = characteristic.getValue()[3];
+        byte r3 = characteristic.getValue()[4];
+        newModule = new byte[]{r3, r2, r1, r0};
 
-            //Log.d("DataRxUART","MODULE:" + String.valueOf(module));
+        Log.d("DataRxUART", "numtrama:" + String.valueOf(numT));
+        Log.d("DataRxUART", "R0:" + String.valueOf(r0));
+        Log.d("DataRxUART", "R1:" + String.valueOf(r1));
+        Log.d("DataRxUART", "R2:" + String.valueOf(r2));
+        Log.d("DataRxUART", "R3:" + String.valueOf(r3));
+        //Log.d("DataRxUART","R4:" + String.valueOf(r4));
 
-            //Fase impedancia
-            byte i0 = characteristic.getValue()[5];
-            byte i1 = characteristic.getValue()[6];
-            byte i2 = characteristic.getValue()[7];
-            byte i3 = characteristic.getValue()[8];
-            newPhase = new byte[]{i3, i2, i1, i0};
+        //int module = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_SINT32, 1);
+        int module = ByteBuffer.wrap(newModule).order(ByteOrder.LITTLE_ENDIAN).getInt();
+        Float fModule = new Float(module);
+        fModule = fModule / 100.f;
 
-            int phase = ByteBuffer.wrap(newPhase).order(ByteOrder.LITTLE_ENDIAN).getInt();
-            Float fPhase = new Float(phase);
-            fPhase = fPhase/100.f;
+        //Log.d("DataRxUART","MODULE:" + String.valueOf(module));
 
-            //float R2 = characteristic.getFloatValue(BluetoothGattCharacteristic.FORMAT_SFLOAT,5);
+        //Fase impedancia
+        byte i0 = characteristic.getValue()[5];
+        byte i1 = characteristic.getValue()[6];
+        byte i2 = characteristic.getValue()[7];
+        byte i3 = characteristic.getValue()[8];
+        newPhase = new byte[]{i3, i2, i1, i0};
 
-            //IF
-            //moduls.add(module); //PREGUNTAR
-            //moduls.add(module);
-            //fases[cont] = phase;
+        int phase = ByteBuffer.wrap(newPhase).order(ByteOrder.LITTLE_ENDIAN).getInt();
+        Float fPhase = new Float(phase);
+        fPhase = fPhase / 100.f;
+
+        //float R2 = characteristic.getFloatValue(BluetoothGattCharacteristic.FORMAT_SFLOAT,5);
+
+        //IF
+        //moduls.add(module); //PREGUNTAR
+        //moduls.add(module);
+        //fases[cont] = phase;
 
 
-            //impedanceDW.setValueText(String.valueOf(fModule));
-            //heartRateData.setValueText(String.valueOf(fPhase));
+        //impedanceDW.setValueText(String.valueOf(fModule));
+        //heartRateData.setValueText(String.valueOf(fPhase));
 
 
-            //Calcul dels valors FFM, FM I TBW i guardar a database
-            pro = new Processing(getApplicationContext());
-            double real = fModule*Math.cos(fPhase);
-            double imag = fModule*Math.sin(fPhase);
+        //Calcul dels valors FFM, FM I TBW i guardar a database
+        pro = new Processing(getApplicationContext());
+        double real = fModule * Math.cos(fPhase);
+        double imag = fModule * Math.sin(fPhase);
+        double tbw = pro.calcula_datos(1, real, imag);
+        double ffm = pro.calcula_datos(2, real, imag);
+        double fm = pro.calcula_datos(1, real, imag);
 
-            //Calculo de las formulas en processing
-            double tbw = pro.calcula_datos(1, real, imag);
-            double ffm = pro.calcula_datos(2, real, imag);
-            double fm = pro.calcula_datos(1, real, imag);
+        //modificar per posarho be a la base de dades alejandra fea i lletja
+        //Saved in DataBase
+        modelmodule = new ModelClassSQL(0, 0, fModule, date);
+        modelphase = new ModelClassSQL(1, 0, (float)ffm, date);
 
-            listaFFM.add(ffm);
-            listaTBW.add(tbw);
-            listaFM.add(fm);
+        try {
+            BD.addparameters(modelmodule);
+            BD.addparameters(modelphase);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    private void Button_Home() {
-        button = (Button) findViewById(R.id.button_home);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DataRx.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-    private void Button_Repeat() {
-        button = (Button) findViewById(R.id.button_repeat);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DataRx.this, ScanResultsActivity.class);
-                startActivity(intent);
-            }
-        });
+
+
+
 
     }
 
-        /**
-         * Do something with the battery level received in a notification.
-         *
-         * @param value The battery percentage value.
-         */
+    /**
+     * Do something with the battery level received in a notification.
+     *
+     */
 
-        /*
-        public void batteryNotificationHandler(byte value) {
+
+ /*       public void batteryNotificationHandler(byte value) {
             mBatteryPercent = String.valueOf(value + "%");
-        }
+        }*/
 
 
         public void sensorLocationHandler(int locationIndex) {
@@ -609,7 +568,7 @@ public class DataRx extends Activity implements Animation.AnimationListener{
             } else {
                 hrm = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, INDEX_HRM_VALUE);
             }
-            heartRateData.setValueText(String.valueOf(hrm));
+//            heartRateData.setValueText(String.valueOf(hrm));
 
             // Get the expended energy if present.
             int energyExpended = 0;
@@ -617,7 +576,7 @@ public class DataRx extends Activity implements Animation.AnimationListener{
                 energyExpended =
                         characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, INDEX_ENERGY_VALUE
                                 + energyIndexOffset);
-                energyData.setValueText(String.valueOf(energyExpended));
+ //               energyData.setValueText(String.valueOf(energyExpended));
             }
 
             // Get RR interval values if present.
@@ -626,7 +585,7 @@ public class DataRx extends Activity implements Animation.AnimationListener{
                 // There can be multiple RR values - just get the most recent which will be the last uint16 in the array.
                 lastRR =
                         characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, value.length - SIZEOF_UINT16);
-                rrData.setValueText(String.valueOf(lastRR));
+//                rrData.setValueText(String.valueOf(lastRR));
             }
-        }*/
-    }
+        }
+}
