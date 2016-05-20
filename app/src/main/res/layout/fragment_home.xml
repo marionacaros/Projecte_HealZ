@@ -26,23 +26,22 @@
                 style="@style/button"
                 android:layout_width="280dp"
                 android:layout_height="60dp"
-                android:layout_above="@+id/button_database"
-                android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:layout_marginBottom="35dp"
                 android:layout_marginRight="20dp"
                 android:text="TAKE A MEASURE"
-                android:textSize="26dp" />
+                android:textSize="26dp"
+                android:layout_marginTop="88dp"
+                android:layout_below="@+id/textFatFreeMass"
+                android:layout_centerHorizontal="true" />
 
-
-            <Button
-                android:id="@+id/button_database"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal|bottom"
-                android:text="Go to Proba-Database" />
+            <!--<Button-->
+                <!--android:id="@+id/button_database"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_gravity="center_horizontal|bottom"-->
+                <!--android:text="Go to Proba-Database" />-->
 
             <TextView
                 android:id="@+id/text_weight"
@@ -90,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/textHeartRate"
                 android:layout_alignEnd="@+id/button_C"
-                android:text="Heart Rate"
+                android:text=""
                 android:textColor="#FFFFFF"
                 android:textSize="20dp" />
 
@@ -100,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/textWeight"
                 android:layout_alignStart="@+id/textWeight"
-                android:text="Heart Rate"
+                android:text=""
                 android:textColor="#FFFFFF"
                 android:textSize="23dp" />
 

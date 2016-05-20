@@ -116,8 +116,8 @@ public class HomeFragment extends Fragment {
         else fatfreemass.setText(""+atributFatFreeMass.getVar()+" %");
         if(atributFatMass==null)fatmass.setText("No Info");
         else fatmass.setText(""+atributFatMass.getVar()+" %");
-        if(atributHeartRate==null)heartrate.setText("No Info");
-        else heartrate.setText(""+atributHeartRate.getVar()+" bpm");
+        //if(atributHeartRate==null)heartrate.setText("No Info");
+        //else heartrate.setText(""+atributHeartRate.getVar()+" bpm");
 
         //Enllaç button_calculs:
 
@@ -132,15 +132,15 @@ public class HomeFragment extends Fragment {
         });
 
         //Per fer la proba base de dades
-        buttonToDB = (Button) view.findViewById(R.id.button_database);
-        buttonToDB.setOnClickListener(new View.OnClickListener() {
+       // buttonToDB = (Button) view.findViewById(R.id.button_database);
+       /* buttonToDB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent2 = new Intent(getActivity(), Proba_Database.class);
                 startActivity(intent2);
             }
-        });
+        });*/
         return view;
     }
 

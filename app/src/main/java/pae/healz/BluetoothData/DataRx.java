@@ -86,10 +86,6 @@ public class DataRx extends Activity implements Animation.AnimationListener {
     private ArrayList<Double> listaFM = new ArrayList<>();
     private ArrayList<Double> listaFFM = new ArrayList<>();
     private ArrayList<Double> listaTBW = new ArrayList<>();
-    private ArrayList<Double> listamoduls = new ArrayList<>();
-    private ArrayList<Double> listafases = new ArrayList<>();
-
-
 
 
     private static final int REQUEST_MANUFACTURER = 0;
@@ -149,28 +145,37 @@ public class DataRx extends Activity implements Animation.AnimationListener {
                 mHandler.post(new Runnable() {
                     public void run() {
 
-                        float medianValueFM = (float) pro.mean(listaFM);
-                        float medianValueFFM = (float) pro.mean(listaFFM);
-                        float medianValueTBW = (float) pro.mean(listaTBW);
-
-                        listaFFM = new ArrayList<Double>();
-                        listaTBW = new ArrayList<Double>();
-                        listaFM = new ArrayList<Double>();
-
-                        //Construcció d'objecte a la base de dades
-                        modeltbw = new ModelClassSQL(2, 0, medianValueTBW, date);
-                        modelfm = new ModelClassSQL(4, 0, medianValueFM, date);
-                        modelffm = new ModelClassSQL(1, 0, medianValueFFM, date);
-
-                        //Guardar base de dades
                         try {
-                            BD.addparameters(modeltbw);
-                            BD.addparameters(modelfm);
-                            BD.addparameters(modelffm);
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
 
+
+                            float medianValueFM = (float) pro.mean(listaFM);
+                            float medianValueFFM = (float) pro.mean(listaFFM);
+                            float medianValueTBW = (float) pro.mean(listaTBW);
+
+                            listaFFM = new ArrayList<Double>();
+                            listaTBW = new ArrayList<Double>();
+                            listaFM = new ArrayList<Double>();
+
+                            //Construcció d'objecte a la base de dades
+                            modeltbw = new ModelClassSQL(2, 0, medianValueTBW, date);
+                            modelfm = new ModelClassSQL(4, 0, medianValueFM, date);
+                            modelffm = new ModelClassSQL(1, 0, medianValueFFM, date);
+
+                            //Guardar base de dades
+                            try {
+                                BD.addparameters(modeltbw);
+                                BD.addparameters(modelfm);
+                                BD.addparameters(modelffm);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                        catch(Exception e){
+                            CharSequence text = "FATAL ERROR";
+                            int duration = Toast.LENGTH_SHORT;
+                            Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+                            toast.show();                        }
 
                         finish();
                     }

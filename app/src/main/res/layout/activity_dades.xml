@@ -42,18 +42,18 @@
         android:id="@+id/freeMassDW"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        custom:titleText="Free Mass"
+        custom:titleText="Fat Mass"
         custom:unitText="%"
         custom:valueText="--"        
         custom:layout_dataview="@layout/data_normal" />
 
-    <com.csr.view.DataView
+<!--    <com.csr.view.DataView
         android:id="@+id/breathingDW"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         custom:titleText="Breathing Rate"
         custom:unitText="bpm"
-        custom:valueText="--"
+        custom:valueText="&#45;&#45;"
         custom:layout_dataview="@layout/data_normal" />
 
     <com.csr.view.DataView
@@ -63,7 +63,7 @@
         custom:layout_dataview="@layout/data_normal"
         custom:titleText="Heart Rate"
         custom:unitText="bpm"
-        custom:valueText="--" />
+        custom:valueText="&#45;&#45;" />-->
 
     <FrameLayout
         android:layout_width="match_parent"
