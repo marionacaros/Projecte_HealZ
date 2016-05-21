@@ -57,7 +57,7 @@ public class DataRx extends Activity implements Animation.AnimationListener {
     // Data Views to update on the display.
     DataView modulTest = null;
     DataView faseTest = null;
-    DataView impedanceDW = null; //SE TIENE QUE TRATAR PARA MOSTRAR TOTAL BODY WATER, FAT FREE MASS PERCENTAGE, FAT MASS PERCENTAGE
+
     DataView totalBodyWaterDW = null;
     DataView fatFreeMassDW = null;
     DataView freeMassDW = null;
@@ -99,7 +99,7 @@ public class DataRx extends Activity implements Animation.AnimationListener {
     private static final int REQUEST_NEW_VALUES = 8;
 
     private static final int CONNECT_TIMEOUT_MILLIS = 5000;
-    private static final int TIMEOUT_MEASURING_MILLIS = 20000;
+    private static final int TIMEOUT_MEASURING_MILLIS = 10000;
 
 
     private static final int INFO_ACTIVITY_REQUEST = 1;
@@ -123,12 +123,13 @@ public class DataRx extends Activity implements Animation.AnimationListener {
 
 
         setContentView(R.layout.loading_data);
-        modulTest = (DataView) findViewById(R.id.modul);
-        faseTest = (DataView) findViewById(R.id.fase);
+        //TEST
+        //modulTest = (DataView) findViewById(R.id.modul);
+        //faseTest = (DataView) findViewById(R.id.fase);
 
         pb = (ProgressBar) findViewById(R.id.progressBar);
 
-        ObjectAnimator animation = ObjectAnimator.ofInt(pb, "progress", 0, 50);
+        ObjectAnimator animation = ObjectAnimator.ofInt(pb, "progress", 0, 60);
 
         animation.setDuration(TIMEOUT_MEASURING_MILLIS);
         animation.setInterpolator(new LinearInterpolator());
@@ -169,7 +170,6 @@ public class DataRx extends Activity implements Animation.AnimationListener {
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
-
                         }
                         catch(Exception e){
                             CharSequence text = "FATAL ERROR";
@@ -181,13 +181,8 @@ public class DataRx extends Activity implements Animation.AnimationListener {
                     }
                 });
                 //onDestroy();
-
-
-
-
                 Intent intent = new Intent(DataRx.this, ShowData.class);
                 startActivity(intent);
-
             }
 
             @Override
@@ -201,24 +196,7 @@ public class DataRx extends Activity implements Animation.AnimationListener {
         animation.start();
 
 
-/*        // Start lengthy operation in a background thread
-            new Thread(new Runnable() {
-                public void run() {
-                    while (mProgressStatus < 100) {
-                        mProgressStatus = increase();
-
-                        // Update the progress bar
-                        mHandler.post(new Runnable() {
-                            public void run() {
-                                mProgress.setProgress(mProgressStatus);
-                            }
-                        });
-                    }
-                }
-            }).start();*/
-
-
-        // Get the device to connect to that was passed to us by the scan results Activity.
+         //Get the device to connect to that was passed to us by the scan results Activity.
         Intent intent = getIntent();
         if (intent != null) {
             mDeviceToConnect = intent.getExtras().getParcelable(BluetoothDevice.EXTRA_DEVICE);
@@ -509,14 +487,8 @@ public class DataRx extends Activity implements Animation.AnimationListener {
 
         //float R2 = characteristic.getFloatValue(BluetoothGattCharacteristic.FORMAT_SFLOAT,5);
 
-        //IF
-        //moduls.add(module); //PREGUNTAR
-        //moduls.add(module);
-        //fases[cont] = phase;
-
-
-        modulTest.setValueText(String.valueOf(fModule));
-        faseTest.setValueText(String.valueOf(fPhase));
+        //modulTest.setValueText(String.valueOf(fModule));
+        //faseTest.setValueText(String.valueOf(fPhase));
 
         pro = new Processing(getApplicationContext());
 

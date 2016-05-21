@@ -92,7 +92,6 @@ public class ShowData extends Activity {
         modelmodule = new ModelClassSQL(0, 0, data, date);
         modelphase = new ModelClassSQL(1, 0, data, date);
 
-
         setContentView(R.layout.activity_dades);
 
 
@@ -101,6 +100,13 @@ public class ShowData extends Activity {
         totalBodyWaterDW = (DataView) findViewById(R.id.totalBodyWaterDW);
         fatFreeMassDW = (DataView) findViewById(R.id.fatFreeMassDW);
         freeMassDW = (DataView) findViewById(R.id.freeMassDW);
+
+        //EXAMPLE
+//        totalBodyWaterDW.setValueText(79.9 + " %");
+//        fatFreeMassDW.setValueText(73.6 + " %");
+//        freeMassDW.setValueText(26.4 + " %");
+
+        
         Button_Home();
         Button_Repeat();
         setDataToLayout();
@@ -135,20 +141,20 @@ public class ShowData extends Activity {
             }
         });
     }
-    @Override
-    public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setTitle("Really Exit?")
-                .setMessage("Are you sure you want to exit?")
-                .setNegativeButton(android.R.string.no, null)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        ShowData.super.onBackPressed();
-                        //onDestroy()???
-                    }
-                }).create().show();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        new AlertDialog.Builder(this)
+//                .setTitle("Really Exit?")
+//                .setMessage("Are you sure you want to exit?")
+//                .setNegativeButton(android.R.string.no, null)
+//                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//
+//                    public void onClick(DialogInterface arg0, int arg1) {
+//                        ShowData.super.onBackPressed();
+//                        //onDestroy()???
+//                    }
+//                }).create().show();
+//    }
 
     public void setDataToLayout(){
 //        totalBodyWaterDW = (DataView) findViewById(R.id.totalBodyWaterDW);
@@ -175,19 +181,27 @@ public class ShowData extends Activity {
 
         while(it.hasNext()){
             atributeFFM=(Atribute)it.next();
-            fatFreeMassDW.setValueText(""+String.valueOf(atributeFFM.getVar())+" %");
+            //fatFreeMassDW.setValueText(""+String.valueOf(atributeFFM.getVar())+" %");
+            float value =Float.valueOf(atributeFFM.getVar());
+            fatFreeMassDW.setValueText((float)Math.round(value * 10) / 10+" %");
 
 
         }
         while(it2.hasNext()){
             atributeFM=(Atribute)it2.next();
-            freeMassDW.setValueText("" + String.valueOf(atributeFM.getVar()) + " %");
+            //freeMassDW.setValueText("" + String.valueOf(atributeFM.getVar()) + " %");
+            float value =Float.valueOf(atributeFM.getVar());
+            freeMassDW.setValueText((float)Math.round(value * 10) / 10 + " %");
+
 
         }
         while(it3.hasNext()){
             Log.d("ShowData.java", "it3.hasNext()");
             atributeTBW=(Atribute)it3.next();
-            totalBodyWaterDW.setValueText(""+String.valueOf(atributeTBW.getVar())+" %");
+            //totalBodyWaterDW.setValueText(""+String.valueOf(atributeTBW.getVar())+" %");
+            float value =Float.valueOf(atributeTBW.getVar());
+            totalBodyWaterDW.setValueText((float)Math.round(value * 10) / 10 + " %");
+
 
         }
 

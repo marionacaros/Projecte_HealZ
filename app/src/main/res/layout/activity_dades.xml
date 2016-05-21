@@ -1,121 +1,124 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"    
-    android:orientation="vertical"
-    android:background="@drawable/coolbg"
-    tools:context=".MainActivityHeartRate" >
-<!--
-    <com.csr.view.DataView
-        android:id="@+id/impedanceDW"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        custom:valueText="-"
-        custom:unitText="Ohms"
-        custom:layout_dataview="@layout/data_big_no_title" />
--->
+    android:fitsSystemWindows="true">
 
-    <com.csr.view.DataView
-        android:id="@+id/totalBodyWaterDW"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        custom:valueText="--"
-        custom:titleText="Total Body Water "
-        custom:unitText="%"
-        custom:layout_dataview="@layout/data_normal" />
-        
-    <com.csr.view.DataView
-        android:id="@+id/fatFreeMassDW"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        custom:titleText="Fat Free Mass"
-        custom:unitText="%"
-        custom:valueText="--"        
-        custom:layout_dataview="@layout/data_normal" />
-    
-    <com.csr.view.DataView
-        android:id="@+id/freeMassDW"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        custom:titleText="Fat Mass"
-        custom:unitText="%"
-        custom:valueText="--"        
-        custom:layout_dataview="@layout/data_normal" />
+        android:layout_height="match_parent"
+        android:background="@drawable/coolbg"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context=".MainActivityHeartRate">
+        <!--
+            <com.csr.view.DataView
+                android:id="@+id/impedanceDW"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                custom:valueText="-"
+                custom:unitText="Ohms"
+                custom:layout_dataview="@layout/data_big_no_title" />
+        -->
 
-<!--    <com.csr.view.DataView
-        android:id="@+id/breathingDW"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        custom:titleText="Breathing Rate"
-        custom:unitText="bpm"
-        custom:valueText="&#45;&#45;"
-        custom:layout_dataview="@layout/data_normal" />
-
-    <com.csr.view.DataView
-        android:id="@+id/heartRateDW"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        custom:layout_dataview="@layout/data_normal"
-        custom:titleText="Heart Rate"
-        custom:unitText="bpm"
-        custom:valueText="&#45;&#45;" />-->
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <Button
-            android:id="@+id/button_home"
-            style="@style/button"
-            android:layout_width="wrap_content"
+        <com.csr.view.DataView
+            android:id="@+id/totalBodyWaterDW"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|bottom"
-            android:text="Home" />
+            custom:layout_dataview="@layout/data_normal"
+            custom:titleText="Total Body Water "
+            custom:valueText="--" />
 
-        <Button
-            android:id="@+id/button_repeat"
-            style="@style/button"
-            android:layout_width="wrap_content"
+        <com.csr.view.DataView
+            android:id="@+id/fatFreeMassDW"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left|bottom"
-            android:layout_marginEnd="10dp"
-            android:text="Repeat" />
+            custom:layout_dataview="@layout/data_normal"
+            custom:titleText="Fat Free Mass"
+            custom:valueText="--" />
+
+        <com.csr.view.DataView
+            android:id="@+id/freeMassDW"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            custom:layout_dataview="@layout/data_normal"
+            custom:titleText="Fat Mass"
+            custom:valueText="--" />
+
+        <!--    <com.csr.view.DataView
+                android:id="@+id/breathingDW"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                custom:titleText="Breathing Rate"
+                custom:unitText="bpm"
+                custom:valueText="&#45;&#45;"
+                custom:layout_dataview="@layout/data_normal" />
+
+            <com.csr.view.DataView
+                android:id="@+id/heartRateDW"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                custom:layout_dataview="@layout/data_normal"
+                custom:titleText="Heart Rate"
+                custom:unitText="bpm"
+                custom:valueText="&#45;&#45;" />-->
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-        <!-- HEART RATE INFO - HRP_SERVICE-->
-    <!--
-    <com.csr.view.DataView
-        android:id="@+id/heartRateData"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        custom:valueText="-"
-        custom:unitText="BPM"
-        custom:layout_dataview="@layout/data_big_no_title" />
+            <Button
+                android:id="@+id/button_home"
+                style="@style/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:text="Home" />
+
+            <Button
+                android:id="@+id/button_repeat"
+                style="@style/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|bottom"
+                android:layout_marginEnd="10dp"
+                android:text="Repeat" />
 
 
-    <com.csr.view.DataView
-        android:id="@+id/RRData"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        custom:valueText="-"
-        custom:titleText="RR value"
-        custom:unitText="Ticks"
-        custom:layout_dataview="@layout/data_normal" />
+            <!-- HEART RATE INFO - HRP_SERVICE-->
+            <!--
+            <com.csr.view.DataView
+                android:id="@+id/heartRateData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                custom:valueText="-"
+                custom:unitText="BPM"
+                custom:layout_dataview="@layout/data_big_no_title" />
 
 
-    <com.csr.view.DataView
-        android:id="@+id/locationData"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        custom:titleText="Sensor location"
-        custom:valueText="-"
-        custom:layout_dataview="@layout/data_normal" />
--->
-    </FrameLayout>
+            <com.csr.view.DataView
+                android:id="@+id/RRData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                custom:valueText="-"
+                custom:titleText="RR value"
+                custom:unitText="Ticks"
+                custom:layout_dataview="@layout/data_normal" />
+
+
+            <com.csr.view.DataView
+                android:id="@+id/locationData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                custom:titleText="Sensor location"
+                custom:valueText="-"
+                custom:layout_dataview="@layout/data_normal" />
+        -->
+        </FrameLayout>
     </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
