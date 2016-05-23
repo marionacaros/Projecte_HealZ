@@ -49,6 +49,15 @@
             custom:titleText="Fat Mass"
             custom:valueText="--" />
 
+        <com.csr.view.DataView
+            android:id="@+id/IMC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            custom:layout_dataview="@layout/data_normal"
+            custom:titleText="IMC"
+            custom:valueText="--" />
+
+
         <!--    <com.csr.view.DataView
                 android:id="@+id/breathingDW"
                 android:layout_width="match_parent"

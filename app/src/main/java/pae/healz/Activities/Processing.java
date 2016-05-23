@@ -2,6 +2,7 @@ package pae.healz.Activities;
 
 import android.content.Context;
 import android.provider.ContactsContract;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ public class Processing { //Correcte declaracio?
     //Aquesta classe conté totes les formules i calculs
     //Recull de bluetooth, calcula i escriu sobre la base de dades
     private int type =0; //TBW=1, FFM=2, FM=3
-    private double altura=0, parteReal=0, peso=0, parteImaginaria=0, edad=0, genero =0; //hombre=1, mujer=0
+    private double IMC=0, altura=0, parteReal=0, peso=0, parteImaginaria=0, edad=0, genero =0; //hombre=1, mujer=0
     private double fM=0, fFM=0, tBW=0;
     private double modulo=0, fase=0;
 
@@ -59,12 +60,20 @@ public class Processing { //Correcte declaracio?
 
 
     public void inicializacionDatosUser(){
-        altura = Double.parseDouble(user.getheight());
-        peso = Double.parseDouble(user.getweight());
-        edad = Double.parseDouble(user.getage());
-        if (user.getsex().equalsIgnoreCase("man"))genero = 1;
-        else genero=0;
+        //if(altura==0||peso==0||edad==0||genero==0){
 
+        //}else {
+            altura = Double.parseDouble(user.getheight());
+            peso = Double.parseDouble(user.getweight());
+            edad = Double.parseDouble(user.getage());
+            if (user.getsex().equalsIgnoreCase("man")) genero = 1;
+            else genero = 0;
+        //}
+
+    }
+    public  float getIMC(){
+        IMC = (float) 10000* (peso / (altura * altura));
+        return (float)IMC;
     }
 
     public double calcula_datos(int type, double real, double imag){

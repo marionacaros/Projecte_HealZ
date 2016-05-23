@@ -59,6 +59,7 @@ public class ShowData extends Activity {
     DataView totalBodyWaterDW = null;
     DataView fatFreeMassDW = null;
     DataView freeMassDW = null;
+    DataView IMCDW = null;
 
     //Heart Rate Activity
     DataView heartRateData = null;
@@ -70,9 +71,10 @@ public class ShowData extends Activity {
     private ModelClassSQL modelmodule;
     private ModelClassSQL modelphase;
     private DataSourceDAO BD;
+    private Processing process;
     private float data = 0;
+    private float IMC =0;
     private long date = System.currentTimeMillis();
-    private Processing pro;
     private List<Atribute> atrFFM, atrFM, atrTBW;
     private Atribute atributeFFM=null, atributeFM=null, atributeTBW=null;
 
@@ -88,7 +90,9 @@ public class ShowData extends Activity {
         // Display back button in action bar.
         // getActionBar().setDisplayHomeAsUpEnabled(true);
 
+
         BD = new DataSourceDAO(this.getApplicationContext());
+        process = new Processing(this.getApplicationContext());
         modelmodule = new ModelClassSQL(0, 0, data, date);
         modelphase = new ModelClassSQL(1, 0, data, date);
 
@@ -100,6 +104,8 @@ public class ShowData extends Activity {
         totalBodyWaterDW = (DataView) findViewById(R.id.totalBodyWaterDW);
         fatFreeMassDW = (DataView) findViewById(R.id.fatFreeMassDW);
         freeMassDW = (DataView) findViewById(R.id.freeMassDW);
+        IMCDW = (DataView) findViewById(R.id.IMC);
+
 
         //EXAMPLE
 //        totalBodyWaterDW.setValueText(79.9 + " %");
@@ -184,16 +190,12 @@ public class ShowData extends Activity {
             //fatFreeMassDW.setValueText(""+String.valueOf(atributeFFM.getVar())+" %");
             float value =Float.valueOf(atributeFFM.getVar());
             fatFreeMassDW.setValueText((float)Math.round(value * 10) / 10+" %");
-
-
         }
         while(it2.hasNext()){
             atributeFM=(Atribute)it2.next();
             //freeMassDW.setValueText("" + String.valueOf(atributeFM.getVar()) + " %");
             float value =Float.valueOf(atributeFM.getVar());
             freeMassDW.setValueText((float)Math.round(value * 10) / 10 + " %");
-
-
         }
         while(it3.hasNext()){
             Log.d("ShowData.java", "it3.hasNext()");
@@ -201,9 +203,10 @@ public class ShowData extends Activity {
             //totalBodyWaterDW.setValueText(""+String.valueOf(atributeTBW.getVar())+" %");
             float value =Float.valueOf(atributeTBW.getVar());
             totalBodyWaterDW.setValueText((float)Math.round(value * 10) / 10 + " %");
-
-
         }
+        IMC= process.getIMC();
+        IMC= Math.round(IMC * 10) / 10;
+        IMCDW.setValueText(String.valueOf(IMC));
 
 
     }
